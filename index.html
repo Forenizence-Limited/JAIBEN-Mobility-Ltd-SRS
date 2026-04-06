@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jaiben Mobility — SRS v4.0 Final</title>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --page-bg:#fff;--text-primary:#1a1a1a;--text-secondary:#4a4a4a;--text-muted:#777;
+    --accent:#0d7c3e;--accent-dark:#064d25;--accent-light:#e8f5ee;
+    --border:#d4d4d4;--border-light:#e8e8e8;
+    --table-header:#0d7c3e;--table-header-text:#fff;--table-alt:#f7faf8;
+    --highlight-bg:#fffbeb;--highlight-border:#f59e0b;
+    --danger:#dc2626;--danger-bg:#fef2f2;
+    --info-bg:#eff6ff;--info-border:#3b82f6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#d0d0d0;font-family:'Inter',sans-serif;color:var(--text-primary);font-size:10.5pt;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .page{width:210mm;min-height:297mm;margin:20px auto;background:var(--page-bg);padding:25mm 25mm 30mm 25mm;box-shadow:0 2px 20px rgba(0,0,0,.15);position:relative;overflow:hidden}
+  .page::after{content:'';position:absolute;bottom:15mm;left:25mm;right:25mm;height:1px;background:var(--border-light)}
+  .page-footer{position:absolute;bottom:8mm;left:25mm;right:25mm;display:flex;justify-content:space-between;font-size:8pt;color:var(--text-muted);font-family:'Inter',sans-serif}
+  .page-footer .conf{font-weight:600;color:var(--danger);letter-spacing:.5px;text-transform:uppercase}
+
+  .cover-page{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:297mm;padding:25mm;position:relative}
+  .cover-page::before{content:'';position:absolute;top:0;left:0;right:0;height:8mm;background:linear-gradient(90deg,var(--accent-dark),var(--accent),#10b981)}
+  .cover-page::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4mm;background:linear-gradient(90deg,var(--accent-dark),var(--accent))}
+  .cover-logo-text{font-family:'Merriweather',serif;font-size:42pt;font-weight:900;color:var(--accent-dark);letter-spacing:-1px}
+  .cover-logo-sub{font-size:10pt;color:var(--text-muted);letter-spacing:4px;text-transform:uppercase;margin-top:4px}
+  .cover-divider{width:80px;height:3px;background:var(--accent);margin:30px auto}
+  .cover-title{font-family:'Merriweather',serif;font-size:22pt;font-weight:700;color:var(--text-primary);line-height:1.3;margin-bottom:10px}
+  .cover-subtitle{font-size:13pt;color:var(--accent);font-weight:600;margin-bottom:50px}
+  .cover-meta{font-size:10pt;color:var(--text-secondary);line-height:2}
+  .cover-meta strong{color:var(--text-primary);font-weight:600}
+  .cover-stamp{position:absolute;bottom:45mm;right:30mm;border:3px solid var(--danger);color:var(--danger);padding:8px 20px;font-size:11pt;font-weight:700;text-transform:uppercase;letter-spacing:2px;transform:rotate(-12deg);opacity:.7}
+
+  h1{font-family:'Merriweather',serif;font-size:20pt;font-weight:900;color:var(--accent-dark);margin-bottom:6px;padding-bottom:8px;border-bottom:2.5px solid var(--accent);page-break-after:avoid}
+  h1 .sn{color:var(--accent);margin-right:8px}
+  h2{font-family:'Merriweather',serif;font-size:13pt;font-weight:700;color:var(--text-primary);margin-top:24px;margin-bottom:8px;padding-left:12px;border-left:3px solid var(--accent);page-break-after:avoid}
+  h3{font-family:'Inter',sans-serif;font-size:11pt;font-weight:700;color:var(--accent-dark);margin-top:18px;margin-bottom:6px;page-break-after:avoid}
+  h4{font-family:'Inter',sans-serif;font-size:10.5pt;font-weight:600;color:var(--text-secondary);margin-top:14px;margin-bottom:4px;page-break-after:avoid}
+  p{margin-bottom:8px;text-align:justify;hyphens:auto}
+
+  .tw{margin:14px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:9.5pt;page-break-inside:avoid}
+  table thead th{background:var(--table-header);color:var(--table-header-text);font-weight:600;text-align:left;padding:8px 10px;font-size:9pt;text-transform:uppercase;letter-spacing:.3px}
+  table tbody td{padding:7px 10px;border-bottom:1px solid var(--border-light);vertical-align:top}
+  table tbody tr:nth-child(even){background:var(--table-alt)}
+  table tbody tr:hover{background:#eef7f1}
+  table.ht thead th{background:var(--accent-dark)}
+  table.ht tbody tr.total-row{background:var(--accent-light)!important;font-weight:700}
+  table.ht tbody tr.total-row td{border-top:2px solid var(--accent);font-size:10.5pt}
+
+  .nb{padding:12px 16px;border-radius:4px;margin:12px 0;font-size:9.5pt;page-break-inside:avoid}
+  .nb.info{background:var(--info-bg);border-left:4px solid var(--info-border)}
+  .nb.warn{background:var(--highlight-bg);border-left:4px solid var(--highlight-border)}
+  .nb.danger{background:var(--danger-bg);border-left:4px solid var(--danger)}
+  .nb.ok{background:var(--accent-light);border-left:4px solid var(--accent)}
+  .nb .nt{font-weight:700;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-size:8.5pt}
+
+  pre{background:#1e293b;color:#e2e8f0;padding:16px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:8.5pt;line-height:1.5;overflow-x:auto;margin:12px 0;page-break-inside:avoid}
+  code{font-family:'JetBrains Mono',monospace;font-size:9pt;background:#f1f5f9;padding:1px 5px;border-radius:3px}
+  pre code{background:none;padding:0}
+  ul,ol{margin:6px 0 10px 20px}li{margin-bottom:3px}
+
+  .toc{page-break-after:always}
+  .toc h2{border-left:none;padding-left:0;text-align:center;font-size:18pt;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:30px}
+  .tl{list-style:none;margin:0;padding:0}
+  .tl li{padding:5px 0;border-bottom:1px dotted var(--border);display:flex;justify-content:space-between;font-size:10pt}
+  .tl li.t1{font-weight:700;color:var(--accent-dark);margin-top:8px;font-size:10.5pt}
+  .tl li.t2{padding-left:20px;font-weight:500;color:var(--text-secondary)}
+  .tl li.t3{padding-left:40px;font-weight:400;color:var(--text-muted);font-size:9.5pt}
+
+  .badge{display:inline-block;padding:2px 10px;border-radius:3px;font-size:8pt;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+  .badge-g{background:var(--accent-light);color:var(--accent-dark)}
+  .badge-r{background:var(--danger-bg);color:var(--danger)}
+  .badge-y{background:var(--highlight-bg);color:#92400e}
+
+  .mc{background:linear-gradient(135deg,#064d25 0%,#0d7c3e 100%);color:#fff;border-radius:6px;padding:20px 24px;margin:16px 0;page-break-inside:avoid}
+  .mc .mct{font-size:8pt;text-transform:uppercase;letter-spacing:1.5px;opacity:.8;margin-bottom:8px}
+  .mc .mca{display:flex;gap:20px;margin-top:12px}
+  .mc .mci{flex:1;background:rgba(255,255,255,.12);border-radius:4px;padding:12px 16px;text-align:center}
+  .mc .mci .mctier{font-size:8pt;text-transform:uppercase;letter-spacing:1px;opacity:.7;margin-bottom:4px}
+  .mc .mci .mcpr{font-family:'Merriweather',serif;font-size:18pt;font-weight:700}
+  .mc .mci .mcp{font-size:8pt;opacity:.7;margin-top:2px}
+
+  .ep-cat{background:#f0f4f0;font-weight:700;font-size:9pt;text-transform:uppercase;letter-spacing:.8px;color:var(--accent-dark);padding:6px 10px!important}
+  .ep-sub{font-size:8.5pt;font-style:italic;color:var(--text-muted);padding-left:14px!important}
+
+  .sig{margin-top:50px;display:flex;justify-content:space-between}
+  .sig .ss{width:45%}
+  .sigl{border-top:1px solid var(--text-primary);margin-top:50px;padding-top:6px;font-size:9pt;color:var(--text-secondary)}
+  .sigl .sl{font-weight:600;color:var(--text-primary)}
+
+  .pb{page-break-before:always}
+  @media print{body{background:#fff}.page{margin:0;box-shadow:none;padding:20mm 20mm 25mm 20mm}.pb{page-break-before:always}}
+  @media screen and (max-width:800px){.page{width:100%;margin:0;padding:15px;box-shadow:none;border-radius:0}.cover-stamp{display:none}.sig{flex-direction:column;gap:30px}.sig .ss{width:100%}.mc .mca{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="page cover-page">
+  <div style="margin-bottom:40px">
+    <div class="cover-logo-text">JAIBEN</div>
+    <div class="cover-logo-sub">Mobility Ltd.</div>
+  </div>
+  <div class="cover-divider"></div>
+  <div class="cover-title">Software Requirements<br>Specification</div>
+  <div class="cover-subtitle">EV Rental & Battery Swap Network Platform — MVP v4.0</div>
+  <div class="cover-meta">
+    <strong>Version:</strong> v4.0 — EV Rental First, Battery Swap Integrated<br>
+    <strong>Date:</strong> April 2026<br>
+    <strong>Prepared by:</strong> Forenizence Limited<br>
+    <strong>Client:</strong> Jaiben Mobility Ltd.<br>
+    <strong>Status:</strong> Final — For Client Approval<br>
+    <strong>Classification:</strong> Confidential
+  </div>
+  <div class="cover-stamp">Confidential</div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page i</span></div>
+</div>
+
+<!-- TOC -->
+<div class="page toc">
+  <h2>Table of Contents</h2>
+  <ul class="tl">
+    <li class="t1"><span>1. Platform Overview</span></li>
+    <li class="t2"><span>1.1 Business Model</span></li><li class="t2"><span>1.2 Client Surfaces</span></li><li class="t2"><span>1.3 Glossary</span></li>
+    <li class="t1"><span>2. System Architecture</span></li>
+    <li class="t2"><span>2.1 Technology Stack</span></li><li class="t2"><span>2.2 Core Services</span></li>
+    <li class="t1"><span>3. Pricing, JCoin &amp; Rental Plans</span></li>
+    <li class="t2"><span>3.1 JCoin Credit System</span></li><li class="t2"><span>3.2 EV Rental Plans</span></li><li class="t2"><span>3.3 Rental Billing Rules</span></li><li class="t2"><span>3.4 Battery Swap Plans</span></li><li class="t2"><span>3.5 Referral Programme</span></li><li class="t2"><span>3.6 FOCO Investor Revenue Model</span></li>
+    <li class="t1"><span>4. Core Business Workflows</span></li>
+    <li class="t2"><span>4.1 EV Rental — End-to-End</span></li><li class="t2"><span>4.2 Battery Swap — End-to-End</span></li><li class="t2"><span>4.3 Real-time Station Availability</span></li><li class="t2"><span>4.4 Payment Flow &amp; Revenue Split</span></li><li class="t2"><span>4.5 Battery Lifecycle</span></li><li class="t2"><span>4.6 EV Bike Lifecycle</span></li>
+    <li class="t1"><span>5. Battery Theft Prevention</span></li>
+    <li class="t1"><span>6. EV Rental Security &amp; Anti-Fraud</span></li>
+    <li class="t1"><span>7. Rider App</span></li>
+    <li class="t1"><span>8. Shop App</span></li>
+    <li class="t1"><span>9. FOCO Investor Dashboard</span></li>
+    <li class="t1"><span>10. Admin Panel</span></li>
+    <li class="t1"><span>11. Non-Functional Requirements</span></li>
+    <li class="t1"><span>12. Operational Recommendations</span></li>
+    <li class="t1"><span>13. Timeline, Financials &amp; SLA</span></li>
+    <li class="t2"><span>13.1 Development Timeline</span></li><li class="t2"><span>13.2 Development Cost</span></li><li class="t2"><span>13.3 Payment Terms</span></li><li class="t2"><span>13.4 Post-Launch SLA</span></li>
+    <li class="t1"><span>14. Detailed Cost Breakdown</span></li>
+    <li class="t1"><span>15. Annual Maintenance Contract (AMC)</span></li>
+    <li class="t2"><span>15.1 AMC Maintenance Charges</span></li><li class="t2"><span>15.2 What AMC Covers</span></li><li class="t2"><span>15.3 Tier Comparison</span></li><li class="t2"><span>15.4 Payment Schedule</span></li><li class="t2"><span>15.5 Exclusions</span></li><li class="t2"><span>15.6 Renewal &amp; Termination</span></li>
+    <li class="t1"><span>16. Data Model</span></li>
+    <li class="t1"><span>17. API Endpoint Summary</span></li>
+    <li class="t2"><span>17.1 Authentication</span></li><li class="t2"><span>17.2 Rider — EV Rental</span></li><li class="t2"><span>17.3 Rider — Battery Swap</span></li><li class="t2"><span>17.4 Rider — Wallet &amp; Subscription</span></li><li class="t2"><span>17.5 Rider — Profile &amp; Support</span></li><li class="t2"><span>17.6 Shop — Swap Operations</span></li><li class="t2"><span>17.7 Shop — Battery &amp; Inventory</span></li><li class="t2"><span>17.8 Shop — Rental Return &amp; Earnings</span></li><li class="t2"><span>17.9 Investor — Portfolio</span></li><li class="t2"><span>17.10 Admin — Rider Management</span></li><li class="t2"><span>17.11 Admin — Fleet &amp; Rental</span></li><li class="t2"><span>17.12 Admin — Shop &amp; Battery</span></li><li class="t2"><span>17.13 Admin — Financial &amp; Analytics</span></li><li class="t2"><span>17.14 Admin — Investor &amp; Incidents</span></li><li class="t2"><span>17.15 Admin — System Configuration</span></li>
+    <li class="t1"><span>18. Risk Register</span></li>
+    <li class="t1"><span>19. Acceptance &amp; Signature</span></li>
+  </ul>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page ii</span></div>
+</div>
+
+<!-- S1: OVERVIEW -->
+<div class="page pb">
+  <h1><span class="sn">1.</span> Platform Overview</h1>
+  <p>Jaiben Mobility is an <strong>EV bike rental platform</strong> with an integrated battery swap network, built for electric bike riders in Bangladesh. The <strong>primary business is EV rental</strong> — riders rent bikes from Jaiben's fleet on hourly, daily, or monthly plans, use them for daily commuting or gig delivery work, and earn income while riding. Battery swap is the enabling infrastructure: when a rented bike's battery runs low, the rider visits any Jaiben-authorised partner shop, swaps the depleted pack for a charged one, and continues riding without interruption.</p>
+  <p>The platform manages the complete rental lifecycle — bike discovery, rental initiation, real-time GPS tracking, automated billing, return and damage assessment — alongside the battery swap flow, JCoin wallet, partner shop network, and <strong>FOCO (Franchise Owned, Company Operated) investor management</strong>.</p>
+
+  <h2>1.1 Business Model</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:27%">Concept</th><th>How It Works</th></tr></thead>
+    <tbody>
+      <tr><td><strong>EV bike fleet ownership</strong></td><td>Jaiben owns and registers all EV bikes. Bikes are added to the fleet with full documentation, GPS tracker, and assigned battery packs. FOCO investors can co-own bikes through the investor programme.</td></tr>
+      <tr><td><strong>EV Rental — Primary Revenue</strong></td><td>Riders rent bikes on Hourly (BDT 60/hr), Daily (BDT 500/day), or Monthly (BDT 12,000/month) plans. Rental fee is the core revenue stream. Riders earn income from deliveries/commuting while renting.</td></tr>
+      <tr><td><strong>Rider registration</strong></td><td>Any EV bike rider registers on the app. Admin manually verifies their NID and driving licence before the account is activated for rental.</td></tr>
+      <tr><td><strong>JCoin credit system</strong></td><td>1 JCoin = 1 BDT. Riders hold a JCoin balance in-app. All swap payments and rental deposits are handled in JCoins. Purchased via bKash, Nagad, or SSLCommerz.</td></tr>
+      <tr><td><strong>Pay-per-swap</strong></td><td>Each battery swap deducts a fixed JCoin amount. Transparent, no commitment. Available to all riders including renters.</td></tr>
+      <tr><td><strong>Subscription plan (Swap)</strong></td><td>Flat monthly JCoin amount for a set or unlimited number of swaps. Auto-renews from wallet. Tiers: Basic, Regular, Unlimited.</td></tr>
+      <tr><td><strong>Partner shop network</strong></td><td>Independent shops join as authorised swap stations. They hold charged packs, confirm swap requests via shop app, and earn commission per swap.</td></tr>
+      <tr><td><strong>Revenue split (Swap)</strong></td><td>Each pay-per-swap fee split between shop (commission %) and Jaiben (platform revenue). Subscription revenue is fully Jaiben-side; shops still earn commission.</td></tr>
+      <tr><td><strong>FOCO Investor programme</strong></td><td><em>You invest while the Brand runs the operations.</em> Investors purchase EV bikes through Jaiben. Jaiben operates all aspects — rental, maintenance, battery, staff, support. Investors earn a percentage of rental revenue and view ROI via investor dashboard. Zero operational burden on the investor.</td></tr>
+      <tr><td><strong>Referral rewards</strong></td><td>Riders share a referral link. When the referred rider completes their first rental or swap, both receive JCoin credits. 90-day expiry.</td></tr>
+      <tr><td><strong>Weekly shop payout</strong></td><td>Accumulated shop commission transferred every Sunday via bKash B2C. Shops see live pending balance throughout the week.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>1.2 Client Surfaces</h2>
+  <div class="tw"><table>
+    <thead><tr><th>Surface</th><th>Platform</th><th>Primary Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rider App</strong></td><td>Native (Android)</td><td>Browse &amp; rent EVs, real-time GPS tracking, rental billing, find swap stations, complete swaps, manage JCoin wallet, view earnings, in-app chat &amp; call.</td></tr>
+      <tr><td><strong>Shop App</strong></td><td>Native (Android)</td><td>Confirm swap requests, manage battery inventory, rental return assistance, in-app chat &amp; call, view earnings &amp; payouts.</td></tr>
+      <tr><td><strong>FOCO Investor Dashboard</strong></td><td>Next.js 16.1 (Web)</td><td>View owned EV fleet, rental revenue, earnings breakdown, ROI calculations, payout history, investment reports.</td></tr>
+      <tr><td><strong>Admin Panel</strong></td><td>Next.js 16.1 (App Router)</td><td>Manage riders, shops, EV fleet, batteries, rental billing, pricing, JCoin, bike GPS tracking, financials, investor management, chat &amp; call.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>1.3 Glossary</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rental Event</strong></td><td>Complete lifecycle of a rider renting an EV: initiation, active rental, billing, return, condition assessment.</td></tr>
+      <tr><td><strong>Rental Plan</strong></td><td>Pricing tier: Hourly (BDT 60/hr), Daily (BDT 500/day), Monthly (BDT 12,000/month).</td></tr>
+      <tr><td><strong>Active Rental</strong></td><td>Rental in progress. Rider has possession. Timer/billing running.</td></tr>
+      <tr><td><strong>Rental Deposit</strong></td><td>Refundable JCoin hold before rental. Released on clean return. Deducted for damages.</td></tr>
+      <tr><td><strong>EV Condition Report</strong></td><td>Photo-based before/after documentation at rental start and end. Used for damage assessment.</td></tr>
+      <tr><td><strong>FOCO</strong></td><td><strong>Franchise Owned, Company Operated.</strong> Investor owns the EV bike asset; Jaiben operates (rents, maintains, manages) the bike. Investor has zero operational responsibility.</td></tr>
+      <tr><td><strong>JCoin</strong></td><td>Jaiben platform currency. 1 JCoin = 1 BDT. Purchased via bKash/Nagad/SSLCommerz. Debited on swaps and deposits.</td></tr>
+      <tr><td><strong>Battery Pack</strong></td><td>Swappable battery with unique QR. Tracked: CHARGING, AVAILABLE, IN_USE, RETURNED, FAULTY.</td></tr>
+      <tr><td><strong>Swap Station</strong></td><td>Authorised partner shop stocking charged packs and processing swap requests.</td></tr>
+      <tr><td><strong>Swap Event</strong></td><td>Logged transaction when rider exchanges depleted pack for charged one. Atomic: payment confirmed only after shop approval and battery scan.</td></tr>
+      <tr><td><strong>Availability Map</strong></td><td>Real-time map: green (3+ packs), amber (1-2), red (0).</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 1</span></div>
+</div>
+
+<!-- S2: ARCHITECTURE -->
+<div class="page pb">
+  <h1><span class="sn">2.</span> System Architecture</h1>
+  <p>Go 1.26 modular monolith behind a single load balancer. Stateless API pods scale horizontally. Redis caches live station inventory and active rental states. All financial operations use a double-entry ledger — JCoin balance is never a mutable column. EV GPS telemetry flows through MQTT for real-time tracking.</p>
+  <pre><code>┌─────────────────────────────────────────────────────────────┐
+│                         CLIENTS                              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
+│  │ Rider App│  │ Shop App │  │ Investor │  │  Admin   │   │
+│  │ (Android)│  │ (Android)│  │ Dashboard│  │  Panel   │   │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘   │
+└───────┼──────────────┼──────────────┼──────────────┼─────────┘
+        ▼              ▼              ▼              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   NGINX LOAD BALANCER                        │
+└──────────────────────────┬──────────────────────────────────┘
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+   ┌────────────┐  ┌────────────┐  ┌────────────┐
+   │  Go API    │  │  Go API    │  │  Go API    │
+   │ (Stateless)│  │ (Stateless)│  │ (Stateless)│
+   └──────┬─────┘  └──────┬─────┘  └──────┬─────┘
+          └────────────────┼────────────────┘
+                           │
+          ┌────────────────┼────────────────┐
+          ▼                ▼                ▼
+   ┌────────────┐  ┌────────────┐  ┌────────────┐
+   │ PostgreSQL │  │   Redis    │  │  RabbitMQ  │
+   │  (Primary) │  │ (Sentinel) │  │ (Durable)  │
+   └──────┬─────┘  └────────────┘  └────────────┘
+          │
+   ┌──────┴─────┐     ┌──────────────┐
+   │ PgBouncer  │     │  MQTT Broker │
+   └────────────┘     │  (EMQX)      │
+                      └──────────────┘
+
+EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
+          FCM + SMS (SSL Wireless) | S3 Storage</code></pre>
+
+  <h2>2.1 Technology Stack</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:18%">Layer</th><th style="width:22%">Technology</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Backend API</strong></td><td>Go 1.26 + Gin</td><td>Green Tea GC reduces pause latency. Goroutines handle thousands of concurrent WebSocket streams for real-time EV tracking and swap notifications.</td></tr>
+      <tr><td><strong>Rider App</strong></td><td>Native (Android)</td><td>Native 60fps. Camera QR scan. GPS tracking. Offline-resilient for intermittent 4G.</td></tr>
+      <tr><td><strong>Shop App</strong></td><td>Native (Android)</td><td>Audio alerts bypass silent mode. Real-time battery inventory via WebSocket push.</td></tr>
+      <tr><td><strong>Investor Dashboard</strong></td><td>Next.js 16.1</td><td>Responsive web. Turbopack. RSC for fast data loading. Investor JWT auth.</td></tr>
+      <tr><td><strong>Admin Panel</strong></td><td>Next.js 16.1 (App Router)</td><td>Turbopack. Cache Components. proxy.ts. RSC security patches applied.</td></tr>
+      <tr><td><strong>Database</strong></td><td>PostgreSQL 16</td><td>ACID transactions protect JCoin ledger, rental billing, swap log. No mutable balance columns.</td></tr>
+      <tr><td><strong>Cache</strong></td><td>Redis 7 (Sentinel)</td><td>Live battery count. Active rental state. OTP TTL. Swap/rental locks. HA via Sentinel.</td></tr>
+      <tr><td><strong>Queue</strong></td><td>RabbitMQ</td><td>Async notifications, payouts, subscription renewal, rental billing, alerts.</td></tr>
+      <tr><td><strong>Storage</strong></td><td>S3-compatible</td><td>NID, licence, condition report photos, battery QR, shop docs. Private ACL.</td></tr>
+      <tr><td><strong>Maps (Primary)</strong></td><td><strong>BariKoi API</strong></td><td>Bangladesh-optimised map provider. Lower cost than Google. Native BD address system, Bangla support, better local POI coverage. Used for station map, rider navigation, and admin fleet map.</td></tr>
+      <tr><td><strong>Maps (Fallback)</strong></td><td>Google Maps SDK</td><td>Secondary map provider. Used when BariKoi is unavailable or for riders who prefer Google navigation. Direction API for turn-by-turn (v2).</td></tr>
+      <tr><td><strong>Payments</strong></td><td>bKash + Nagad + SSLCommerz</td><td>JCoin top-up via all three. bKash B2C for shop + investor payouts.</td></tr>
+      <tr><td><strong>Push</strong></td><td>FCM + SMS (SSL Wireless)</td><td>Rental, swap, payment, theft, stock, expiry, investor payout events.</td></tr>
+      <tr><td><strong>MQTT</strong></td><td>EMQX / VerneMQ</td><td>EV GPS telemetry. Real-time bike tracking. Geofence breach alerts.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>2.2 Core Services</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:20%">Service</th><th>Responsibilities</th></tr></thead>
+    <tbody>
+      <tr><td><strong>AuthService</strong></td><td>Phone OTP. JWT RS256 (access 15 min, refresh 30 days with rotation). Redis jti blacklist. 4 role claims: Rider, Shop, Investor, Admin.</td></tr>
+      <tr><td><strong>RentalService</strong></td><td>EV availability. Rental initiation with deposit hold. Active state management. Hourly/daily/monthly billing. Extension. Return with condition check. Damage assessment. Auto-end. Rental lock on overdue.</td></tr>
+      <tr><td><strong>WalletService</strong></td><td>JCoin top-up (bKash/Nagad/SSLCommerz webhook, idempotency). Double-entry ledger. Subscription billing. Deposit hold/release. Referral credits. Balance guard.</td></tr>
+      <tr><td><strong>FleetService</strong></td><td>EV registration with GPS tracker ID. Fleet inventory. Bike status FSM. MQTT telemetry ingestion. Geofence config. Maintenance scheduling.</td></tr>
+      <tr><td><strong>SwapService</strong></td><td>Station QR validation. Balance/subscription check with Redis lock. Shop notification. Battery assignment. Anti-theft QR. Revenue split. Swap event log.</td></tr>
+      <tr><td><strong>BatteryService</strong></td><td>Battery FSM. Anti-theft registry. Shop inventory. Health score. Fault quarantine. Cycle count and retirement tracking.</td></tr>
+      <tr><td><strong>ShopService</strong></td><td>Shop onboarding. Inventory management. Earnings ledger. Weekly payout accumulation. Low-stock alerts.</td></tr>
+      <tr><td><strong>InvestorService</strong></td><td>Investor KYC. EV-to-investor mapping. Rental revenue allocation. ROI calculation. Monthly payout processing.</td></tr>
+      <tr><td><strong>TelemetryService</strong></td><td>MQTT connection management. GPS ingestion. Speed logging. Geofence breach detection. Last-known-location cache. Trip distance calculation.</td></tr>
+      <tr><td><strong>MapService</strong></td><td>BariKoi API integration (primary): geocoding, reverse geocoding, routing, place search, map tiles. Google Maps fallback. Station proximity queries. Navigation URL generation.</td></tr>
+      <tr><td><strong>AdminService</strong></td><td>RBAC. Rider/shop/EV/battery/investor CRUD. Pricing config. JCoin management. Financial reporting. Dispute resolution.</td></tr>
+      <tr><td><strong>SchedulerWorker</strong></td><td>Subscription renewal. Weekly shop payout. Rental billing cycles. Rental expiry. Health score recalc. Referral expiry. Monthly investor payout.</td></tr>
+      <tr><td><strong>NotificationWorker</strong></td><td>FCM + SMS fallback (30 s). Rental, swap, payment, theft, stock, expiry, investor events.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 2</span></div>
+</div>
+
+<!-- S3: PRICING -->
+<div class="page pb">
+  <h1><span class="sn">3.</span> Pricing, JCoin &amp; Rental Plans</h1>
+  <p>Two revenue pillars: <strong>EV Rental</strong> (primary) and <strong>Battery Swap</strong> (supporting). All payments flow through JCoins.</p>
+
+  <h2>3.1 JCoin Credit System</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Concept</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Exchange rate</strong></td><td>1 JCoin = 1 BDT. Fixed. Admin-managed. Payment convenience layer, not volatile currency.</td></tr>
+      <tr><td><strong>Top-up channels</strong></td><td>bKash, Nagad, or SSLCommerz (Visa, Mastercard, local BD cards). Webhook credits JCoins via double-entry ledger within 5 seconds.</td></tr>
+      <tr><td><strong>Minimum top-up</strong></td><td>Admin-configurable. Default: 50 JCoins.</td></tr>
+      <tr><td><strong>Promotional credits</strong></td><td>Admin issues to rider/group. Reason code required. Audit logged.</td></tr>
+      <tr><td><strong>Referral credits</strong></td><td>Referrer: 50 JCoins. Referee: 30 JCoins. 90-day TTL. Admin-configurable amounts.</td></tr>
+      <tr><td><strong>Credit expiry</strong></td><td>Promo + referral: 90-day TTL with 7-day and 1-day push. Purchased credits: no expiry.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3.2 EV Rental Plans — Primary Revenue</h2>
+  <div class="tw"><table class="ht">
+    <thead><tr><th>Plan</th><th>Price</th><th>Duration</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Hourly Rent</strong></td><td>BDT 60 / hour</td><td>Per completed hour</td><td>Short trips, test rides, occasional use</td></tr>
+      <tr><td><strong>Daily Plan</strong></td><td>BDT 500 / day</td><td>24-hour window, unlimited rides</td><td>Full-day delivery riders, daily commuters</td></tr>
+      <tr><td><strong>Monthly Pass</strong></td><td>BDT 12,000 / month</td><td>30-day cycle, unlimited rides</td><td>Regular delivery workers, highest savings</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3.3 Rental Billing Rules</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Rule</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Deposit hold</strong></td><td>Refundable JCoin deposit locked before rental (admin-configurable per plan: e.g., Hourly BDT 200, Daily BDT 500, Monthly BDT 2,000). Released on clean return. Deducted for damages.</td></tr>
+      <tr><td><strong>Hourly billing</strong></td><td>Billed per completed hour. Partial hours rounded up. Auto-deducted each hour. Insufficient balance: 10-min grace, then auto-paused.</td></tr>
+      <tr><td><strong>Daily billing</strong></td><td>BDT 500 deducted at initiation. Auto-extends past 24 hours from wallet.</td></tr>
+      <tr><td><strong>Monthly billing</strong></td><td>BDT 12,000 at initiation. Auto-renews on billing date. 3-day grace with daily push. Day 4: paused.</td></tr>
+      <tr><td><strong>Overdue payment</strong></td><td>Grace: 10 min (hourly), 3 hours (daily), 3 days (monthly). After grace: auto-paused, admin notified. +48h: suspended, recovery initiated.</td></tr>
+      <tr><td><strong>Damage charges</strong></td><td>Assessed on return. Deducted from deposit. Excess: flagged as debt. No new rental until cleared.</td></tr>
+      <tr><td><strong>Early return</strong></td><td>Hourly: charged for completed hours only. Daily/Monthly: no refund.</td></tr>
+      <tr><td><strong>Rental + Swap</strong></td><td>Active renters swap freely at any station. Swap charges separate from rental fee.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3.4 Battery Swap Subscription Plans</h2>
+  <div class="tw"><table class="ht">
+    <thead><tr><th>Plan</th><th>Monthly Price</th><th>Swap Allowance</th><th>Best For</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pay-Per-Swap</strong></td><td>No fee</td><td>Unlimited — pay per use</td><td>Occasional/new users</td></tr>
+      <tr><td><strong>Basic</strong></td><td>BDT 300 / month</td><td>15 swaps / month</td><td>Light commuters</td></tr>
+      <tr><td><strong>Regular</strong></td><td>BDT 550 / month</td><td>40 swaps / month</td><td>Regular commuters</td></tr>
+      <tr><td><strong>Unlimited</strong></td><td>BDT 900 / month</td><td>Unlimited</td><td>Heavy daily / delivery</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3.5 Referral Programme</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Rule</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Trigger</strong></td><td>First rental initiated OR first swap COMPLETE — whichever occurs first. Not on registration.</td></tr>
+      <tr><td><strong>Credits</strong></td><td>Referrer: 50 JCoins. Referee: 30 JCoins. Admin-configurable. Max 20 referrals/month/rider.</td></tr>
+      <tr><td><strong>Anti-abuse</strong></td><td>One reward per phone. Device fingerprint + NID match for fraud detection.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>3.6 FOCO Investor Revenue Model</h2>
+  <div class="nb ok"><div class="nt">FOCO — Franchise Owned, Company Operated</div><em>You invest while the Brand runs the operations.</em> The investor provides capital (buys EV bikes). Jaiben handles everything else: rental operations, maintenance, battery management, rider support, insurance coordination. The investor earns passive income with zero operational involvement.</div>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Concept</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Investment</strong></td><td>Investor purchases one or more EV bikes through Jaiben. Terms defined in FOCO agreement.</td></tr>
+      <tr><td><strong>Revenue share</strong></td><td>Investor earns a configured % (admin-set, e.g., 70%) of net rental revenue from owned bikes. Jaiben retains remainder for operations.</td></tr>
+      <tr><td><strong>Payout cycle</strong></td><td>Monthly. SchedulerWorker calculates share from previous month's closed rentals. Paid via bKash B2C or bank transfer.</td></tr>
+      <tr><td><strong>Maintenance cost</strong></td><td>Shared per agreement (e.g., Jaiben bears first 6 months, then 50/50). Tracked per bike in admin.</td></tr>
+      <tr><td><strong>ROI visibility</strong></td><td>Investor dashboard: total invested, earned, monthly trend, projected payback, per-bike utilisation.</td></tr>
+      <tr><td><strong>Zero operational burden</strong></td><td>Investor never handles riders, maintenance, batteries, disputes, or staffing. Jaiben manages all operations end-to-end.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 3</span></div>
+</div>
+
+<!-- S4: WORKFLOWS -->
+<div class="page pb">
+  <h1><span class="sn">4.</span> Core Business Workflows</h1>
+
+  <h2>4.1 EV Rental — End-to-End (Primary Flow)</h2>
+  <pre><code>┌─────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│ BROWSE  │───▶│ INITIATE │───▶│  ACTIVE  │───▶│  RETURN  │───▶│  CLOSE   │
+│ BIKES   │    │ RENTAL   │    │ RENTAL   │    │  BIKE    │    │ RENTAL   │
+└─────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
+     │               │               │               │               │
+     ▼               ▼               ▼               ▼               ▼
+  View map       Deposit hold    GPS tracking    Condition      Deposit
+  & list of      & plan select   & billing      check photos   release/
+  available      & condition     & swap access   & damage       damage
+  EVs nearby     check photos                    assessment     deduction</code></pre>
+  <div class="tw"><table>
+    <thead><tr><th style="width:4%">#</th><th style="width:18%">Step</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Browse bikes</strong></td><td>Map + list of available EVs. Cards: EV ID, model, battery %, distance, plans. Filter: hourly/daily/monthly.</td></tr>
+      <tr><td>2</td><td><strong>Select &amp; plan</strong></td><td>Bike detail: photos, specs, battery %, plan options with prices.</td></tr>
+      <tr><td>3</td><td><strong>Condition check</strong></td><td>4 mandatory angle photos (front, back, left, right) + existing damage. Uploaded to S3. GPS-timestamped.</td></tr>
+      <tr><td>4</td><td><strong>Deposit hold</strong></td><td>Balance check for deposit + first billing. Double-entry ledger hold (not debit).</td></tr>
+      <tr><td>5</td><td><strong>Activation</strong></td><td>Bike: AVAILABLE → RENTED. GPS active. Start time recorded. Push confirmation.</td></tr>
+      <tr><td>6</td><td><strong>Active rental</strong></td><td>Live GPS map, battery %, distance, time, amount accrued, swap/extend/end buttons.</td></tr>
+      <tr><td>7</td><td><strong>Hourly billing</strong></td><td>Each hour: JCoin deducted. Push. Insufficient: 10-min grace.</td></tr>
+      <tr><td>8</td><td><strong>End rental</strong></td><td>Nearest return location. Navigate via BariKoi/Google.</td></tr>
+      <tr><td>9</td><td><strong>Return photos</strong></td><td>4 angles by rider + independently by shop/admin. Side-by-side comparison.</td></tr>
+      <tr><td>10</td><td><strong>Damage assessment</strong></td><td>New damage: type, photo, cost from admin table.</td></tr>
+      <tr><td>11</td><td><strong>Final bill</strong></td><td>Rental fee + damage. Deposit applied. Excess: debt flagged.</td></tr>
+      <tr><td>12</td><td><strong>Close</strong></td><td>No damage: deposit released. Damage: deducted, remainder released. Push confirmation.</td></tr>
+      <tr><td>13</td><td><strong>Dispute</strong></td><td>24-hour window. Ticket with photos. Admin reviews. Deposit held pending.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>4.2 Battery Swap — End-to-End</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:4%">#</th><th style="width:18%">Step</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Check availability</strong></td><td>Live map: green 3+, amber 1-2, red 0. Pick station before travelling.</td></tr>
+      <tr><td>2</td><td><strong>Navigate</strong></td><td>Station detail: pack count, ETA, hours. Navigate via BariKoi/Google.</td></tr>
+      <tr><td>3</td><td><strong>Scan station QR</strong></td><td>HMAC-signed QR. Swap request: PENDING.</td></tr>
+      <tr><td>4</td><td><strong>Payment lock</strong></td><td>Pay-per-swap: JCoin locked. Subscription: validity checked.</td></tr>
+      <tr><td>5</td><td><strong>Shop alert</strong></td><td>Audio + visual within 2s. Rider info. 3-min window.</td></tr>
+      <tr><td>6</td><td><strong>Battery assignment</strong></td><td>Shop Approves. Scans pack QR. Anti-theft check. AVAILABLE → IN_USE.</td></tr>
+      <tr><td>7</td><td><strong>Complete</strong></td><td>JCoin deducted / counter incremented. Revenue split logged.</td></tr>
+      <tr><td>8</td><td><strong>Battery return</strong></td><td>Any shop scans pack. Rider_id verified. IN_USE → RETURNED → CHARGING.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>4.3 Real-time Station Availability</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Feature</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Live cache</strong></td><td>Redis HSET station:{id} available_count. INCR/DECR on every state change.</td></tr>
+      <tr><td><strong>Colour thresholds</strong></td><td>Green ≥3. Amber 1-2. Red 0. 60s refresh. WebSocket push within 5 km.</td></tr>
+      <tr><td><strong>Slot booking</strong></td><td>30-min window. Soft-reserve 1 pack. Reminder at T-10. Auto-cancel at T+15.</td></tr>
+      <tr><td><strong>Low-stock cascade</strong></td><td>Count=1: push shop + admin. Admin can transfer packs.</td></tr>
+      <tr><td><strong>Auto-redirect</strong></td><td>Count=0: app surfaces nearest station with stock.</td></tr>
+      <tr><td><strong>Admin heatmap</strong></td><td>Demand per station (swaps/hour) overlay. Guides redistribution.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>4.4 Payment Flow &amp; Revenue Split</h2>
+  <pre><code>RIDER PAYS
+├── Rental Fee ──────────────────▶ JAIBEN (100%)
+│     └── Investor Share (e.g., 70% per owned bike)
+│
+└── Swap Fee ───────────────────▶ Shop Commission (e.g., 40%)
+                                └── Jaiben Revenue (e.g., 60%)
+
+ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
+
+  <h2>4.5 Battery Lifecycle</h2>
+  <pre><code>CHARGING ──Mark Available──▶ AVAILABLE ──Swap──▶ IN_USE
+  ▲                                          │
+  └──────────── Returned ────────────────────┘
+                      │
+                 Report Fault ──▶ FAULTY ──▶ Retire</code></pre>
+
+  <h2>4.6 EV Bike Lifecycle</h2>
+  <pre><code>REGISTERED ──Assign──▶ AVAILABLE ──Rent──▶ RENTED ──Return──▶ AVAILABLE
+                      │
+                 Maintenance ──▶ MAINTENANCE ──Complete──▶ AVAILABLE
+                      │
+                   Retire ──▶ RETIRED</code></pre>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 4</span></div>
+</div>
+
+<!-- S5-6: SECURITY -->
+<div class="page pb">
+  <h1><span class="sn">5.</span> Battery Theft Prevention</h1>
+  <p>Battery packs are high-value (BDT 25,000–45,000). Four protection layers:</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Control</th><th>Implementation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Signed QR token</strong></td><td>HMAC-SHA256: pack_id, shop_id, issue_date, server secret. Verified on every scan. Copied/printed QR rejected.</td></tr>
+      <tr><td><strong>Network binding</strong></td><td>Unique pack_id. Unregistered QR → alert + admin log.</td></tr>
+      <tr><td><strong>Shop assignment lock</strong></td><td>Pack at Shop A cannot be AVAILABLE at Shop B without admin transfer. Cross-shop alert triggered.</td></tr>
+      <tr><td><strong>Rider binding</strong></td><td>IN_USE pack linked to rider_id. Return verifies match. Mismatch → review alert.</td></tr>
+      <tr><td><strong>Unreturned escalation</strong></td><td>72h: push. 96h: 2nd push. 120h: blocked, JCoin hold = replacement value. 144h: suspended.</td></tr>
+      <tr><td><strong>Return incentive</strong></td><td>Return within 24h: 2 JCoin bonus (admin-configurable).</td></tr>
+    </tbody>
+  </table></div>
+
+  <h1><span class="sn">6.</span> EV Rental Security &amp; Anti-Fraud</h1>
+  <p>Bikes are high-value (BDT 80,000–1,50,000). Multiple prevention layers:</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Control</th><th>Implementation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>NID + Licence</strong></td><td>Admin verifies both before rental activation.</td></tr>
+      <tr><td><strong>Deposit</strong></td><td>Refundable JCoin hold. Scales with plan. Financial commitment.</td></tr>
+      <tr><td><strong>GPS tracking</strong></td><td>Every rented bike streams GPS via MQTT. Last-known location in Redis. Admin fleet map.</td></tr>
+      <tr><td><strong>Geofence</strong></td><td>Allowed area configured. Exit → rider push + admin alert. Repeated → auto-pause.</td></tr>
+      <tr><td><strong>Speed monitoring</strong></td><td>Excessive speed → warning push. Repeated → flagged.</td></tr>
+      <tr><td><strong>Idle detection</strong></td><td>Stationary >4h → push to rider. Suspicious → admin investigates.</td></tr>
+      <tr><td><strong>Condition photos</strong></td><td>4 angles + damage. GPS-timestamped. Immutable S3 storage. Staff independent photos.</td></tr>
+      <tr><td><strong>GPS validation</strong></td><td>Photo GPS must match bike GPS at capture time. Mismatch flagged.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Overdue Rental Escalation</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:20%">Timeline</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Plan expiry</strong></td><td>Push: "Plan expired. Extend or return."</td></tr>
+      <tr><td><strong>Grace exceeded</strong></td><td>Auto-paused. Push: "Top up or return."</td></tr>
+      <tr><td><strong>+24 hours</strong></td><td>Admin notified. GPS pinned for recovery.</td></tr>
+      <tr><td><strong>+48 hours</strong></td><td>Account suspended. Recovery dispatched. Police report if untraceable.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 5</span></div>
+</div>
+
+<!-- S7-9: APPS -->
+<div class="page pb">
+  <h1><span class="sn">7.</span> Rider App</h1>
+  <p>Native Android. <strong>Rent a bike, track earnings, swap battery in under 3 minutes.</strong> Low-end Android, intermittent 4G.</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:20%">Feature</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Home dashboard</strong></td><td>Greeting, active rental card (EV ID, battery %, time, accrued), JCoin balance, earnings, trips, quick actions.</td></tr>
+      <tr><td><strong>EV browse</strong></td><td>BariKoi map + list. Filter plans. Cards: EV ID, model, battery %, distance.</td></tr>
+      <tr><td><strong>EV active rental</strong></td><td>GPS map (BariKoi), battery %, distance, time, accrued, swap/extend/end buttons.</td></tr>
+      <tr><td><strong>EV end rental</strong></td><td>Return location (BariKoi navigate), condition photos, side-by-side, final bill, deposit status.</td></tr>
+      <tr><td><strong>Station map</strong></td><td>BariKoi map. Colour-coded pins. Tap: count, ETA, hours. Navigate + Book Slot.</td></tr>
+      <tr><td><strong>Swap initiation</strong></td><td>QR scan. PENDING → APPROVED → COMPLETE progress bar.</td></tr>
+      <tr><td><strong>Wallet</strong></td><td>Balance, breakdown, top-up (bKash/Nagad/SSLCommerz), history, deposit hold status.</td></tr>
+      <tr><td><strong>Earnings</strong></td><td>Today/week/month. Trip count. Average. Weekly chart.</td></tr>
+      <tr><td><strong>Subscription</strong></td><td>Active plan, billing date, swaps used, upgrade/downgrade/cancel, grace status.</td></tr>
+      <tr><td><strong>Referral</strong></td><td>Unique link. Share via WhatsApp/SMS. Referred count. Expiry dates.</td></tr>
+      <tr><td><strong>CO2 impact</strong></td><td>Total swaps, km, CO2 saved vs petrol, equivalent trees.</td></tr>
+      <tr><td><strong>Notifications</strong></td><td>Rental, swap, payment, low balance, subscription, referral, geofence, overdue.</td></tr>
+      <tr><td><strong>Support</strong></td><td>FAQ, pre-filled ticket, dispute flow, in-app chat and call.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="nb ok"><div class="nt">Bangladesh UX Priorities</div>Under 3 taps to rental/swap. No mandatory tours on return. Offline: cached bikes + stations. Low-end: 2 GB RAM benchmark. bKash first. "How much do I owe?" always visible. Bengali numerals v2.</div>
+
+  <h1><span class="sn">8.</span> Shop App</h1>
+  <p>Native Android. Audio-first. All actions within 2 taps.</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Feature</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Swap alert</strong></td><td>Audio chime (media stream, bypasses silent). Green flash. Rider info. 3-min countdown.</td></tr>
+      <tr><td><strong>Approve/Reject</strong></td><td>Approve: scan pack QR. Anti-theft check. Reject: reason required. Lock released.</td></tr>
+      <tr><td><strong>Battery inventory</strong></td><td>All packs: status, serial, cycle count, health. Mark available / report faulty.</td></tr>
+      <tr><td><strong>Return processing</strong></td><td>Scan returned pack. Rider_id verified. IN_USE → RETURNED → CHARGING.</td></tr>
+      <tr><td><strong>Rental return assist</strong></td><td>Independent 4-angle photos. Upload S3. Confirm condition. Trigger damage workflow.</td></tr>
+      <tr><td><strong>Booked queue</strong></td><td>Upcoming slots: rider, time, pack size. 10-min pre-alert.</td></tr>
+      <tr><td><strong>Earnings</strong></td><td>Today + week-to-date commission. Per-swap rows. Weekly payout history.</td></tr>
+      <tr><td><strong>Support</strong></td><td>In-app chat and call with admin.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h1><span class="sn">9.</span> FOCO Investor Dashboard</h1>
+  <p>Next.js 16.1 responsive web. Row-level data isolation.</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Module</th><th>Capabilities</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Portfolio</strong></td><td>Total EVs owned, active, idle, maintenance. Total investment.</td></tr>
+      <tr><td><strong>Earnings</strong></td><td>Total/monthly. Trend chart. Per-bike breakdown.</td></tr>
+      <tr><td><strong>ROI calculator</strong></td><td>Projected monthly income, payback period, annual ROI %. Live data.</td></tr>
+      <tr><td><strong>Fleet detail</strong></td><td>Owned bikes: status, rider, days rented, revenue. Full history.</td></tr>
+      <tr><td><strong>Payouts</strong></td><td>All payouts: date, amount, reference, status. Download PDF.</td></tr>
+      <tr><td><strong>Maintenance</strong></td><td>Per-bike events: date, type, cost, cost split per agreement.</td></tr>
+      <tr><td><strong>Notifications</strong></td><td>New rental, earnings updated, payout processed, low utilisation alert.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 6</span></div>
+</div>
+
+<!-- S10-11: ADMIN + NFR -->
+<div class="page pb">
+  <h1><span class="sn">10.</span> Admin Panel</h1>
+  <p>Next.js 16.1. Single admin role MVP. Insert-only audit log, 2-year retention.</p>
+  <div class="tw"><table>
+    <thead><tr><th style="width:20%">Module</th><th>Capabilities</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rider management</strong></td><td>Applications, approve/reject, NID + licence view, rental history, wallet, active rental, suspend, promo JCoins.</td></tr>
+      <tr><td><strong>Fleet management</strong></td><td>Add bikes (model, registration, GPS, photos, owner), transfer, lifecycle, GPS live map, maintenance log, retire.</td></tr>
+      <tr><td><strong>Rental management</strong></td><td>Active rentals with GPS, damage assessment (before/after photos), overdue queue, dispute resolution.</td></tr>
+      <tr><td><strong>Investor management</strong></td><td>Add investors, assign bikes, process payouts, portfolio health, agreement storage.</td></tr>
+      <tr><td><strong>Battery management</strong></td><td>Add/transfer packs, lifecycle, cycle count, health score, fault reports, retire, health export.</td></tr>
+      <tr><td><strong>Station live map</strong></td><td>All stations, real-time stock, swap count, booked slots, demand heatmap.</td></tr>
+      <tr><td><strong>Pricing config</strong></td><td>Rental plans, swap fee, per-station overrides, subscription tiers, revenue split, damage cost table.</td></tr>
+      <tr><td><strong>JCoin management</strong></td><td>Promotional credits, referral config, total in circulation, deposit hold summary.</td></tr>
+      <tr><td><strong>Financial dashboard</strong></td><td>Rental + swap revenue, Jaiben net, shop payables, investor payables, failed payouts.</td></tr>
+      <tr><td><strong>Analytics</strong></td><td>Active riders/rentals, fleet utilisation, station heatmap, top bikes/stations, retention, investor ROI.</td></tr>
+      <tr><td><strong>Theft &amp; incidents</strong></td><td>Overdue returns, cross-shop scans, stock discrepancies, geofence breaches, recovery tracking, JCoin holds.</td></tr>
+      <tr><td><strong>Support queue</strong></td><td>Rider/shop tickets, rental/swap disputes, payment issues, damage disputes. JCoin refund. Chat monitoring.</td></tr>
+      <tr><td><strong>Notification config</strong></td><td>Low-JCoin threshold, low-stock threshold, subscription warnings, rental expiry, geofence boundary.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h1><span class="sn">11.</span> Non-Functional Requirements</h1>
+  <h3>11.1 Performance</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:28%">Metric</th><th style="width:12%">Target</th><th>Condition</th></tr></thead>
+    <tbody>
+      <tr><td>API response (p95)</td><td>&lt; 300 ms</td><td>Standard endpoints under load</td></tr>
+      <tr><td>Rental initiation</td><td>&lt; 3 s</td><td>Deposit lock to rental active</td></tr>
+      <tr><td>Swap → shop alert</td><td>&lt; 2 s</td><td>QR scan to shop notification</td></tr>
+      <tr><td>GPS position update</td><td>&lt; 5 s</td><td>Telemetry to app display</td></tr>
+      <tr><td>Geofence breach alert</td><td>&lt; 15 s</td><td>GPS exit to push</td></tr>
+      <tr><td>Map tile load (BariKoi)</td><td>&lt; 2 s</td><td>Station map on 4G</td></tr>
+      <tr><td>Platform uptime</td><td>99.9%</td><td>Max 8.7 h/year excl. planned</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>11.2 Security</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Control</th><th>Implementation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Auth</strong></td><td>Phone OTP. JWT RS256 (15 min / 30 day refresh). Redis jti blacklist. 4 roles.</td></tr>
+      <tr><td><strong>Transit</strong></td><td>TLS 1.3. HTTP→HTTPS redirect. MQTT over TLS.</td></tr>
+      <tr><td><strong>At rest</strong></td><td>S3 SSE. NID/licence: private ACL, presigned 15-min. Sensitive DB: AES-256-GCM.</td></tr>
+      <tr><td><strong>QR integrity</strong></td><td>HMAC-SHA256 signed. Tampered/copied/rejected.</td></tr>
+      <tr><td><strong>Rate limiting</strong></td><td>/auth/otp: 5/min. /api/*: 200/min. /swap: 10/min. /rental: 5/min.</td></tr>
+      <tr><td><strong>Investor isolation</strong></td><td>Row-level security: investors query only own bikes/earnings.</td></tr>
+      <tr><td><strong>Audit</strong></td><td>Insert-only. All admin mutations. 2-year retention. No update/delete.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 7</span></div>
+</div>
+
+<!-- S12-13: RECOMMENDATIONS + FINANCIALS -->
+<div class="page pb">
+  <h1><span class="sn">12.</span> Operational Recommendations</h1>
+  <div class="tw"><table>
+    <thead><tr><th style="width:28%">Improvement</th><th>Why It Matters</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rental-first UX</strong></td><td>Home leads with rental status. Maximises engagement and revenue.</td></tr>
+      <tr><td><strong>Live GPS tracking</strong></td><td>Reduces theft. Enables recovery. Builds investor confidence.</td></tr>
+      <tr><td><strong>Photo condition reports</strong></td><td>Eliminates disputes. Immutable evidence. Reduces support volume.</td></tr>
+      <tr><td><strong>Earnings visibility</strong></td><td>App becomes earnings dashboard. Creates stickiness for delivery riders.</td></tr>
+      <tr><td><strong>BariKoi-first maps</strong></td><td>BD-optimised, lower cost, native Bangla, better local POI. Reduces map spend by 40-60%.</td></tr>
+      <tr><td><strong>Geofence alerts</strong></td><td>Prevents out-of-area use. Early theft warning.</td></tr>
+      <tr><td><strong>Real-time availability</strong></td><td>Eliminates empty-station arrivals. 60-80% wasted trip reduction.</td></tr>
+      <tr><td><strong>Investor ROI transparency</strong></td><td>Real-time earnings. Builds confidence for additional FOCO investment.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h1><span class="sn">13.</span> Timeline, Financials &amp; SLA</h1>
+
+  <h2>13.1 Development Timeline (16 Weeks)</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:10%">Weeks</th><th style="width:20%">Phase</th><th>Deliverables</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1–2</strong></td><td>Architecture + API</td><td>System design. OpenAPI 3.0 frozen. DB schema. BariKoi API integration setup. MQTT broker. Cloud infra. Payment gateway applications.</td></tr>
+      <tr><td><strong>2–8</strong></td><td>Backend</td><td>All 13 Go services. Anti-theft QR. GPS pipeline. Condition workflow. FOCO revenue calc. BariKoi MapService. 3 payment integrations.</td></tr>
+      <tr><td><strong>3–9</strong></td><td>Mobile (parallel)</td><td>Rider + Shop apps. EV rental flow, swap flow, wallet, referral, BariKoi maps, GPS tracking, earnings.</td></tr>
+      <tr><td><strong>4–10</strong></td><td>Web (parallel)</td><td>Admin (14 modules) + Investor Dashboard (portfolio, earnings, ROI, payouts).</td></tr>
+      <tr><td><strong>9–13</strong></td><td>Integration + QA</td><td>E2E rental + swap. Payment sandboxes. GPS telemetry. Load: 500 riders, 50 rentals, 50 swaps. Security review. UAT.</td></tr>
+      <tr><td><strong>14–15</strong></td><td>Beta Launch</td><td>10–20 riders, 3–5 shops, 2–3 investors. Real everything.</td></tr>
+      <tr><td><strong>16</strong></td><td>Launch + Handover</td><td>Source code, docs, runbook. 6-month support begins.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>13.2 Development Cost</h2>
+  <div class="tw"><table class="ht">
+    <thead><tr><th style="width:5%">#</th><th style="width:28%">Module</th><th style="width:22%">Stack</th><th style="width:15%">Cost (BDT)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Backend Development</td><td>Go 1.26, PostgreSQL, Redis, RabbitMQ, MQTT</td><td>1,90,000</td></tr>
+      <tr><td>2</td><td>Rider Mobile App</td><td>Android (Native)</td><td>1,15,000</td></tr>
+      <tr><td>3</td><td>Shop Mobile App</td><td>Android (Native)</td><td>95,000</td></tr>
+      <tr><td>4</td><td>Admin Web Panel</td><td>Next.js 16.1</td><td>70,000</td></tr>
+      <tr><td>5</td><td>FOCO Investor Dashboard</td><td>Next.js 16.1</td><td>30,000</td></tr>
+      <tr><td>6</td><td>UI/UX Design</td><td>Figma</td><td>25,000</td></tr>
+      <tr><td>7</td><td>QA and Testing</td><td>Manual + Load</td><td>15,000</td></tr>
+      <tr><td>8</td><td>Project Management</td><td>Agile / Scrum</td><td>10,000</td></tr>
+      <tr class="total-row"><td></td><td><strong>Total</strong></td><td></td><td><strong>5,50,000</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="nb warn"><div class="nt">Important</div>This cost does not include VAT and tax.</div>
+
+  <h2>13.3 Payment Terms</h2>
+  <div class="tw"><table class="ht">
+    <thead><tr><th>Milestone</th><th style="width:15%">Amount</th><th>Trigger</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Advance</strong></td><td>1,65,000 (30%)</td><td>Contract signing</td></tr>
+      <tr><td><strong>Milestone 1</strong></td><td>1,65,000 (30%)</td><td>Backend + API + payments + GPS + BariKoi (Week 8)</td></tr>
+      <tr><td><strong>Milestone 2</strong></td><td>1,10,000 (20%)</td><td>Beta launch live (Week 15)</td></tr>
+      <tr><td><strong>Final</strong></td><td>1,10,000 (20%)</td><td>Full launch + handover (Week 16)</td></tr>
+      <tr class="total-row"><td><strong>Total</strong></td><td><strong>5,50,000</strong></td><td></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>13.4 Post-Launch SLA (6-Month Complimentary)</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:25%">Item</th><th>Commitment</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Support period</strong></td><td>6 months from full launch.</td></tr>
+      <tr><td><strong>Critical fix</strong></td><td>24 hours (rental broken, JCoin incorrect, payment down, GPS failure).</td></tr>
+      <tr><td><strong>High fix</strong></td><td>72 hours (degraded with workaround).</td></tr>
+      <tr><td><strong>Medium fix</strong></td><td>7 days (non-critical, UI, minor calc).</td></tr>
+      <tr><td><strong>Source code</strong></td><td>Full ownership on final payment.</td></tr>
+      <tr><td><strong>Scope changes</strong></td><td>Change Order with revised cost/timeline.</td></tr>
+      <tr><td><strong>Validity</strong></td><td>30 days from cover date.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 8</span></div>
+</div>
+
+<!-- S14: DETAILED COST -->
+<div class="page pb">
+  <h1><span class="sn">14.</span> Detailed Cost Breakdown</h1>
+  <div class="tw"><table>
+    <thead><tr><th style="width:28%">Module</th><th style="width:10%">BDT</th><th>What Is Included</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Go Backend — Core</strong></td><td>55,000</td><td>Auth, Rental, Wallet, Swap, Fleet, Battery, Shop, Investor, Admin, Map services. All REST endpoints. JWT 4 roles. HMAC QR. Idempotency.</td></tr>
+      <tr><td><strong>Go Backend — Workers</strong></td><td>45,000</td><td>Scheduler (subscription, shop payout, investor payout, rental billing, expiry, health, referral). NotificationWorker. 3 payment gateways. bKash B2C.</td></tr>
+      <tr><td><strong>Go Backend — Telemetry</strong></td><td>30,000</td><td>MQTT integration. GPS ingestion, speed, geofence, last-known cache, trip distance. Goroutine pool.</td></tr>
+      <tr><td><strong>Go Backend — Rental Workflow</strong></td><td>30,000</td><td>Rental FSM. Deposit hold/release. Hourly billing. Condition photos. Damage assessment. Disputes. Overdue lock.</td></tr>
+      <tr><td><strong>PostgreSQL Schema</strong></td><td>20,000</td><td>20+ tables. PgBouncer. Read replica. Migration scripts.</td></tr>
+      <tr><td><strong>Redis + RabbitMQ</strong></td><td>10,000</td><td>Sentinel 3-node. Rental session + GPS cache. Durable queues + DLQ. Lock patterns.</td></tr>
+      <tr><td><strong>Infrastructure as Code</strong></td><td>15,000</td><td>K8s manifests, Dockerfiles, NGINX, MQTT deploy, CI/CD (GitHub Actions), env configs, secrets.</td></tr>
+      <tr><td><strong>Rider Android App</strong></td><td>1,15,000</td><td>KYC (NID+licence). Home with rental+earnings. BariKoi EV browse. Full rental (photos, deposit, GPS, extend, end, bill). Swap. Wallet. Subscription. Referral. History+CO2. Push. Offline. Chat/call.</td></tr>
+      <tr><td><strong>Shop Android App</strong></td><td>95,000</td><td>OTP. Swap alert (audio). Approve/reject + QR. Inventory. Mark available/fault. Return. Rental return assist (photos). Earnings + payout. Chat/call.</td></tr>
+      <tr><td><strong>Admin Panel</strong></td><td>70,000</td><td>14 modules. RBAC. Fleet GPS map. Station heatmap. Rental + damage. Investor mgmt. FOCO payouts. Turbopack.</td></tr>
+      <tr><td><strong>Investor Dashboard</strong></td><td>30,000</td><td>Portfolio, earnings charts, ROI, fleet detail, payout PDF, maintenance log, notifications. Row-level isolation.</td></tr>
+      <tr><td><strong>Payment Testing</strong></td><td>10,000</td><td>Sandbox: bKash, Nagad, SSLCommerz. Edge cases. Production credential checklist.</td></tr>
+      <tr><td><strong>Anti-theft + Anti-fraud</strong></td><td>10,000</td><td>HMAC QR rotation. Cross-shop detection. Unreturned escalation. Geofence. Overdue rental. Deposit fraud prevention.</td></tr>
+      <tr><td><strong>UI/UX (Figma)</strong></td><td>25,000</td><td>Design system. Rider (35+), Shop (18), Admin (28), Investor (12) screens. Annotations.</td></tr>
+      <tr><td><strong>QA</strong></td><td>15,000</td><td>Unit + integration (rental E2E, swap E2E, webhooks, GPS). Load: 500 riders, 50 rentals, 50 swaps. Security: QR, JWT, webhook, GPS spoof.</td></tr>
+      <tr><td><strong>Project Management</strong></td><td>10,000</td><td>16-week sprints. Daily standups. Weekly reports. OpenAPI spec. Runbook. Deployment guide. User guides. Handover.</td></tr>
+      <tr class="total-row"><td><strong>Total</strong></td><td><strong>5,50,000</strong></td><td><strong>Five Lakh Fifty Thousand BDT Only</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Third-Party Costs (Client-Managed)</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:28%">Item</th><th style="width:20%">Est. Cost</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>BariKoi Maps API (Primary)</strong></td><td>BDT 8,000–15,000/mo</td><td>Bangladesh-optimised. Lower cost than Google. Native BD addresses, Bangla support. Primary for all map features.</td></tr>
+      <tr><td><strong>Google Maps SDK (Fallback)</strong></td><td>BDT 10,000–30,000/mo</td><td>USD 200 free credit. Used as secondary/fallback. Direction API for v2 turn-by-turn.</td></tr>
+      <tr><td><strong>bKash Merchant (pay-in)</strong></td><td>~1.5–1.8% + setup</td><td>2–3 week lead time.</td></tr>
+      <tr><td><strong>bKash B2C (payouts)</strong></td><td>Per-txn rate</td><td>Shop + investor payouts.</td></tr>
+      <tr><td><strong>Nagad Merchant</strong></td><td>~1.5–2%</td><td>1–2 week lead time.</td></tr>
+      <tr><td><strong>SSLCommerz</strong></td><td>~2–2.5%</td><td>Visa, Mastercard, DBBL Nexus.</td></tr>
+      <tr><td><strong>SSL Wireless (SMS)</strong></td><td>BDT 0.30–0.50/SMS</td><td>3,000–10,000/month est.</td></tr>
+      <tr><td><strong>MQTT Broker</strong></td><td>BDT 5,000–15,000/mo</td><td>500+ connections.</td></tr>
+      <tr><td><strong>GPS Trackers</strong></td><td>BDT 2,000–4,000/unit</td><td>One-time per bike. Client procures.</td></tr>
+      <tr><td><strong>S3 Storage</strong></td><td>BDT 1,000–5,000/mo</td><td>~100 GB/year with condition reports.</td></tr>
+      <tr><td><strong>Cloud (K8s)</strong></td><td>BDT 15,000–25,000/mo</td><td>3 nodes (4 vCPU/8 GB). PostgreSQL, Redis, RabbitMQ, MQTT.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 9</span></div>
+</div>
+
+<!-- S15: AMC -->
+<div class="page pb">
+  <h1><span class="sn">15.</span> Annual Maintenance Contract (AMC)</h1>
+  <p>After the <strong>6-month complimentary support period</strong>, Jaiben may enter a structured AMC with three tiers — <strong>Basic, Standard, Premium</strong> — matching operational maturity and budget.</p>
+  <div class="nb info"><div class="nt">Transition</div>Evaluate AMC tier during Month 5 of complimentary support for seamless transition without coverage gap.</div>
+
+  <h2>15.1 AMC Maintenance Charges</h2>
+  <p>Fixed monthly fee billed in advance. First payment on activation date (day after complimentary period ends). All-inclusive: labour, deployment, communication, documentation. No hidden charges.</p>
+
+  <div class="mc">
+    <div class="mct">Monthly Maintenance Charge — By Tier</div>
+    <div style="font-size:11pt;opacity:.9;margin-bottom:4px">Select the tier matching your operational requirements and budget.</div>
+    <div class="mca">
+      <div class="mci"><div class="mctier">Basic</div><div class="mcpr">BDT 15,000</div><div class="mcp">per month</div></div>
+      <div class="mci"><div class="mctier">Standard</div><div class="mcpr">BDT 30,000</div><div class="mcp">per month</div></div>
+      <div class="mci"><div class="mctier">Premium</div><div class="mcpr">BDT 50,000</div><div class="mcp">per month</div></div>
+    </div>
+  </div>
+
+  <div class="tw"><table class="ht">
+    <thead><tr><th>Tier</th><th style="text-align:right">Monthly</th><th style="text-align:right">Annual</th><th>Daily</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Basic</strong></td><td style="text-align:right"><strong>BDT 15,000</strong></td><td style="text-align:right"><strong>BDT 1,80,000</strong></td><td>BDT 493</td></tr>
+      <tr><td><strong>Standard</strong></td><td style="text-align:right"><strong>BDT 30,000</strong></td><td style="text-align:right"><strong>BDT 3,36,000</strong></td><td>BDT 921</td></tr>
+      <tr><td><strong>Premium</strong></td><td style="text-align:right"><strong>BDT 50,000</strong></td><td style="text-align:right"><strong>BDT 6,00,000</strong></td><td>BDT 1,644</td></tr>
+      <tr class="total-row"><td><strong>Recommended</strong></td><td style="text-align:right"><strong>BDT 30,000</strong></td><td style="text-align:right"><strong>BDT 3,36,000</strong></td><td><span class="badge badge-g">Standard</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="nb ok"><div class="nt">Recommendation</div>Standard at BDT 30,000/month: 24-hour critical SLA, managed dependency upgrades, monthly performance reviews with action items, quarterly optimisation sprint, dedicated WhatsApp — critical for stability as volume scales.</div>
+
+  <h2>15.2 What AMC Covers</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:20%">Category</th><th>What Is Covered</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bug fixes</strong></td><td>All production codebase bugs. Regression testing + deployment. No new features.</td></tr>
+      <tr><td><strong>Security patches</strong></td><td>Emergency CVE patches for Go, Next.js, PostgreSQL, Redis, RabbitMQ. Within SLA window.</td></tr>
+      <tr><td><strong>Performance monitoring</strong></td><td>Monthly review (API times, error rates, query performance). Recommendations. Quarterly sprint (Standard+).</td></tr>
+      <tr><td><strong>Dependency upgrades</strong></td><td>Major Go, Next.js upgrades within 6 months of release (Standard+). Compatibility + regression testing.</td></tr>
+      <tr><td><strong>Infrastructure support</strong></td><td>K8s pod failures, DB connections, Redis failover, RabbitMQ health. BD business hours.</td></tr>
+      <tr><td><strong>Third-party integrations</strong></td><td>bKash/Nagad/SSLCommerz API changes requiring code updates. Premium: proactive changelog monitoring.</td></tr>
+      <tr><td><strong>Database maintenance</strong></td><td>Monthly slow queries, index health, storage growth. Migration support for schema changes.</td></tr>
+      <tr><td><strong>Documentation</strong></td><td>Updated API docs, runbook, admin guide as platform evolves within scope.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>15.3 Tier Comparison</h2>
+  <div class="tw"><table class="ht">
+    <thead><tr><th style="width:28%">Feature</th><th style="text-align:center;width:16%">Basic</th><th style="text-align:center;width:16%">Standard</th><th style="text-align:center;width:16%">Premium</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Monthly Charge</strong></td><td style="text-align:center"><strong>BDT 15,000</strong></td><td style="text-align:center"><strong>BDT 30,000</strong></td><td style="text-align:center"><strong>BDT 50,000</strong></td></tr>
+      <tr><td><strong>Annual Charge</strong></td><td style="text-align:center"><strong>BDT 1,80,000</strong></td><td style="text-align:center"><strong>BDT 3,36,000</strong></td><td style="text-align:center"><strong>BDT 6,00,000</strong></td></tr>
+      <tr><td colspan="4" class="ep-cat">Service Level Agreements</td></tr>
+      <tr><td>Critical bug SLA</td><td style="text-align:center"><span class="badge badge-y">48h</span></td><td style="text-align:center"><span class="badge badge-g">24h</span></td><td style="text-align:center"><span class="badge badge-g">8h</span></td></tr>
+      <tr><td>High bug SLA</td><td style="text-align:center">7 days</td><td style="text-align:center">72h</td><td style="text-align:center">48h</td></tr>
+      <tr><td>Medium/low SLA</td><td style="text-align:center">30 days</td><td style="text-align:center">14 days</td><td style="text-align:center">7 days</td></tr>
+      <tr><td>Security patch SLA</td><td style="text-align:center">72h</td><td style="text-align:center">24h</td><td style="text-align:center">4h</td></tr>
+      <tr><td colspan="4" class="ep-cat">Proactive Services</td></tr>
+      <tr><td>Monthly perf review</td><td style="text-align:center"><span class="badge badge-r">No</span></td><td style="text-align:center"><span class="badge badge-g">Yes</span></td><td style="text-align:center"><span class="badge badge-g">Yes + actions</span></td></tr>
+      <tr><td>Dependency upgrades</td><td style="text-align:center">On request</td><td style="text-align:center">Managed</td><td style="text-align:center">Proactive+tested</td></tr>
+      <tr><td>Quarterly sprint (2 days)</td><td style="text-align:center"><span class="badge badge-r">No</span></td><td style="text-align:center">1 sprint</td><td style="text-align:center">2 sprints</td></tr>
+      <tr><td colspan="4" class="ep-cat">Communication</td></tr>
+      <tr><td>Dedicated WhatsApp</td><td style="text-align:center"><span class="badge badge-r">No</span></td><td style="text-align:center"><span class="badge badge-g">Yes</span></td><td style="text-align:center"><span class="badge badge-g">Yes</span></td></tr>
+      <tr><td>Monthly status call</td><td style="text-align:center"><span class="badge badge-r">No</span></td><td style="text-align:center"><span class="badge badge-g">Yes</span></td><td style="text-align:center"><span class="badge badge-g">Yes+recorded</span></td></tr>
+      <tr><td>Payment gateway monitoring</td><td style="text-align:center">Reactive</td><td style="text-align:center">Reactive</td><td style="text-align:center"><span class="badge badge-g">Proactive</span></td></tr>
+      <tr><td>Emergency out-of-hours</td><td style="text-align:center"><span class="badge badge-r">No</span></td><td style="text-align:center"><span class="badge badge-r">No</span></td><td style="text-align:center"><span class="badge badge-y">+BDT 5,000/hr</span></td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 10</span></div>
+</div>
+
+<!-- AMC PAYMENT + RENEWAL -->
+<div class="page pb">
+  <h2>15.4 AMC Payment Schedule</h2>
+  <p>Billed <strong>monthly in advance</strong>. Invoice 5 business days before due. Payment due within 5 business days of invoice.</p>
+  <div class="tw"><table class="ht">
+    <thead><tr><th>Month</th><th style="text-align:right">Basic</th><th style="text-align:right">Standard</th><th style="text-align:right">Premium</th></tr></thead>
+    <tbody>
+      <tr><td>Each month × 12</td><td style="text-align:right">15,000</td><td style="text-align:right">30,000</td><td style="text-align:right">50,000</td></tr>
+      <tr class="total-row"><td><strong>Annual Total</strong></td><td style="text-align:right"><strong>1,80,000</strong></td><td style="text-align:right"><strong>3,36,000</strong></td><td style="text-align:right"><strong>6,00,000</strong></td></tr>
+    </tbody>
+  </table></div>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Term</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Late payment</strong></td><td>10 business day grace. After: services suspended, SLA paused.</td></tr>
+      <tr><td><strong>Emergency billing</strong></td><td>Premium only: BDT 5,000/hr, invoiced monthly. Requires prior written approval per callout.</td></tr>
+      <tr><td><strong>Taxes</strong></td><td>Exclusive of VAT. Added per invoice per Bangladesh regulations.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>15.5 What AMC Does Not Cover</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Out of Scope</th><th>How to Handle</th></tr></thead>
+    <tbody>
+      <tr><td><strong>New features</strong></td><td>Change Order with separate scope/cost. AMC clients get <strong>15% discount</strong>.</td></tr>
+      <tr><td><strong>Design changes</strong></td><td>Billed separately. AMC clients get <strong>15% discount</strong>.</td></tr>
+      <tr><td><strong>Infrastructure costs</strong></td><td>Cloud, SMS, BariKoi, Google Maps, payment gateway fees — client's responsibility.</td></tr>
+      <tr><td><strong>Vendor downtime</strong></td><td>Forenizence communicates with vendor; restoration outside our control.</td></tr>
+      <tr><td><strong>Data loss by client</strong></td><td>Backup config provided. Execution is client's responsibility unless Premium.</td></tr>
+      <tr><td><strong>Platform rewrites</strong></td><td>Major architecture change = new project, not AMC.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>15.6 Renewal &amp; Termination</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:22%">Term</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Duration</strong></td><td>12 months from activation.</td></tr>
+      <tr><td><strong>Auto-renewal</strong></td><td>Unless 30-day written notice. Max 10% annual increase.</td></tr>
+      <tr><td><strong>Upgrade/downgrade</strong></td><td>Upgrade: any time (prorated). Downgrade: next renewal.</td></tr>
+      <tr><td><strong>Termination</strong></td><td>60-day notice. Prorata refund minus 15% admin fee.</td></tr>
+      <tr><td><strong>Knowledge transfer</strong></td><td>2-hour handover + updated docs + 30 days email Q&amp;A on termination.</td></tr>
+      <tr><td><strong>Non-payment</strong></td><td>30 days past due: 15-day notice termination. No refund for terminated month.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 11</span></div>
+</div>
+
+<!-- S16: DATA MODEL -->
+<div class="page pb">
+  <h1><span class="sn">16.</span> Data Model</h1>
+  <p>20+ core tables. Double-entry financial ledger architecture.</p>
+  <pre><code>RIDERS ──▶ RENTALS ──▶ EV_BIKES ──▶ FOCO_INVESTORS
+  │           │              │
+  │      CONDITION_REPORTS  BATTERY_PACKS ──▶ SHOPS
+  │           │              │
+  │      DAMAGE_ASSESSMENTS  │
+  │                          │
+  └──▶ SWAPS ───────────────┘
+
+WALLET_LEDGER          EARNINGS_LEDGER         RENTAL_REVENUE_LEDGER
+(all JCoin movements)   (shop commissions)     (investor revenue splits)
+INVESTOR_PAYOUTS        SUBSCRIPTIONS          REFERRALS
+THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
+  <div class="tw"><table>
+    <thead><tr><th style="width:18%">Table</th><th>Key Fields</th></tr></thead>
+    <tbody>
+      <tr><td><strong>users</strong></td><td>id, phone, name, role (RIDER/SHOP/INVESTOR/ADMIN), status, nid_number, licence_number</td></tr>
+      <tr><td><strong>ev_bikes</strong></td><td>id, model, registration_no, gps_tracker_id, status (REGISTERED/AVAILABLE/RENTED/MAINTENANCE/RETIRED), current_location_id, investor_id</td></tr>
+      <tr><td><strong>rentals</strong></td><td>id, rider_id, bike_id, plan_type (HOURLY/DAILY/MONTHLY), status (ACTIVE/PAUSED/COMPLETED/CLOSED/DISPUTED), start_time, end_time, deposit_held, total_fee, damage_charge, final_settlement</td></tr>
+      <tr><td><strong>condition_reports</strong></td><td>id, rental_id, report_type (PRE_RENTAL/POST_RETURN/STAFF_RETURN), photo_urls[], gps_lat, gps_lng, created_at, created_by</td></tr>
+      <tr><td><strong>damage_assessments</strong></td><td>id, rental_id, damage_type, description, photo_url, estimated_cost, actual_cost, status (PENDING/APPROVED/DISPUTED/RESOLVED), assessed_by</td></tr>
+      <tr><td><strong>batteries</strong></td><td>id, model, capacity, qr_token_hash, status (CHARGING/AVAILABLE/IN_USE/RETURNED/FAULTY), current_shop_id, cycle_count, retirement_threshold, health_score</td></tr>
+      <tr><td><strong>shops</strong></td><td>id, name, gps_lat, gps_lng, contact_phone, operating_hours, commission_rate, status</td></tr>
+      <tr><td><strong>swaps</strong></td><td>id, rider_id, shop_id, battery_id, status (PENDING/APPROVED/COMPLETE/REJECTED), rental_id, jcoin_amount, swap_fee, commission</td></tr>
+      <tr><td><strong>wallet_ledger</strong></td><td>id, user_id, entry_type (CREDIT/DEBIT/HOLD/RELEASE), source (TOPUP/SWAP/RENTAL/REFERRAL/PROMO/DEPOSIT/DAMAGE), amount, balance_after, reference_id, idempotency_key</td></tr>
+      <tr><td><strong>earnings_ledger</strong></td><td>id, shop_id, swap_id, commission_amount, status (PENDING/PAID/FAILED), paid_at, payout_ref</td></tr>
+      <tr><td><strong>rental_revenue_ledger</strong></td><td>id, rental_id, bike_id, investor_id, gross_rental, investor_share, jaiben_share, status</td></tr>
+      <tr><td><strong>subscriptions</strong></td><td>id, rider_id, plan_type, status (ACTIVE/GRACE/LAPSED), billing_date, swaps_allowed, swaps_used</td></tr>
+      <tr><td><strong>foco_investors</strong></td><td>id, user_id, agreement_date, revenue_share_pct, total_invested, status</td></tr>
+      <tr><td><strong>investor_payouts</strong></td><td>id, investor_id, amount, period_start, period_end, status, paid_at, payout_ref</td></tr>
+      <tr><td><strong>referrals</strong></td><td>id, referrer_id, referee_id, status (PENDING/CREDITED/EXPIRED), credited_at, expires_at</td></tr>
+      <tr><td><strong>theft_incidents</strong></td><td>id, type, entity_id, description, status, resolved_at</td></tr>
+      <tr><td><strong>battery_transfers</strong></td><td>id, battery_id, from_shop_id, to_shop_id, initiated_by, created_at</td></tr>
+      <tr><td><strong>maintenance_logs</strong></td><td>id, bike_id, type (ROUTINE/REPAIR), description, cost, investor_share_pct, created_at</td></tr>
+      <tr><td><strong>geofences</strong></td><td>id, name, boundary_geojson, is_active, created_by</td></tr>
+      <tr><td><strong>audit_log</strong></td><td>id, actor_id, action, entity_type, entity_id, old_values (JSONB), new_values (JSONB), ip_address, created_at</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 12</span></div>
+</div>
+
+<!-- S17: API ENDPOINTS — COMPREHENSIVE -->
+<div class="page pb">
+  <h1><span class="sn">17.</span> API Endpoint Summary</h1>
+  <p>Complete REST API surface organised by module. All endpoints require JWT authentication unless noted. Version prefix: <code>/api/v1</code>. All responses follow standard envelope: <code>{"success": bool, "data": ..., "error": ...}</code>.</p>
+
+  <h2>17.1 Authentication</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td>/auth/otp/send</td><td>Send 6-digit OTP to BD phone number. Rate: 5 req/min/phone.</td></tr>
+      <tr><td><code>POST</code></td><td>/auth/otp/verify</td><td>Verify OTP. Returns access_token (15 min) + refresh_token (30 days).</td></tr>
+      <tr><td><code>POST</code></td><td>/auth/refresh</td><td>Rotate refresh token. Issues new access + refresh pair.</td></tr>
+      <tr><td><code>POST</code></td><td>/auth/logout</td><td>Revoke current refresh token via jti blacklist.</td></tr>
+      <tr><td><code>POST</code></td><td>/auth/shop/login</td><td>Shop phone + password login. Returns shop-scoped JWT.</td></tr>
+      <tr><td><code>POST</code></td><td>/auth/investor/login</td><td>Investor email + password login. Returns investor-scoped JWT.</td></tr>
+      <tr><td><code>POST</code></td><td>/auth/admin/login</td><td>Admin email + password login. Returns admin-scoped JWT.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.2 Rider — EV Rental</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/rentals/bikes/nearby</td><td>Available bikes within radius. Query: lat, lng, radius (m), plan_filter. Returns bike cards with distance, battery %, plans.</td></tr>
+      <tr><td><code>GET</code></td><td>/rentals/bikes/:bike_id</td><td>Bike detail: photos, model, specs, battery %, current location, rental plans with prices.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/initiate</td><td>Start rental. Body: bike_id, plan_type. Checks deposit + first billing. Creates condition report record. Returns rental_id.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/:id/condition-photos</td><td>Upload pre-rental condition photos (4 angles + damage). Body: multipart photos[], gps_lat, gps_lng. Stores to S3.</td></tr>
+      <tr><td><code>GET</code></td><td>/rentals/:id</td><td>Active rental status: bike_id, plan, start_time, time_elapsed, amount_accrued, battery %, gps_position.</td></tr>
+      <tr><td><code>GET</code></td><td>/rentals/:id/tracking</td><td>Real-time GPS position for map display. WebSocket upgrade available for continuous tracking.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/:id/extend</td><td>Extend rental. Body: hours (hourly) or plan_type (switch to daily/monthly). Checks wallet balance. Returns new expiry.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/:id/end</td><td>Initiate return. Returns nearest return location (BariKoi geocoded). Status: RETURNING.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/:id/return-photos</td><td>Upload post-return condition photos (4 angles). Same format as pre-rental.</td></tr>
+      <tr><td><code>GET</code></td><td>/rentals/:id/bill</td><td>Final bill: rental_fee, damage_charges, deposit_held, deposit_deducted, total_payable, debt_remaining.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/:id/confirm-return</td><td>Confirm return complete after staff verification. Triggers deposit release/deduction. Closes rental.</td></tr>
+      <tr><td><code>POST</code></td><td>/rentals/:id/dispute</td><td>Open damage dispute. Body: reason, description. 24-hour window. Holds deposit pending resolution.</td></tr>
+      <tr><td><code>GET</code></td><td>/rentals/history</td><td>Rental history. Query: page, limit, status_filter, date_from, date_to. Sorted by start_time desc.</td></tr>
+      <tr><td><code>GET</code></td><td>/rentals/active</td><td>Check if rider has active rental. Returns current rental or null.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.3 Rider — Battery Swap</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/swaps/stations/nearby</td><td>Swap stations within radius. Query: lat, lng, radius. Returns: station_id, name, available_count, colour, distance.</td></tr>
+      <tr><td><code>GET</code></td><td>/swaps/stations/:station_id</td><td>Station detail: name, address, hours, available_count, avg_swap_time (last 50), booked_slots.</td></tr>
+      <tr><td><code>POST</code></td><td>/swaps/initiate</td><td>Initiate swap. Body: station_id, station_qr_token. Validates HMAC QR. Locks JCoin or checks subscription. Returns swap_id.</td></tr>
+      <tr><td><code>GET</code></td><td>/swaps/:id/status</td><td>Swap status: PENDING/APPROVED/COMPLETE/REJECTED. Includes rider-facing details at each stage.</td></tr>
+      <tr><td><code>POST</code></td><td>/swaps/book-slot</td><td>Book 30-min arrival window. Body: station_id, window_start. Soft-reserves 1 pack.</td></tr>
+      <tr><td><code>DELETE</code></td><td>/swaps/book-slot/:booking_id</td><td>Cancel booked slot. Free cancel up to T-15 min.</td></tr>
+      <tr><td><code>GET</code></td><td>/swaps/bookings</td><td>Rider's upcoming booked slots.</td></tr>
+      <tr><td><code>GET</code></td><td>/swaps/history</td><td>Swap history. Query: page, limit, date_from, date_to. Includes CO2 saved per swap.</td></tr>
+      <tr><td><code>GET</code></td><td>/swaps/co2-impact</td><td>Cumulative CO2 impact: total swaps, estimated km, CO2 saved (kg), equivalent trees.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 13</span></div>
+</div>
+
+<!-- API CONTINUED -->
+<div class="page pb">
+  <h2>17.4 Rider — Wallet &amp; Subscription</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/wallet/balance</td><td>Current JCoin balance. Breakdown: purchased, referral, promotional. Active deposit holds.</td></tr>
+      <tr><td><code>POST</code></td><td>/wallet/topup</td><td>Initiate top-up. Body: amount, method (bkash/nagad/sslcommerz). Returns payment redirect URL or gateway response.</td></tr>
+      <tr><td><code>POST</code></td><td>/wallet/topup/verify</td><td>[Webhook endpoint — also callable for polling] Verify top-up status by transaction_id.</td></tr>
+      <tr><td><code>GET</code></td><td>/wallet/transactions</td><td>Transaction history. Query: page, limit, type_filter (CREDIT/DEBIT/HOLD/RELEASE), source_filter, date_from, date_to.</td></tr>
+      <tr><td><code>GET</code></td><td>/wallet/holds</td><td>Active deposit holds: rental_id, hold_amount, hold_time.</td></tr>
+      <tr><td><code>GET</code></td><td>/subscriptions/current</td><td>Active swap subscription: plan_type, billing_date, swaps_allowed, swaps_used, next_renewal_amount, grace_status.</td></tr>
+      <tr><td><code>GET</code></td><td>/subscriptions/plans</td><td>Available swap subscription plans with pricing and allowances.</td></tr>
+      <tr><td><code>POST</code></td><td>/subscriptions/subscribe</td><td>Subscribe to swap plan. Body: plan_type. Deducts first month from wallet.</td></tr>
+      <tr><td><code>PUT</code></td><td>/subscriptions/change-tier</td><td>Change plan tier. Body: new_plan_type. Prorated credit applied.</td></tr>
+      <tr><td><code>POST</code></td><td>/subscriptions/cancel</td><td>Cancel subscription. Effective at end of current billing period.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.5 Rider — Profile &amp; Support</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/riders/me</td><td>Current rider profile: name, phone, verification_status, NID status, licence status.</td></tr>
+      <tr><td><code>PUT</code></td><td>/riders/me</td><td>Update profile: name, profile_photo.</td></tr>
+      <tr><td><code>POST</code></td><td>/riders/me/kyc</td><td>Submit KYC: name, NID number, NID photos (front/back), driving licence photos (front/back). S3 upload.</td></tr>
+      <tr><td><code>GET</code></td><td>/riders/me/kyc-status</td><td>KYC verification status: PENDING/APPROVED/REJECTED with rejection reason.</td></tr>
+      <tr><td><code>GET</code></td><td>/referrals/code</td><td>Get unique referral link and code.</td></tr>
+      <tr><td><code>GET</code></td><td>/referrals/stats</td><td>Referral statistics: total_referred, credits_earned, pending_credits, expiry_dates.</td></tr>
+      <tr><td><code>GET</code></td><td>/earnings/today</td><td>Today's earnings summary: total, trips, average_per_trip.</td></tr>
+      <tr><td><code>GET</code></td><td>/earnings/summary</td><td>Earnings summary. Query: period (today/week/month/custom).</td></tr>
+      <tr><td><code>GET</code></td><td>/notifications</td><td>Notification centre. Query: page, limit, type_filter, read_status.</td></tr>
+      <tr><td><code>PUT</code></td><td>/notifications/:id/read</td><td>Mark notification as read.</td></tr>
+      <tr><td><code>PUT</code></td><td>/notifications/read-all</td><td>Mark all as read.</td></tr>
+      <tr><td><code>POST</code></td><td>/support/tickets</td><td>Create support ticket. Body: category, subject, description, reference_type (rental/swap/payment), reference_id.</td></tr>
+      <tr><td><code>GET</code></td><td>/support/tickets</td><td>List tickets. Query: page, limit, status_filter.</td></tr>
+      <tr><td><code>GET</code></td><td>/support/tickets/:id</td><td>Ticket detail with full message thread.</td></tr>
+      <tr><td><code>POST</code></td><td>/support/tickets/:id/messages</td><td>Add message to ticket thread. Body: text, attachments[].</td></tr>
+      <tr><td><code>POST</code></td><td>/chat/initiate</td><td>Initiate in-app chat session with support staff.</td></tr>
+      <tr><td><code>POST</code></td><td>/chat/:session_id/message</td><td>Send chat message. WebSocket for real-time.</td></tr>
+      <tr><td><code>GET</code></td><td>/chat/sessions</td><td>Chat session history list.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.6 Shop — Swap Operations</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/shop/swaps/incoming</td><td>Pending swap requests for this shop. Real-time via WebSocket push.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/swaps/incoming/:id</td><td>Swap request detail: rider name, pack_size, wallet/subscription status, time_remaining.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/swaps/:id/approve</td><td>Approve swap. Body: battery_qr_token. Validates pack AVAILABLE + registered to shop. IN_USE.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/swaps/:id/reject</td><td>Reject swap. Body: reason (NO_STOCK/PACK_FAULTY/SHOP_CLOSING/OTHER). Releases rider lock.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/swaps/history</td><td>Shop swap history. Query: page, limit, date_from, date_to.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/returns/process</td><td>Process battery return. Body: battery_qr_token. Validates rider_id match. IN_USE→RETURNED→CHARGING.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/bookings</td><td>Upcoming booked swap slots. Sorted by window_start.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 14</span></div>
+</div>
+
+<!-- API CONTINUED -->
+<div class="page pb">
+  <h2>17.7 Shop — Battery &amp; Inventory</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/shop/batteries</td><td>All batteries at this shop. Query: status_filter. Returns: id, serial, model, status, cycle_count, health_score, last_swap.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/batteries/:id</td><td>Battery detail: full lifecycle data, swap history.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/batteries/:id/mark-available</td><td>Mark CHARGING→AVAILABLE. Body: qr_token verification. Increments available count.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/batteries/:id/report-fault</td><td>Report FAULTY. Body: reason, description, photo. Quarantines immediately.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/inventory/summary</td><td>Summary counts: charging, available, in_use, faulty. Stock alerts status.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/profile</td><td>Shop profile: name, address, hours, commission_rate, contact.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.8 Shop — Rental Return &amp; Earnings</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/shop/rental-returns/pending</td><td>Riders who initiated end-rental at this shop location. Awaiting staff photos.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/rental-returns/:rental_id/photos</td><td>Upload staff independent return photos (4 angles). Body: multipart photos[], gps_lat, gps_lng.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/rental-returns/:rental_id/confirm</td><td>Confirm return condition. Body: has_damage (bool), damage_type (if true), damage_photo (if true). Triggers damage workflow.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/earnings/today</td><td>Today: completed swaps, total commission, per-swap breakdown.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/earnings/weekly</td><td>Week-to-date: daily breakdown, total.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/earnings/monthly</td><td>Monthly summary with daily bars.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/payouts/pending</td><td>Current week pending earnings amount.</td></tr>
+      <tr><td><code>GET</code></td><td>/shop/payouts/history</td><td>Payout history: date, amount, bKash_txn_id, status.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/support/tickets</td><td>Create shop support ticket.</td></tr>
+      <tr><td><code>POST</code></td><td>/shop/chat/initiate</td><td>Initiate chat with admin support.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.9 Investor — Portfolio</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/investor/portfolio</td><td>Portfolio overview: total_evs, active, idle, maintenance, total_invested, total_earned.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/earnings</td><td>Earnings dashboard: total, this_month, last_month, monthly_trend (12 months), per_bike_breakdown.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/roi</td><td>ROI calculation: investment_amount, revenue_share_pct, projected_monthly, payback_months, annual_roi_pct. Updated with live data.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/bikes</td><td>Owned bikes list: id, model, status, current_rider, days_rented_this_month, revenue_this_month.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/bikes/:id</td><td>Bike detail: full rental history, maintenance log, revenue per month, utilisation_rate.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/payouts</td><td>Payout history: date, amount, period, bKash/bank_ref, status (PENDING/PAID/FAILED).</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/payouts/:id/statement</td><td>Download payout statement PDF: itemised rental revenue breakdown.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/maintenance</td><td>Maintenance logs for owned bikes: date, bike_id, type, description, cost, investor_share, jaiben_share.</td></tr>
+      <tr><td><code>GET</code></td><td>/investor/notifications</td><td>Notifications: new rental, earnings update, payout, low utilisation alert.</td></tr>
+      <tr><td><code>POST</code></td><td>/investor/support/tickets</td><td>Create ticket. Pre-filled with investor_id.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.10 Admin — Rider Management</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/admin/riders</td><td>List all riders. Query: page, limit, status_filter, verification_filter, search (phone/name).</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/riders/:id</td><td>Rider detail: profile, NID/licence photos, wallet, active rental, swap history, trust indicators.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/riders/:id/verify</td><td>Approve or reject KYC. Body: action (APPROVE/REJECTED), rejection_reason.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/riders/:id/suspend</td><td>Suspend rider account. Body: reason. Blocks login, swaps, rentals.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/riders/:id/unsuspend</td><td>Unsuspend rider account.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/riders/:id/credits</td><td>Issue promotional JCoin credits. Body: amount, reason_code, description.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/riders/:id/rentals</td><td>Rider's rental history with damage incidents.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/riders/:id/ledger</td><td>Rider's full wallet ledger entries.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 15</span></div>
+</div>
+
+<!-- API CONTINUED -->
+<div class="page pb">
+  <h2>17.11 Admin — Fleet &amp; Rental Management</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td>/admin/fleet/bikes</td><td>Add bike. Body: model, registration_no, gps_tracker_id, photos[], initial_location_id, investor_id (nullable).</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/fleet/bikes</td><td>List bikes. Query: status_filter, location_filter, investor_filter, search.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/fleet/bikes/:id</td><td>Bike detail: full lifecycle, GPS position, rental history, maintenance, revenue, condition reports.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/fleet/bikes/:id</td><td>Update bike: model, photos, location, status.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/fleet/bikes/:id/retire</td><td>Retire bike. Body: reason. Status→RETIRED. Historical data retained.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/fleet/bikes/:id/transfer</td><td>Transfer bike to location. Body: to_location_id.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/fleet/map</td><td>Live fleet GPS map data. Returns all RENTED bikes with lat/lng, rider, speed, last_update.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/fleet/utilisation</td><td>Fleet utilisation: % rented, % idle, % maintenance. Filterable by date range.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/rentals/active</td><td>All active rentals: rider, bike, plan, start, accrued, GPS, overdue flag.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/rentals/overdue</td><td>Overdue rentals queue: escalation stage, GPS position, rider contact.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/rentals/:id/damage-assess</td><td>Assess damage. Body: damage_type, description, repair_cost. Triggers charge from deposit.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/rentals/:id/resolve-dispute</td><td>Resolve damage dispute. Body: action (WAIVE_DAMAGE/UPHOLD_DAMAGE/WAIVE_PARTIAL), reason.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/rentals/:id/force-close</td><td>Admin force-close rental. Used for recovery cases. Body: reason, damage_override.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/geofences</td><td>List geofence boundaries.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/geofences</td><td>Create geofence. Body: name, boundary_geojson.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/geofences/:id</td><td>Update geofence boundary.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.12 Admin — Shop &amp; Battery Management</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td>/admin/shops</td><td>Add shop. Body: name, gps_lat, gps_lng, contact, hours, commission_rate.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/shops</td><td>List shops with performance: swaps/day, rejection_rate, avg_response_time, earnings.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/shops/:id</td><td>Update shop details, commission_rate.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/shops/:id/suspend</td><td>Suspend shop. Freezes pack assignments + payouts.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/batteries</td><td>Add battery pack. Body: model, capacity, initial_shop_id.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/batteries</td><td>List batteries. Query: status_filter, shop_filter, health_filter.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/batteries/:id</td><td>Battery detail: lifecycle, cycle_count, health_score, swap_history, fault_reports.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/batteries/:id/transfer</td><td>Transfer battery. Body: to_shop_id. Creates immutable transfer_log.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/batteries/:id/retire</td><td>Retire battery. Body: reason.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/batteries/:id/clear-fault</td><td>Clear FAULTY status after inspection. Body: inspection_notes.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/batteries/audit</td><td>Trigger stock count audit for shop. Body: shop_id. Returns expected vs reported counts
+      </td></tr>
+      </tbody>
+      </table></div>
+      
+      <!-- S17.13-17.15: REMAINING ADMIN API -->
+  <h2>17.13 Admin — Financial &amp; Analytics</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/admin/financials/overview</td><td>Dashboard: total rental revenue, swap revenue, Jaiben net, shop payables, investor payables. Filterable by period.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/financials/rental-revenue</td><td>Rental revenue breakdown: by plan type, daily/monthly trend, gross vs net.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/financials/swap-revenue</td><td>Swap revenue: pay-per-swap vs subscription split, commission vs Jaiben share.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/financials/shop-payables</td><td>Shop commission payables: pending total, paid history, failed list with retry action.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/financials/shop-payables/:id/retry</td><td>Retry failed shop payout via bKash B2C.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/financials/investor-payables</td><td>Investor payables: pending, paid history, failed.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/financials/investor-payouts/process</td><td>Process monthly investor payout batch. Body: period_month.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/jcoin/circulation</td><td>Total JCoins in circulation: purchased, promotional, referral, held (deposits).</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/analytics/riders</td><td>Active riders (rented/swapped in 7 days). New registrations trend. Retention rate (re-rental in 7 days).</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/analytics/fleet</td><td>Fleet utilisation %, top bikes by rental frequency, idle bikes alert.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/analytics/stations</td><td>Station demand heatmap data (swaps/hour per station). Top 10 by volume. Busiest hours.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/analytics/revenue-split</td><td>Rental vs swap revenue pie. Subscription vs pay-per-swap. Investor share vs Jaiben share.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/analytics/investor-roi</td><td>Per-investor and aggregate ROI summary. Payback progress tracking.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/analytics/export</td><td>Export analytics as CSV/PDF. Body: report_type, date_from, date_to, format.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.14 Admin — Investor &amp; Incidents</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</tr></thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td>/admin/investors</td><td>Add FOCO investor. Body: name, contact, email, agreement_date, revenue_share_pct, total_invested.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/investors</td><td>List investors with portfolio health: total invested, total earned, active bikes, ROI.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/investors/:id</td><td>Investor detail: full profile, owned bikes, earnings trend, payout history, maintenance cost share.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/investors/:id</td><td>Update investor: revenue_share_pct, contact, status.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/investors/:id/assign-bike</td><td>Assign bike to investor. Body: bike_id. Transfers revenue allocation.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/incidents</td><td>Security incidents queue. Query: type_filter (OVERDUE_RETURN/CROSS_SHOP/UNREGISTERED_QR/GEOFENCE_BREACH/STOCK_DISCREPANCY), status_filter.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/incidents/:id</td><td>Incident detail: timeline, related entities, GPS data, evidence.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/incidents/:id/escalate</td><td>Escalate incident. Body: escalation_level, notes.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/incidents/:id/resolve</td><td>Resolve incident. Body: resolution, action_taken.</td></tr>
+      <tr><td><code>POST</code></td><td>/admin/incidents/:id/jcoin-hold</td><td>Place JCoin hold on rider. Body: amount, reason. Blocked from top-up and spending.</td></tr>
+      <tr><td><code>DELETE</code></td><td>/admin/incidents/:id/jcoin-hold</td><td>Release JCoin hold. Body: resolution_notes.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/theft/recovery</td><td>Bike recovery tracker: overdue bikes with GPS, recovery team status, police report status.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>17.15 Admin — System Configuration</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET</code></td><td>/admin/config/pricing</td><td>Current pricing config: rental plans, swap fee, subscription tiers, revenue split %, deposit amounts.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/pricing/rental</td><td>Update rental plans. Body: plan_type, price, deposit_amount.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/pricing/swap</td><td>Update global swap fee and per-station overrides.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/pricing/subscription</td><td>Update swap subscription tiers: name, price, swaps_allowed.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/pricing/revenue-split</td><td>Update global and per-shop commission rates.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/damage-costs</code><td>Update damage cost table. Body: damage_type, repair_cost_bdt.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/referral</td><td>Update referral: referrer_amount, referee_amount, max_per_month, expiry_days.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/notifications</code><td>Update thresholds: low_jcoin, low_stock, subscription_warning_days, rental_expiry_timings, geofence_config.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/battery</code><td>Update battery: retirement_threshold, health_alert_percentage, unreturned_hours_timeline.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/config/jcoin-rate</code><td>Current JCoin exchange rate (1 JCoin = X BDT).</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/jcoin-rate</code><td>Update JCoin rate. Body: rate. Default: 1.0.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/support/tickets</td><td>All support tickets. Query: source_filter (rider/shop/investor), status_filter, category_filter.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/support/tickets/:id</code><td>Ticket detail with full thread. Can add internal notes.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/support/tickets/:id/resolve</code><td>Resolve ticket. Body: resolution, jcoin_refund_amount (if applicable).</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/audit-log</code><td>Audit log. Query: actor_id, action, entity_type, date_from, date_to, page, limit. Insert-only — no mutations.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/system/health</code><td>System health: API pods, DB connections, Redis, RabbitMQ, MQTT broker, BariKoi API status.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Webhook Endpoints (External → Platform)</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:8%">Method</th><th style="width:40%">Endpoint</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td>/webhooks/bkash/payin</td><td>bKash payment confirmation. Verifies signature + idempotency. Credits JCoins.</td></tr>
+      <tr><td><code>POST</code></td><td>/webhooks/nagad/payin</td><td>Nagad payment confirmation. Same verification flow.</td></tr>
+      <tr><td><code>POST</code></td><td>/webhooks/sslcommerz/payin</td><td>SSLCommerz payment confirmation. Validates IP whitelist + signature.</td></tr>
+      <tr><td><code>POST</code></td><td>/webhooks/bkash/b2c-status</td><td>bKash B2C payout status callback. Updates payout record.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 16</span></div>
+</div>
+
+<!-- S18: RISK REGISTER -->
+<div class="page pb">
+  <h1><span class="sn">18.</span> Risk Register</h1>
+  <p>Comprehensive risk assessment covering technical, operational, financial, and security risks. Each risk is evaluated on likelihood (Low/Medium/High) and impact (Low/Medium/High/Critical) with specific, actionable mitigation strategies.</p>
+
+  <h2>18.1 Technical Risks</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Risk</th><th style="width:10%">Likelihood</th><th style="width:10%">Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>GPS tracker hardware failure</strong></td><td>Medium</td><td>High</td><td>Alert on no-telemetry &gt; 15 min. Redis fallback for last-known position. Backup: cell tower triangulation (v2). Fleet dashboard highlights non-reporting bikes.</td></tr>
+      <tr><td><strong>MQTT broker failure</strong></td><td>Low</td><td>Medium</td><td>EMQX cluster (3 nodes) with auto-failover. Redis fallback caches last-known positions. GPS data buffered on device and replayed on reconnection.</td></tr>
+      <tr><td><strong>BariKoi API downtime</strong></td><td>Low</td><td>Medium</td><td>Automatic fallback to Google Maps SDK. Cached map tiles for recently viewed areas. Geocoding queue with retry logic.</td></tr>
+      <tr><td><strong>Redis Sentinel failover lag</strong></td><td>Low</td><td>High</td><td>3-node Sentinel cluster with quorum. Sub-millisecond failover. Swap/rental locks have TTL safety net. Monitoring alerts on sentinel state change.</td></tr>
+      <tr><td><strong>Database connection exhaustion</strong></td><td>Low</td><td>High</td><td>PgBouncer with max 100 connections regardless of pod count. Connection recycling. Auto-scale pods do not bypass pooler.</td></tr>
+      <tr><td><strong>RabbitMQ queue buildup</strong></td><td>Low</td><td>Medium</td><td>DLX for failed messages. Consumer auto-restart. Queue depth monitoring with alert at threshold. Manual purge capability in admin.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>18.2 Operational Risks</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Risk</th><th style="width:10%">Likelihood</th><th style="width:10%">Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Rider never returns bike</strong></td><td>Medium</td><td>Critical</td><td>Deposit mechanism. GPS tracking. Geofence alerts. Escalation timeline (72h→96h→120h→144h). Police report. Insurance claim. Recovery team dispatch at +48h.</td></tr>
+      <tr><td><strong>False damage claims</strong></td><td>Medium</td><td>Medium</td><td>Mandatory pre/post photos from rider + staff. GPS-validated timestamps. Side-by-side comparison in admin. 24-hour dispute window. Admin as final arbiter.</td></tr>
+      <tr><td><strong>Shop collusion (fake swaps)</strong></td><td>Low</td><td>Medium</td><td>Anti-theft QR with HMAC binding. Cross-shop scan alerts. Monthly stock reconciliation. Anomaly detection on swap patterns per shop. Payout block on discrepancy.</td></tr>
+      <tr><td><strong>Shop staff not marking batteries available</strong></td><td>Medium</td><td>Medium</td><td>Low-stock cascade alerts to shop + admin. Dashboard shows charging→available conversion rate per shop. Under-performing shops flagged.</td></tr>
+      <tr><td><strong>Bike returned to wrong location</strong></td><td>Medium</td><td>Low</td><td>BariKoi geofence around authorised return locations. App only allows "End Rental" when within geofence. Staff confirms location via GPS on return photo.</td></tr>
+      <tr><td><strong>High condition-report storage costs</strong></td><td>Medium</td><td>Low</td><td>Compress photos before S3 upload (WebP, 80% quality). Auto-archive reports &gt; 6 months to cold storage (Glacier-class). Lifecycle policy deletes after 2 years.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>18.3 Financial Risks</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Risk</th><th style="width:10%">Likelihood</th><th style="width:10%">Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Payment gateway downtime</strong></td><td>Low</td><td>High</td><td>Three independent gateways (bKash, Nagad, SSLCommerz). Auto-fallback on failure. JCoin wallet absorbs temporary outages — riders can still swap with existing balance.</td></tr>
+      <tr><td><strong>Double payment webhook</strong></td><td>Low</td><td>High</td><td>Idempotency key (transaction_id) on every webhook. Duplicate delivery is a no-op. Ledger balance check before credit. Alert on duplicate detection.</td></tr>
+      <tr><td><strong>Investor disputes over earnings</strong></td><td>Medium</td><td>Medium</td><td>Transparent per-bike revenue breakdown. Immutable double-entry ledger. Monthly PDF payout statements. Dispute workflow with admin resolution. Agreement terms clearly define cost splits.</td></tr>
+      <tr><td><strong>JCoin ledger imbalance</strong></td><td>Low</td><td>Critical</td><td>Double-entry architecture: every credit has a corresponding debit entry. Nightly reconciliation job. Alert on imbalance &gt; 1 JCoin. Manual investigation SOP.</td></tr>
+      <tr><td><strong>Shop payout failure</strong></td><td>Low</td><td>Medium</td><td>bKash B2C retry on failure. Failed payouts in admin queue for manual retry. Shops see pending amount in real-time. Weekly batch allows time to resolve before next cycle.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>18.4 Security Risks</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Risk</th><th style="width:10%">Likelihood</th><th style="width:10%">Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Battery pack theft</strong></td><td>Medium</td><td>High</td><td>HMAC-signed QR with network binding. Shop assignment lock. Unreturned escalation (72h→144h). JCoin hold = replacement value. Physical Jaiben branding reduces resale value.</td></tr>
+      <tr><td><strong>QR code cloning/replay</strong></td><td>Low</td><td>High</td><td>HMAC-SHA256 with server-side secret. Timestamp validation. One-time-use tokens for station QR. Battery QR bound to shop_id — replay at different shop triggers alert.</td></tr>
+      <tr><td><strong>JWT token theft</strong></td><td>Low</td><td>High</td><td>Short access token (15 min). Refresh token rotation on use. jti blacklist on suspension/logout. TLS 1.3 in transit. Token stored in encrypted local storage.</td></tr>
+      <tr><td><strong>OTP bombing</strong></td><td>Medium</td><td>Low</td><td>Rate limit: 5 OTP req/min/phone. Max 3 attempts/hour. 5-min OTP TTL. SSL Wireless rate limiting. Alert on burst patterns.</td></tr>
+      <tr><td><strong>Referral credit farming</strong></td><td>Medium</td><td>Low</td><td>Credit on first rental/swap (not registration). Device fingerprint + NID match detection. Max 20 referrals/month/rider. 90-day expiry. Admin flag for review.</td></tr>
+      <tr><td><strong>GPS spoofing</strong></td><td>Low</td><td>Medium</td><td>Speed plausibility checks (ignore &gt;120 km/h). Coordinate jump detection. MQTT payload HMAC signing (v2). Correlation with cell tower data (v2).</td></tr>
+      <tr><td><strong>SQL injection / XSS</strong></td><td>Low</td><td>Critical</td><td>Parameterised queries via GORM. Input validation middleware. Output encoding in web dashboards. CSP headers on Next.js. Regular security testing in QA.</td></tr>
+      <tr><td><strong>Payment webhook tampering</strong></td><td>Low</td><td>Critical</td><td>bKash/Nagad: IP whitelist. SSLCommerz: signature validation on every webhook. No JCoin credit without verified webhook. All webhook events logged with raw payload.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>18.5 Business Risks</h2>
+  <div class="tw"><table>
+    <thead><tr><th style="width:24%">Risk</th><th style="width:10%">Likelihood</th><th style="width:10%">Impact</th><th>Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Low rider adoption</strong></td><td>Medium</td><td>High</td><td>Rental-first UX reduces friction. Referral programme with JCoin incentives. Competitive pricing. Delivery rider earnings visibility drives stickiness.</td></tr>
+      <tr><td><strong>Low shop partner recruitment</strong></td><td>Medium</td><td>High</td><td>Weekly payout transparency builds trust. Low operational burden (scan + approve). Commission-based earning attracts existing shops.</td></tr>
+      <tr><td><strong>FOCO investor hesitation</strong></td><td>Medium</td><td>Medium</td><td>Transparent ROI dashboard. Monthly PDF statements. Zero operational burden messaging. Pilot investors with proven returns before wider rollout.</td></tr>
+      <tr><td><strong>Regulatory changes (EV policy)</strong></td><td>Low</td><td>Medium</td><td>Modular architecture allows quick adaptation. Admin-configurable pricing and rules. Regulatory monitoring via legal counsel.</td></tr>
+      <tr><td><strong>Competitive entry</strong></td><td>Medium</td><td>Medium</td><td>First-mover advantage in integrated rental + swap. Network effects (more shops → better UX → more riders). FOCO model creates investor-loyal capital base.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 17</span></div>
+</div>
+
+<!-- S19: ACCEPTANCE & SIGNATURE -->
+<div class="page pb">
+  <h1><span class="sn">19.</span> Acceptance &amp; Signature</h1>
+  <p>This Software Requirements Specification (v4.0) defines the complete scope, functionality, technical architecture, pricing, timeline, and maintenance terms for the Jaiben Mobility EV Rental &amp; Battery Swap Network Platform. Both parties acknowledge that this document serves as the binding basis for the development engagement and subsequent Annual Maintenance Contract.</p>
+
+  <h3>Scope Summary</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:35%">Item</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Platform</strong></td><td>EV Rental + Battery Swap Network with FOCO Investor Management</td></tr>
+      <tr><td><strong>Client Surfaces</strong></td><td>Rider App (Android), Shop App (Android), Investor Dashboard (Web), Admin Panel (Web)</td></tr>
+      <tr><td><strong>Map Provider</strong></td><td>BariKoi (primary) + Google Maps SDK (fallback)</td></tr>
+      <tr><td><strong>Payments</strong></td><td>bKash, Nagad, SSLCommerz (top-up + payouts)</td></tr>
+      <tr><td><strong>Development Cost</strong></td><td>BDT 5,50,000 (Five Lakh Fifty Thousand) — excluding VAT and tax</td></tr>
+      <tr><td><strong>Payment Milestones</strong></td><td>30% advance → 30% backend complete → 20% beta launch → 20% full launch</td></tr>
+      <tr><td><strong>Timeline</strong></td><td>16 weeks from contract signing to full launch</td></tr>
+      <tr><td><strong>Post-Launch Support</strong></td><td>6-month complimentary technical support</td></tr>
+      <tr><td><strong>AMC Options</strong></td><td>Basic (BDT 15,000/mo), Standard (BDT 30,000/mo), Premium (BDT 50,000/mo)</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="nb danger">
+    <div class="nt">Binding Agreement</div>
+    By signing below, both parties agree to the scope, cost (BDT 5,50,000), payment milestones (30/30/20/20), 16-week timeline, 6-month complimentary support, and AMC terms as defined in this document. Any deviation requires a formal Change Order with revised cost and timeline. This document is valid for 30 days from the date of issue.
+  </div>
+
+  <div class="nb warn">
+    <div class="nt">Pre-Conditions for Development Start</div>
+    The following must be fulfilled by Jaiben Mobility before or during Week 1:<br>
+    1. Signed contract with 30% advance payment cleared.<br>
+    2. bKash merchant (pay-in) and bKash B2C applications submitted.<br>
+    3. Nagad merchant application submitted.<br>
+    4. SSLCommerz merchant application submitted.<br>
+    5. Pilot EV bikes confirmed with GPS tracker IDs and photos.<br>
+    6. Pilot partner shops confirmed: name, GPS, contact, battery stock.<br>
+    7. Rental plan prices, deposit amounts, swap fee, subscription tiers, revenue split %, and FOCO investor revenue share % confirmed.<br>
+    8. Operational area geofence boundaries defined.<br>
+    9. BariKoi API key provisioned.<br>
+    10. FOCO investor agreement template finalised.
+  </div>
+
+  <div class="sig">
+    <div class="ss">
+      <div style="font-weight:700;font-size:11pt;margin-bottom:4px">Forenizence Limited</div>
+      <div style="font-size:9pt;color:var(--text-secondary);margin-bottom:4px">Service Provider</div>
+      <div class="sigl">
+        <span class="sl">Authorised Signatory</span><br>
+        Name: _____________________________<br>
+        Title: _____________________________<br>
+        Date: _____________________________
+      </div>
+    </div>
+    <div class="ss">
+      <div style="font-weight:700;font-size:11pt;margin-bottom:4px">Jaiben Mobility Ltd.</div>
+      <div style="font-size:9pt;color:var(--text-secondary);margin-bottom:4px">Client</div>
+      <div class="sigl">
+        <span class="sl">Authorised Signatory</span><br>
+        Name: _____________________________<br>
+        Title: _____________________________<br>
+        Date: _____________________________
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:30px;padding:16px;background:var(--accent-light);border-radius:4px;font-size:9pt">
+    <div style="font-weight:700;color:var(--accent-dark);margin-bottom:6px">Document Control</div>
+    <table style="width:100%;font-size:9pt">
+      <tr><td style="width:25%;padding:2px 0"><strong>Document ID:</strong></td><td>SRS-JAIBEN-v4.0-2026</td></tr>
+      <tr><td style="padding:2px 0"><strong>Version:</strong></td><td>v4.0 — EV Rental First, Battery Swap Integrated, FOCO Model, BariKoi Maps</td></tr>
+      <tr><td style="padding:2px 0"><strong>Date:</strong></td><td>April 2026</td></tr>
+      <tr><td style="padding:2px 0"><strong>Status:</strong></td><td><span class="badge badge-g">Final — For Client Approval</span></td></tr>
+      <tr><td style="padding:2px 0"><strong>Validity:</strong></td><td>30 days from date of issue</td></tr>
+      <tr><td style="padding:2px 0"><strong>Distribution:</strong></td><td>Restricted — Named recipients only</td></tr>
+      <tr><td style="padding:2px 0"><strong>Confidentiality:</strong></td><td>This document contains proprietary information. Unauthorised reproduction or distribution is prohibited.</td></tr>
+    </table>
+  </div>
+
+  <div style="margin-top:20px;text-align:center;font-size:9pt;color:var(--text-muted)">
+    — End of Document —
+  </div>
+  <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page 18</span></div>
+</div>
+
+</body>
+</html>
