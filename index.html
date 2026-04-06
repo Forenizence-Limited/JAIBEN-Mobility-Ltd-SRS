@@ -66,10 +66,13 @@
   .toc{page-break-after:always}
   .toc h2{border-left:none;padding-left:0;text-align:center;font-size:18pt;border-bottom:2px solid var(--accent);padding-bottom:10px;margin-bottom:30px}
   .tl{list-style:none;margin:0;padding:0}
-  .tl li{padding:5px 0;border-bottom:1px dotted var(--border);display:flex;justify-content:space-between;font-size:10pt}
+  .tl li{padding:5px 0;border-bottom:1px dotted var(--border);display:flex;justify-content:space-between;align-items:baseline;font-size:10pt}
   .tl li.t1{font-weight:700;color:var(--accent-dark);margin-top:8px;font-size:10.5pt}
   .tl li.t2{padding-left:20px;font-weight:500;color:var(--text-secondary)}
   .tl li.t3{padding-left:40px;font-weight:400;color:var(--text-muted);font-size:9.5pt}
+  .tl a{text-decoration:none;color:inherit;flex:1}
+  .tl a:hover{color:var(--accent)}
+  .tl li span.pn{flex-shrink:0;min-width:28px;text-align:right;color:var(--text-muted);font-size:9.5pt}
 
   .badge{display:inline-block;padding:2px 10px;border-radius:3px;font-size:8pt;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
   .badge-g{background:var(--accent-light);color:var(--accent-dark)}
@@ -93,7 +96,7 @@
   .sigl .sl{font-weight:600;color:var(--text-primary)}
 
   .pb{page-break-before:always}
-  @media print{body{background:#fff}.page{margin:0;box-shadow:none;padding:20mm 20mm 25mm 20mm}.pb{page-break-before:always}}
+  @media print{body{background:#fff}.page{margin:0;box-shadow:none;padding:20mm 20mm 25mm 20mm}.pb{page-break-before:always}.tl a:hover{color:inherit}}
   @media screen and (max-width:800px){.page{width:100%;margin:0;padding:15px;box-shadow:none;border-radius:0}.cover-stamp{display:none}.sig{flex-direction:column;gap:30px}.sig .ss{width:100%}.mc .mca{flex-direction:column;gap:8px}}
 </style>
 </head>
@@ -107,7 +110,7 @@
   </div>
   <div class="cover-divider"></div>
   <div class="cover-title">Software Requirements<br>Specification</div>
-  <div class="cover-subtitle">EV Rental & Battery Swap Network Platform — MVP v4.0</div>
+  <div class="cover-subtitle">EV Rental &amp; Battery Swap Network Platform — MVP v4.0</div>
   <div class="cover-meta">
     <strong>Version:</strong> v4.0 — EV Rental First, Battery Swap Integrated<br>
     <strong>Date:</strong> April 2026<br>
@@ -124,43 +127,80 @@
 <div class="page toc">
   <h2>Table of Contents</h2>
   <ul class="tl">
-    <li class="t1"><span>1. Platform Overview</span></li>
-    <li class="t2"><span>1.1 Business Model</span></li><li class="t2"><span>1.2 Client Surfaces</span></li><li class="t2"><span>1.3 Glossary</span></li>
-    <li class="t1"><span>2. System Architecture</span></li>
-    <li class="t2"><span>2.1 Technology Stack</span></li><li class="t2"><span>2.2 Core Services</span></li>
-    <li class="t1"><span>3. Pricing, JCoin &amp; Rental Plans</span></li>
-    <li class="t2"><span>3.1 JCoin Credit System</span></li><li class="t2"><span>3.2 EV Rental Plans</span></li><li class="t2"><span>3.3 Rental Billing Rules</span></li><li class="t2"><span>3.4 Battery Swap Plans</span></li><li class="t2"><span>3.5 Referral Programme</span></li><li class="t2"><span>3.6 FOCO Investor Revenue Model</span></li>
-    <li class="t1"><span>4. Core Business Workflows</span></li>
-    <li class="t2"><span>4.1 EV Rental — End-to-End</span></li><li class="t2"><span>4.2 Battery Swap — End-to-End</span></li><li class="t2"><span>4.3 Real-time Station Availability</span></li><li class="t2"><span>4.4 Payment Flow &amp; Revenue Split</span></li><li class="t2"><span>4.5 Battery Lifecycle</span></li><li class="t2"><span>4.6 EV Bike Lifecycle</span></li>
-    <li class="t1"><span>5. Battery Theft Prevention</span></li>
-    <li class="t1"><span>6. EV Rental Security &amp; Anti-Fraud</span></li>
-    <li class="t1"><span>7. Rider App</span></li>
-    <li class="t1"><span>8. Shop App</span></li>
-    <li class="t1"><span>9. FOCO Investor Dashboard</span></li>
-    <li class="t1"><span>10. Admin Panel</span></li>
-    <li class="t1"><span>11. Non-Functional Requirements</span></li>
-    <li class="t1"><span>12. Operational Recommendations</span></li>
-    <li class="t1"><span>13. Timeline, Financials &amp; SLA</span></li>
-    <li class="t2"><span>13.1 Development Timeline</span></li><li class="t2"><span>13.2 Development Cost</span></li><li class="t2"><span>13.3 Payment Terms</span></li><li class="t2"><span>13.4 Post-Launch SLA</span></li>
-    <li class="t1"><span>14. Detailed Cost Breakdown</span></li>
-    <li class="t1"><span>15. Annual Maintenance Contract (AMC)</span></li>
-    <li class="t2"><span>15.1 AMC Maintenance Charges</span></li><li class="t2"><span>15.2 What AMC Covers</span></li><li class="t2"><span>15.3 Tier Comparison</span></li><li class="t2"><span>15.4 Payment Schedule</span></li><li class="t2"><span>15.5 Exclusions</span></li><li class="t2"><span>15.6 Renewal &amp; Termination</span></li>
-    <li class="t1"><span>16. Data Model</span></li>
-    <li class="t1"><span>17. API Endpoint Summary</span></li>
-    <li class="t2"><span>17.1 Authentication</span></li><li class="t2"><span>17.2 Rider — EV Rental</span></li><li class="t2"><span>17.3 Rider — Battery Swap</span></li><li class="t2"><span>17.4 Rider — Wallet &amp; Subscription</span></li><li class="t2"><span>17.5 Rider — Profile &amp; Support</span></li><li class="t2"><span>17.6 Shop — Swap Operations</span></li><li class="t2"><span>17.7 Shop — Battery &amp; Inventory</span></li><li class="t2"><span>17.8 Shop — Rental Return &amp; Earnings</span></li><li class="t2"><span>17.9 Investor — Portfolio</span></li><li class="t2"><span>17.10 Admin — Rider Management</span></li><li class="t2"><span>17.11 Admin — Fleet &amp; Rental</span></li><li class="t2"><span>17.12 Admin — Shop &amp; Battery</span></li><li class="t2"><span>17.13 Admin — Financial &amp; Analytics</span></li><li class="t2"><span>17.14 Admin — Investor &amp; Incidents</span></li><li class="t2"><span>17.15 Admin — System Configuration</span></li>
-    <li class="t1"><span>18. Risk Register</span></li>
-    <li class="t1"><span>19. Acceptance &amp; Signature</span></li>
+    <li class="t1"><a href="#sec-1">1. Platform Overview</a><span class="pn">1</span></li>
+    <li class="t2"><a href="#sec-1-1">1.1 Business Model</a><span class="pn">1</span></li>
+    <li class="t2"><a href="#sec-1-2">1.2 Client Surfaces</a><span class="pn">1</span></li>
+    <li class="t2"><a href="#sec-1-3">1.3 Glossary</a><span class="pn">1</span></li>
+    <li class="t1"><a href="#sec-2">2. System Architecture</a><span class="pn">2</span></li>
+    <li class="t2"><a href="#sec-2-1">2.1 Technology Stack</a><span class="pn">2</span></li>
+    <li class="t2"><a href="#sec-2-2">2.2 Core Services</a><span class="pn">2</span></li>
+    <li class="t1"><a href="#sec-3">3. Pricing, JCoin &amp; Rental Plans</a><span class="pn">3</span></li>
+    <li class="t2"><a href="#sec-3-1">3.1 JCoin Credit System</a><span class="pn">3</span></li>
+    <li class="t2"><a href="#sec-3-2">3.2 EV Rental Plans</a><span class="pn">3</span></li>
+    <li class="t2"><a href="#sec-3-3">3.3 Rental Billing Rules</a><span class="pn">3</span></li>
+    <li class="t2"><a href="#sec-3-4">3.4 Battery Swap Subscription Plans</a><span class="pn">3</span></li>
+    <li class="t2"><a href="#sec-3-5">3.5 Referral Programme</a><span class="pn">3</span></li>
+    <li class="t2"><a href="#sec-3-6">3.6 FOCO Investor Revenue Model</a><span class="pn">3</span></li>
+    <li class="t1"><a href="#sec-4">4. Core Business Workflows</a><span class="pn">4</span></li>
+    <li class="t2"><a href="#sec-4-1">4.1 EV Rental — End-to-End</a><span class="pn">4</span></li>
+    <li class="t2"><a href="#sec-4-2">4.2 Battery Swap — End-to-End</a><span class="pn">4</span></li>
+    <li class="t2"><a href="#sec-4-3">4.3 Real-time Station Availability</a><span class="pn">4</span></li>
+    <li class="t2"><a href="#sec-4-4">4.4 Payment Flow &amp; Revenue Split</a><span class="pn">4</span></li>
+    <li class="t2"><a href="#sec-4-5">4.5 Battery Lifecycle</a><span class="pn">4</span></li>
+    <li class="t2"><a href="#sec-4-6">4.6 EV Bike Lifecycle</a><span class="pn">4</span></li>
+    <li class="t1"><a href="#sec-5">5. Battery Theft Prevention</a><span class="pn">5</span></li>
+    <li class="t1"><a href="#sec-6">6. EV Rental Security &amp; Anti-Fraud</a><span class="pn">5</span></li>
+    <li class="t1"><a href="#sec-7">7. Rider App</a><span class="pn">6</span></li>
+    <li class="t1"><a href="#sec-8">8. Shop App</a><span class="pn">6</span></li>
+    <li class="t1"><a href="#sec-9">9. FOCO Investor Dashboard</a><span class="pn">6</span></li>
+    <li class="t1"><a href="#sec-10">10. Admin Panel</a><span class="pn">7</span></li>
+    <li class="t1"><a href="#sec-11">11. Non-Functional Requirements</a><span class="pn">7</span></li>
+    <li class="t2"><a href="#sec-11-1">11.1 Performance</a><span class="pn">7</span></li>
+    <li class="t2"><a href="#sec-11-2">11.2 Security</a><span class="pn">7</span></li>
+    <li class="t1"><a href="#sec-12">12. Operational Recommendations</a><span class="pn">8</span></li>
+    <li class="t1"><a href="#sec-13">13. Timeline, Financials &amp; SLA</a><span class="pn">8</span></li>
+    <li class="t2"><a href="#sec-13-1">13.1 Development Timeline</a><span class="pn">8</span></li>
+    <li class="t2"><a href="#sec-13-2">13.2 Development Cost</a><span class="pn">8</span></li>
+    <li class="t2"><a href="#sec-13-3">13.3 Payment Terms</a><span class="pn">8</span></li>
+    <li class="t2"><a href="#sec-13-4">13.4 Post-Launch SLA</a><span class="pn">8</span></li>
+    <li class="t1"><a href="#sec-14">14. Detailed Cost Breakdown</a><span class="pn">9</span></li>
+    <li class="t1"><a href="#sec-15">15. Annual Maintenance Contract (AMC)</a><span class="pn">10</span></li>
+    <li class="t2"><a href="#sec-15-1">15.1 AMC Maintenance Charges</a><span class="pn">10</span></li>
+    <li class="t2"><a href="#sec-15-2">15.2 What AMC Covers</a><span class="pn">10</span></li>
+    <li class="t2"><a href="#sec-15-3">15.3 Tier Comparison</a><span class="pn">10</span></li>
+    <li class="t2"><a href="#sec-15-4">15.4 AMC Payment Schedule</a><span class="pn">11</span></li>
+    <li class="t2"><a href="#sec-15-5">15.5 What AMC Does Not Cover</a><span class="pn">11</span></li>
+    <li class="t2"><a href="#sec-15-6">15.6 Renewal &amp; Termination</a><span class="pn">11</span></li>
+    <li class="t1"><a href="#sec-16">16. Data Model</a><span class="pn">12</span></li>
+    <li class="t1"><a href="#sec-17">17. API Endpoint Summary</a><span class="pn">13</span></li>
+    <li class="t2"><a href="#sec-17-1">17.1 Authentication</a><span class="pn">13</span></li>
+    <li class="t2"><a href="#sec-17-2">17.2 Rider — EV Rental</a><span class="pn">13</span></li>
+    <li class="t2"><a href="#sec-17-3">17.3 Rider — Battery Swap</a><span class="pn">13</span></li>
+    <li class="t2"><a href="#sec-17-4">17.4 Rider — Wallet &amp; Subscription</a><span class="pn">14</span></li>
+    <li class="t2"><a href="#sec-17-5">17.5 Rider — Profile &amp; Support</a><span class="pn">14</span></li>
+    <li class="t2"><a href="#sec-17-6">17.6 Shop — Swap Operations</a><span class="pn">14</span></li>
+    <li class="t2"><a href="#sec-17-7">17.7 Shop — Battery &amp; Inventory</a><span class="pn">15</span></li>
+    <li class="t2"><a href="#sec-17-8">17.8 Shop — Rental Return &amp; Earnings</a><span class="pn">15</span></li>
+    <li class="t2"><a href="#sec-17-9">17.9 Investor — Portfolio</a><span class="pn">15</span></li>
+    <li class="t2"><a href="#sec-17-10">17.10 Admin — Rider Management</a><span class="pn">15</span></li>
+    <li class="t2"><a href="#sec-17-11">17.11 Admin — Fleet &amp; Rental Management</a><span class="pn">16</span></li>
+    <li class="t2"><a href="#sec-17-12">17.12 Admin — Shop &amp; Battery Management</a><span class="pn">16</span></li>
+    <li class="t2"><a href="#sec-17-13">17.13 Admin — Financial &amp; Analytics</a><span class="pn">16</span></li>
+    <li class="t2"><a href="#sec-17-14">17.14 Admin — Investor &amp; Incidents</a><span class="pn">16</span></li>
+    <li class="t2"><a href="#sec-17-15">17.15 Admin — System Configuration</a><span class="pn">16</span></li>
+    <li class="t1"><a href="#sec-18">18. Risk Register</a><span class="pn">17</span></li>
+    <li class="t1"><a href="#sec-19">19. Acceptance &amp; Signature</a><span class="pn">18</span></li>
   </ul>
   <div class="page-footer"><span>Forenizence Limited — Proprietary &amp; Confidential</span><span class="conf">Confidential</span><span>Page ii</span></div>
 </div>
 
 <!-- S1: OVERVIEW -->
 <div class="page pb">
-  <h1><span class="sn">1.</span> Platform Overview</h1>
+  <h1 id="sec-1"><span class="sn">1.</span> Platform Overview</h1>
   <p>Jaiben Mobility is an <strong>EV bike rental platform</strong> with an integrated battery swap network, built for electric bike riders in Bangladesh. The <strong>primary business is EV rental</strong> — riders rent bikes from Jaiben's fleet on hourly, daily, or monthly plans, use them for daily commuting or gig delivery work, and earn income while riding. Battery swap is the enabling infrastructure: when a rented bike's battery runs low, the rider visits any Jaiben-authorised partner shop, swaps the depleted pack for a charged one, and continues riding without interruption.</p>
   <p>The platform manages the complete rental lifecycle — bike discovery, rental initiation, real-time GPS tracking, automated billing, return and damage assessment — alongside the battery swap flow, JCoin wallet, partner shop network, and <strong>FOCO (Franchise Owned, Company Operated) investor management</strong>.</p>
 
-  <h2>1.1 Business Model</h2>
+  <h2 id="sec-1-1">1.1 Business Model</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:27%">Concept</th><th>How It Works</th></tr></thead>
     <tbody>
@@ -178,7 +218,7 @@
     </tbody>
   </table></div>
 
-  <h2>1.2 Client Surfaces</h2>
+  <h2 id="sec-1-2">1.2 Client Surfaces</h2>
   <div class="tw"><table>
     <thead><tr><th>Surface</th><th>Platform</th><th>Primary Purpose</th></tr></thead>
     <tbody>
@@ -189,7 +229,7 @@
     </tbody>
   </table></div>
 
-  <h2>1.3 Glossary</h2>
+  <h2 id="sec-1-3">1.3 Glossary</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:24%">Term</th><th>Definition</th></tr></thead>
     <tbody>
@@ -211,7 +251,7 @@
 
 <!-- S2: ARCHITECTURE -->
 <div class="page pb">
-  <h1><span class="sn">2.</span> System Architecture</h1>
+  <h1 id="sec-2"><span class="sn">2.</span> System Architecture</h1>
   <p>Go 1.26 modular monolith behind a single load balancer. Stateless API pods scale horizontally. Redis caches live station inventory and active rental states. All financial operations use a double-entry ledger — JCoin balance is never a mutable column. EV GPS telemetry flows through MQTT for real-time tracking.</p>
   <pre><code>┌─────────────────────────────────────────────────────────────┐
 │                         CLIENTS                              │
@@ -248,7 +288,7 @@
 EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
           FCM + SMS (SSL Wireless) | S3 Storage</code></pre>
 
-  <h2>2.1 Technology Stack</h2>
+  <h2 id="sec-2-1">2.1 Technology Stack</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:18%">Layer</th><th style="width:22%">Technology</th><th>Rationale</th></tr></thead>
     <tbody>
@@ -269,7 +309,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>2.2 Core Services</h2>
+  <h2 id="sec-2-2">2.2 Core Services</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:20%">Service</th><th>Responsibilities</th></tr></thead>
     <tbody>
@@ -293,10 +333,10 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
 
 <!-- S3: PRICING -->
 <div class="page pb">
-  <h1><span class="sn">3.</span> Pricing, JCoin &amp; Rental Plans</h1>
+  <h1 id="sec-3"><span class="sn">3.</span> Pricing, JCoin &amp; Rental Plans</h1>
   <p>Two revenue pillars: <strong>EV Rental</strong> (primary) and <strong>Battery Swap</strong> (supporting). All payments flow through JCoins.</p>
 
-  <h2>3.1 JCoin Credit System</h2>
+  <h2 id="sec-3-1">3.1 JCoin Credit System</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Concept</th><th>Detail</th></tr></thead>
     <tbody>
@@ -309,7 +349,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>3.2 EV Rental Plans — Primary Revenue</h2>
+  <h2 id="sec-3-2">3.2 EV Rental Plans — Primary Revenue</h2>
   <div class="tw"><table class="ht">
     <thead><tr><th>Plan</th><th>Price</th><th>Duration</th><th>Best For</th></tr></thead>
     <tbody>
@@ -319,7 +359,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>3.3 Rental Billing Rules</h2>
+  <h2 id="sec-3-3">3.3 Rental Billing Rules</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Rule</th><th>Detail</th></tr></thead>
     <tbody>
@@ -334,7 +374,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>3.4 Battery Swap Subscription Plans</h2>
+  <h2 id="sec-3-4">3.4 Battery Swap Subscription Plans</h2>
   <div class="tw"><table class="ht">
     <thead><tr><th>Plan</th><th>Monthly Price</th><th>Swap Allowance</th><th>Best For</th></tr></thead>
     <tbody>
@@ -345,7 +385,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>3.5 Referral Programme</h2>
+  <h2 id="sec-3-5">3.5 Referral Programme</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Rule</th><th>Detail</th></tr></thead>
     <tbody>
@@ -355,7 +395,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>3.6 FOCO Investor Revenue Model</h2>
+  <h2 id="sec-3-6">3.6 FOCO Investor Revenue Model</h2>
   <div class="nb ok"><div class="nt">FOCO — Franchise Owned, Company Operated</div><em>You invest while the Brand runs the operations.</em> The investor provides capital (buys EV bikes). Jaiben handles everything else: rental operations, maintenance, battery management, rider support, insurance coordination. The investor earns passive income with zero operational involvement.</div>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Concept</th><th>Detail</th></tr></thead>
@@ -373,9 +413,9 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
 
 <!-- S4: WORKFLOWS -->
 <div class="page pb">
-  <h1><span class="sn">4.</span> Core Business Workflows</h1>
+  <h1 id="sec-4"><span class="sn">4.</span> Core Business Workflows</h1>
 
-  <h2>4.1 EV Rental — End-to-End (Primary Flow)</h2>
+  <h2 id="sec-4-1">4.1 EV Rental — End-to-End (Primary Flow)</h2>
   <pre><code>┌─────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
 │ BROWSE  │───▶│ INITIATE │───▶│  ACTIVE  │───▶│  RETURN  │───▶│  CLOSE   │
 │ BIKES   │    │ RENTAL   │    │ RENTAL   │    │  BIKE    │    │ RENTAL   │
@@ -405,7 +445,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>4.2 Battery Swap — End-to-End</h2>
+  <h2 id="sec-4-2">4.2 Battery Swap — End-to-End</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:4%">#</th><th style="width:18%">Step</th><th>Detail</th></tr></thead>
     <tbody>
@@ -420,7 +460,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>4.3 Real-time Station Availability</h2>
+  <h2 id="sec-4-3">4.3 Real-time Station Availability</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Feature</th><th>Detail</th></tr></thead>
     <tbody>
@@ -433,7 +473,7 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
     </tbody>
   </table></div>
 
-  <h2>4.4 Payment Flow &amp; Revenue Split</h2>
+  <h2 id="sec-4-4">4.4 Payment Flow &amp; Revenue Split</h2>
   <pre><code>RIDER PAYS
 ├── Rental Fee ──────────────────▶ JAIBEN (100%)
 │     └── Investor Share (e.g., 70% per owned bike)
@@ -443,14 +483,14 @@ EXTERNAL: BariKoi Maps | bKash PGW+B2C | Nagad | SSLCommerz
 
 ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
-  <h2>4.5 Battery Lifecycle</h2>
+  <h2 id="sec-4-5">4.5 Battery Lifecycle</h2>
   <pre><code>CHARGING ──Mark Available──▶ AVAILABLE ──Swap──▶ IN_USE
   ▲                                          │
   └──────────── Returned ────────────────────┘
                       │
                  Report Fault ──▶ FAULTY ──▶ Retire</code></pre>
 
-  <h2>4.6 EV Bike Lifecycle</h2>
+  <h2 id="sec-4-6">4.6 EV Bike Lifecycle</h2>
   <pre><code>REGISTERED ──Assign──▶ AVAILABLE ──Rent──▶ RENTED ──Return──▶ AVAILABLE
                       │
                  Maintenance ──▶ MAINTENANCE ──Complete──▶ AVAILABLE
@@ -461,7 +501,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S5-6: SECURITY -->
 <div class="page pb">
-  <h1><span class="sn">5.</span> Battery Theft Prevention</h1>
+  <h1 id="sec-5"><span class="sn">5.</span> Battery Theft Prevention</h1>
   <p>Battery packs are high-value (BDT 25,000–45,000). Four protection layers:</p>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Control</th><th>Implementation</th></tr></thead>
@@ -475,7 +515,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h1><span class="sn">6.</span> EV Rental Security &amp; Anti-Fraud</h1>
+  <h1 id="sec-6"><span class="sn">6.</span> EV Rental Security &amp; Anti-Fraud</h1>
   <p>Bikes are high-value (BDT 80,000–1,50,000). Multiple prevention layers:</p>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Control</th><th>Implementation</th></tr></thead>
@@ -506,7 +546,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S7-9: APPS -->
 <div class="page pb">
-  <h1><span class="sn">7.</span> Rider App</h1>
+  <h1 id="sec-7"><span class="sn">7.</span> Rider App</h1>
   <p>Native Android. <strong>Rent a bike, track earnings, swap battery in under 3 minutes.</strong> Low-end Android, intermittent 4G.</p>
   <div class="tw"><table>
     <thead><tr><th style="width:20%">Feature</th><th>Detail</th></tr></thead>
@@ -528,7 +568,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
   </table></div>
   <div class="nb ok"><div class="nt">Bangladesh UX Priorities</div>Under 3 taps to rental/swap. No mandatory tours on return. Offline: cached bikes + stations. Low-end: 2 GB RAM benchmark. bKash first. "How much do I owe?" always visible. Bengali numerals v2.</div>
 
-  <h1><span class="sn">8.</span> Shop App</h1>
+  <h1 id="sec-8"><span class="sn">8.</span> Shop App</h1>
   <p>Native Android. Audio-first. All actions within 2 taps.</p>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Feature</th><th>Detail</th></tr></thead>
@@ -544,7 +584,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h1><span class="sn">9.</span> FOCO Investor Dashboard</h1>
+  <h1 id="sec-9"><span class="sn">9.</span> FOCO Investor Dashboard</h1>
   <p>Next.js 16.1 responsive web. Row-level data isolation.</p>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Module</th><th>Capabilities</th></tr></thead>
@@ -563,7 +603,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S10-11: ADMIN + NFR -->
 <div class="page pb">
-  <h1><span class="sn">10.</span> Admin Panel</h1>
+  <h1 id="sec-10"><span class="sn">10.</span> Admin Panel</h1>
   <p>Next.js 16.1. Single admin role MVP. Insert-only audit log, 2-year retention.</p>
   <div class="tw"><table>
     <thead><tr><th style="width:20%">Module</th><th>Capabilities</th></tr></thead>
@@ -584,8 +624,8 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h1><span class="sn">11.</span> Non-Functional Requirements</h1>
-  <h3>11.1 Performance</h3>
+  <h1 id="sec-11"><span class="sn">11.</span> Non-Functional Requirements</h1>
+  <h3 id="sec-11-1">11.1 Performance</h3>
   <div class="tw"><table>
     <thead><tr><th style="width:28%">Metric</th><th style="width:12%">Target</th><th>Condition</th></tr></thead>
     <tbody>
@@ -599,7 +639,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h3>11.2 Security</h3>
+  <h3 id="sec-11-2">11.2 Security</h3>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Control</th><th>Implementation</th></tr></thead>
     <tbody>
@@ -617,7 +657,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S12-13: RECOMMENDATIONS + FINANCIALS -->
 <div class="page pb">
-  <h1><span class="sn">12.</span> Operational Recommendations</h1>
+  <h1 id="sec-12"><span class="sn">12.</span> Operational Recommendations</h1>
   <div class="tw"><table>
     <thead><tr><th style="width:28%">Improvement</th><th>Why It Matters</th></tr></thead>
     <tbody>
@@ -632,9 +672,9 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h1><span class="sn">13.</span> Timeline, Financials &amp; SLA</h1>
+  <h1 id="sec-13"><span class="sn">13.</span> Timeline, Financials &amp; SLA</h1>
 
-  <h2>13.1 Development Timeline (16 Weeks)</h2>
+  <h2 id="sec-13-1">13.1 Development Timeline (16 Weeks)</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:10%">Weeks</th><th style="width:20%">Phase</th><th>Deliverables</th></tr></thead>
     <tbody>
@@ -648,7 +688,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h2>13.2 Development Cost</h2>
+  <h2 id="sec-13-2">13.2 Development Cost</h2>
   <div class="tw"><table class="ht">
     <thead><tr><th style="width:5%">#</th><th style="width:28%">Module</th><th style="width:22%">Stack</th><th style="width:15%">Cost (BDT)</th></tr></thead>
     <tbody>
@@ -665,7 +705,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
   </table></div>
   <div class="nb warn"><div class="nt">Important</div>This cost does not include VAT and tax.</div>
 
-  <h2>13.3 Payment Terms</h2>
+  <h2 id="sec-13-3">13.3 Payment Terms</h2>
   <div class="tw"><table class="ht">
     <thead><tr><th>Milestone</th><th style="width:15%">Amount</th><th>Trigger</th></tr></thead>
     <tbody>
@@ -677,7 +717,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h2>13.4 Post-Launch SLA (6-Month Complimentary)</h2>
+  <h2 id="sec-13-4">13.4 Post-Launch SLA (6-Month Complimentary)</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:25%">Item</th><th>Commitment</th></tr></thead>
     <tbody>
@@ -695,7 +735,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S14: DETAILED COST -->
 <div class="page pb">
-  <h1><span class="sn">14.</span> Detailed Cost Breakdown</h1>
+  <h1 id="sec-14"><span class="sn">14.</span> Detailed Cost Breakdown</h1>
   <div class="tw"><table>
     <thead><tr><th style="width:28%">Module</th><th style="width:10%">BDT</th><th>What Is Included</th></tr></thead>
     <tbody>
@@ -741,11 +781,11 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S15: AMC -->
 <div class="page pb">
-  <h1><span class="sn">15.</span> Annual Maintenance Contract (AMC)</h1>
+  <h1 id="sec-15"><span class="sn">15.</span> Annual Maintenance Contract (AMC)</h1>
   <p>After the <strong>6-month complimentary support period</strong>, Jaiben may enter a structured AMC with three tiers — <strong>Basic, Standard, Premium</strong> — matching operational maturity and budget.</p>
   <div class="nb info"><div class="nt">Transition</div>Evaluate AMC tier during Month 5 of complimentary support for seamless transition without coverage gap.</div>
 
-  <h2>15.1 AMC Maintenance Charges</h2>
+  <h2 id="sec-15-1">15.1 AMC Maintenance Charges</h2>
   <p>Fixed monthly fee billed in advance. First payment on activation date (day after complimentary period ends). All-inclusive: labour, deployment, communication, documentation. No hidden charges.</p>
 
   <div class="mc">
@@ -770,7 +810,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
   <div class="nb ok"><div class="nt">Recommendation</div>Standard at BDT 30,000/month: 24-hour critical SLA, managed dependency upgrades, monthly performance reviews with action items, quarterly optimisation sprint, dedicated WhatsApp — critical for stability as volume scales.</div>
 
-  <h2>15.2 What AMC Covers</h2>
+  <h2 id="sec-15-2">15.2 What AMC Covers</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:20%">Category</th><th>What Is Covered</th></tr></thead>
     <tbody>
@@ -785,7 +825,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h2>15.3 Tier Comparison</h2>
+  <h2 id="sec-15-3">15.3 Tier Comparison</h2>
   <div class="tw"><table class="ht">
     <thead><tr><th style="width:28%">Feature</th><th style="text-align:center;width:16%">Basic</th><th style="text-align:center;width:16%">Standard</th><th style="text-align:center;width:16%">Premium</th></tr></thead>
     <tbody>
@@ -812,7 +852,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- AMC PAYMENT + RENEWAL -->
 <div class="page pb">
-  <h2>15.4 AMC Payment Schedule</h2>
+  <h2 id="sec-15-4">15.4 AMC Payment Schedule</h2>
   <p>Billed <strong>monthly in advance</strong>. Invoice 5 business days before due. Payment due within 5 business days of invoice.</p>
   <div class="tw"><table class="ht">
     <thead><tr><th>Month</th><th style="text-align:right">Basic</th><th style="text-align:right">Standard</th><th style="text-align:right">Premium</th></tr></thead>
@@ -830,7 +870,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h2>15.5 What AMC Does Not Cover</h2>
+  <h2 id="sec-15-5">15.5 What AMC Does Not Cover</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:24%">Out of Scope</th><th>How to Handle</th></tr></thead>
     <tbody>
@@ -843,7 +883,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     </tbody>
   </table></div>
 
-  <h2>15.6 Renewal &amp; Termination</h2>
+  <h2 id="sec-15-6">15.6 Renewal &amp; Termination</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:22%">Term</th><th>Detail</th></tr></thead>
     <tbody>
@@ -860,7 +900,7 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
 
 <!-- S16: DATA MODEL -->
 <div class="page pb">
-  <h1><span class="sn">16.</span> Data Model</h1>
+  <h1 id="sec-16"><span class="sn">16.</span> Data Model</h1>
   <p>20+ core tables. Double-entry financial ledger architecture.</p>
   <pre><code>RIDERS ──▶ RENTALS ──▶ EV_BIKES ──▶ FOCO_INVESTORS
   │           │              │
@@ -904,10 +944,10 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
 
 <!-- S17: API ENDPOINTS — COMPREHENSIVE -->
 <div class="page pb">
-  <h1><span class="sn">17.</span> API Endpoint Summary</h1>
+  <h1 id="sec-17"><span class="sn">17.</span> API Endpoint Summary</h1>
   <p>Complete REST API surface organised by module. All endpoints require JWT authentication unless noted. Version prefix: <code>/api/v1</code>. All responses follow standard envelope: <code>{"success": bool, "data": ..., "error": ...}</code>.</p>
 
-  <h2>17.1 Authentication</h2>
+  <h2 id="sec-17-1">17.1 Authentication</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -921,7 +961,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.2 Rider — EV Rental</h2>
+  <h2 id="sec-17-2">17.2 Rider — EV Rental</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -942,7 +982,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.3 Rider — Battery Swap</h2>
+  <h2 id="sec-17-3">17.3 Rider — Battery Swap</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -962,7 +1002,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
 
 <!-- API CONTINUED -->
 <div class="page pb">
-  <h2>17.4 Rider — Wallet &amp; Subscription</h2>
+  <h2 id="sec-17-4">17.4 Rider — Wallet &amp; Subscription</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -979,7 +1019,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.5 Rider — Profile &amp; Support</h2>
+  <h2 id="sec-17-5">17.5 Rider — Profile &amp; Support</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1004,7 +1044,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.6 Shop — Swap Operations</h2>
+  <h2 id="sec-17-6">17.6 Shop — Swap Operations</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1022,7 +1062,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
 
 <!-- API CONTINUED -->
 <div class="page pb">
-  <h2>17.7 Shop — Battery &amp; Inventory</h2>
+  <h2 id="sec-17-7">17.7 Shop — Battery &amp; Inventory</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1035,7 +1075,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.8 Shop — Rental Return &amp; Earnings</h2>
+  <h2 id="sec-17-8">17.8 Shop — Rental Return &amp; Earnings</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1052,7 +1092,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.9 Investor — Portfolio</h2>
+  <h2 id="sec-17-9">17.9 Investor — Portfolio</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1069,7 +1109,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.10 Admin — Rider Management</h2>
+  <h2 id="sec-17-10">17.10 Admin — Rider Management</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1088,7 +1128,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
 
 <!-- API CONTINUED -->
 <div class="page pb">
-  <h2>17.11 Admin — Fleet &amp; Rental Management</h2>
+  <h2 id="sec-17-11">17.11 Admin — Fleet &amp; Rental Management</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1111,7 +1151,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.12 Admin — Shop &amp; Battery Management</h2>
+  <h2 id="sec-17-12">17.12 Admin — Shop &amp; Battery Management</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1125,13 +1165,11 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
       <tr><td><code>POST</code></td><td>/admin/batteries/:id/transfer</td><td>Transfer battery. Body: to_shop_id. Creates immutable transfer_log.</td></tr>
       <tr><td><code>PUT</code></td><td>/admin/batteries/:id/retire</td><td>Retire battery. Body: reason.</td></tr>
       <tr><td><code>PUT</code></td><td>/admin/batteries/:id/clear-fault</td><td>Clear FAULTY status after inspection. Body: inspection_notes.</td></tr>
-      <tr><td><code>POST</code></td><td>/admin/batteries/audit</td><td>Trigger stock count audit for shop. Body: shop_id. Returns expected vs reported counts
-      </td></tr>
-      </tbody>
-      </table></div>
-      
-      <!-- S17.13-17.15: REMAINING ADMIN API -->
-  <h2>17.13 Admin — Financial &amp; Analytics</h2>
+      <tr><td><code>POST</code></td><td>/admin/batteries/audit</td><td>Trigger stock count audit for shop. Body: shop_id. Returns expected vs reported counts.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 id="sec-17-13">17.13 Admin — Financial &amp; Analytics</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1152,9 +1190,9 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.14 Admin — Investor &amp; Incidents</h2>
+  <h2 id="sec-17-14">17.14 Admin — Investor &amp; Incidents</h2>
   <div class="tw"><table>
-    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</tr></thead>
+    <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
       <tr><td><code>POST</code></td><td>/admin/investors</td><td>Add FOCO investor. Body: name, contact, email, agreement_date, revenue_share_pct, total_invested.</td></tr>
       <tr><td><code>GET</code></td><td>/admin/investors</td><td>List investors with portfolio health: total invested, total earned, active bikes, ROI.</td></tr>
@@ -1171,7 +1209,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
     </tbody>
   </table></div>
 
-  <h2>17.15 Admin — System Configuration</h2>
+  <h2 id="sec-17-15">17.15 Admin — System Configuration</h2>
   <div class="tw"><table>
     <thead><tr><th style="width:8%">Method</th><th style="width:35%">Endpoint</th><th>Purpose</th></tr></thead>
     <tbody>
@@ -1180,17 +1218,17 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
       <tr><td><code>PUT</code></td><td>/admin/config/pricing/swap</td><td>Update global swap fee and per-station overrides.</td></tr>
       <tr><td><code>PUT</code></td><td>/admin/config/pricing/subscription</td><td>Update swap subscription tiers: name, price, swaps_allowed.</td></tr>
       <tr><td><code>PUT</code></td><td>/admin/config/pricing/revenue-split</td><td>Update global and per-shop commission rates.</td></tr>
-      <tr><td><code>PUT</code></td><td>/admin/config/damage-costs</code><td>Update damage cost table. Body: damage_type, repair_cost_bdt.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/damage-costs</td><td>Update damage cost table. Body: damage_type, repair_cost_bdt.</td></tr>
       <tr><td><code>PUT</code></td><td>/admin/config/referral</td><td>Update referral: referrer_amount, referee_amount, max_per_month, expiry_days.</td></tr>
-      <tr><td><code>PUT</code></td><td>/admin/config/notifications</code><td>Update thresholds: low_jcoin, low_stock, subscription_warning_days, rental_expiry_timings, geofence_config.</td></tr>
-      <tr><td><code>PUT</code></td><td>/admin/config/battery</code><td>Update battery: retirement_threshold, health_alert_percentage, unreturned_hours_timeline.</td></tr>
-      <tr><td><code>GET</code></td><td>/admin/config/jcoin-rate</code><td>Current JCoin exchange rate (1 JCoin = X BDT).</td></tr>
-      <tr><td><code>PUT</code></td><td>/admin/config/jcoin-rate</code><td>Update JCoin rate. Body: rate. Default: 1.0.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/notifications</td><td>Update thresholds: low_jcoin, low_stock, subscription_warning_days, rental_expiry_timings, geofence_config.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/battery</td><td>Update battery: retirement_threshold, health_alert_percentage, unreturned_hours_timeline.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/config/jcoin-rate</td><td>Current JCoin exchange rate (1 JCoin = X BDT).</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/config/jcoin-rate</td><td>Update JCoin rate. Body: rate. Default: 1.0.</td></tr>
       <tr><td><code>GET</code></td><td>/admin/support/tickets</td><td>All support tickets. Query: source_filter (rider/shop/investor), status_filter, category_filter.</td></tr>
-      <tr><td><code>GET</code></td><td>/admin/support/tickets/:id</code><td>Ticket detail with full thread. Can add internal notes.</td></tr>
-      <tr><td><code>PUT</code></td><td>/admin/support/tickets/:id/resolve</code><td>Resolve ticket. Body: resolution, jcoin_refund_amount (if applicable).</td></tr>
-      <tr><td><code>GET</code></td><td>/admin/audit-log</code><td>Audit log. Query: actor_id, action, entity_type, date_from, date_to, page, limit. Insert-only — no mutations.</td></tr>
-      <tr><td><code>GET</code></td><td>/admin/system/health</code><td>System health: API pods, DB connections, Redis, RabbitMQ, MQTT broker, BariKoi API status.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/support/tickets/:id</td><td>Ticket detail with full thread. Can add internal notes.</td></tr>
+      <tr><td><code>PUT</code></td><td>/admin/support/tickets/:id/resolve</td><td>Resolve ticket. Body: resolution, jcoin_refund_amount (if applicable).</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/audit-log</td><td>Audit log. Query: actor_id, action, entity_type, date_from, date_to, page, limit. Insert-only — no mutations.</td></tr>
+      <tr><td><code>GET</code></td><td>/admin/system/health</td><td>System health: API pods, DB connections, Redis, RabbitMQ, MQTT broker, BariKoi API status.</td></tr>
     </tbody>
   </table></div>
 
@@ -1209,7 +1247,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
 
 <!-- S18: RISK REGISTER -->
 <div class="page pb">
-  <h1><span class="sn">18.</span> Risk Register</h1>
+  <h1 id="sec-18"><span class="sn">18.</span> Risk Register</h1>
   <p>Comprehensive risk assessment covering technical, operational, financial, and security risks. Each risk is evaluated on likelihood (Low/Medium/High) and impact (Low/Medium/High/Critical) with specific, actionable mitigation strategies.</p>
 
   <h2>18.1 Technical Risks</h2>
@@ -1281,7 +1319,7 @@ THEFT_INCIDENTS         MAINTENANCE_LOGS       AUDIT_LOG</code></pre>
 
 <!-- S19: ACCEPTANCE & SIGNATURE -->
 <div class="page pb">
-  <h1><span class="sn">19.</span> Acceptance &amp; Signature</h1>
+  <h1 id="sec-19"><span class="sn">19.</span> Acceptance &amp; Signature</h1>
   <p>This Software Requirements Specification (v4.0) defines the complete scope, functionality, technical architecture, pricing, timeline, and maintenance terms for the Jaiben Mobility EV Rental &amp; Battery Swap Network Platform. Both parties acknowledge that this document serves as the binding basis for the development engagement and subsequent Annual Maintenance Contract.</p>
 
   <h3>Scope Summary</h3>
