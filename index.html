@@ -28,15 +28,23 @@
   font-size: 8pt;
   color: var(--text-muted);font-family:'Inter',sans-serif} */
   .page-footer {
+  position: static;
+  margin-top: 30px;
+}
+
+@media print {
+  .page {
+    min-height: 297mm;
+    padding-bottom: 0;
+  }
+
+  .page-footer {
     position: absolute;
     bottom: 10mm;
     left: 25mm;
     right: 25mm;
-    display: flex;
-  justify-content: space-between;
-  font-size: 8pt;
-  color: var(--text-muted);font-family:'Inter',sans-serif
   }
+}
   .page-footer .conf{font-weight:600;color:var(--danger);letter-spacing:.5px;text-transform:uppercase}
 
   .cover-page{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:297mm;padding:25mm;position:relative}
