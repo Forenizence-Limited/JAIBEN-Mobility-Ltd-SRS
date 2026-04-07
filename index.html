@@ -693,12 +693,12 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     <thead><tr><th style="width:5%">#</th><th style="width:28%">Module</th><th style="width:22%">Stack</th><th style="width:15%">Cost (BDT)</th></tr></thead>
     <tbody>
       <tr><td>1</td><td>Backend Development</td><td>Go 1.26, PostgreSQL, Redis, RabbitMQ, MQTT</td><td>1,90,000</td></tr>
-      <tr><td>2</td><td>Rider Mobile App</td><td>Android (Native)</td><td>1,15,000</td></tr>
-      <tr><td>3</td><td>Shop Mobile App</td><td>Android (Native)</td><td>95,000</td></tr>
+      <tr><td>2</td><td>Rider Mobile App</td><td>Android (Native)</td><td>1,10,000</td></tr>
+      <tr><td>3</td><td>Shop Mobile App</td><td>Android (Native)</td><td>90,000</td></tr>
       <tr><td>4</td><td>Admin Web Panel</td><td>Next.js 16.1</td><td>70,000</td></tr>
       <tr><td>5</td><td>FOCO Investor Dashboard</td><td>Next.js 16.1</td><td>30,000</td></tr>
-      <tr><td>6</td><td>UI/UX Design</td><td>Figma</td><td>25,000</td></tr>
-      <tr><td>7</td><td>QA and Testing</td><td>Manual + Load</td><td>15,000</td></tr>
+      <tr><td>6</td><td>UI/UX Design</td><td>Figma</td><td>30,000</td></tr>
+      <tr><td>7</td><td>QA and Testing</td><td>Manual + Load</td><td>20,000</td></tr>
       <tr><td>8</td><td>Project Management</td><td>Agile / Scrum</td><td>10,000</td></tr>
       <tr class="total-row"><td></td><td><strong>Total</strong></td><td></td><td><strong>5,50,000</strong></td></tr>
     </tbody>
@@ -741,19 +741,18 @@ ALL VIA JCOIN WALLET (Top-up: bKash / Nagad / SSLCommerz)</code></pre>
     <tbody>
       <tr><td><strong>Go Backend — Core</strong></td><td>55,000</td><td>Auth, Rental, Wallet, Swap, Fleet, Battery, Shop, Investor, Admin, Map services. All REST endpoints. JWT 4 roles. HMAC QR. Idempotency.</td></tr>
       <tr><td><strong>Go Backend — Workers</strong></td><td>45,000</td><td>Scheduler (subscription, shop payout, investor payout, rental billing, expiry, health, referral). NotificationWorker. 3 payment gateways. bKash B2C.</td></tr>
-      <tr><td><strong>Go Backend — Telemetry</strong></td><td>30,000</td><td>MQTT integration. GPS ingestion, speed, geofence, last-known cache, trip distance. Goroutine pool.</td></tr>
-      <tr><td><strong>Go Backend — Rental Workflow</strong></td><td>30,000</td><td>Rental FSM. Deposit hold/release. Hourly billing. Condition photos. Damage assessment. Disputes. Overdue lock.</td></tr>
+      <tr><td><strong>Go Backend — Telemetry</strong></td><td>20,000</td><td>MQTT integration. GPS ingestion, speed, geofence, last-known cache, trip distance. Goroutine pool.</td></tr>
+      <tr><td><strong>Go Backend — Rental Workflow</strong></td><td>25,000</td><td>Rental FSM. Deposit hold/release. Hourly billing. Condition photos. Damage assessment. Disputes. Overdue lock.</td></tr>
       <tr><td><strong>PostgreSQL Schema</strong></td><td>20,000</td><td>20+ tables. PgBouncer. Read replica. Migration scripts.</td></tr>
       <tr><td><strong>Redis + RabbitMQ</strong></td><td>10,000</td><td>Sentinel 3-node. Rental session + GPS cache. Durable queues + DLQ. Lock patterns.</td></tr>
       <tr><td><strong>Infrastructure as Code</strong></td><td>15,000</td><td>K8s manifests, Dockerfiles, NGINX, MQTT deploy, CI/CD (GitHub Actions), env configs, secrets.</td></tr>
-      <tr><td><strong>Rider Android App</strong></td><td>1,15,000</td><td>KYC (NID+licence). Home with rental+earnings. BariKoi EV browse. Full rental (photos, deposit, GPS, extend, end, bill). Swap. Wallet. Subscription. Referral. History+CO2. Push. Offline. Chat/call.</td></tr>
-      <tr><td><strong>Shop Android App</strong></td><td>95,000</td><td>OTP. Swap alert (audio). Approve/reject + QR. Inventory. Mark available/fault. Return. Rental return assist (photos). Earnings + payout. Chat/call.</td></tr>
+      <tr><td><strong>Rider Android App</strong></td><td>1,10,000</td><td>KYC (NID+licence). Home with rental+earnings. BariKoi EV browse. Full rental (photos, deposit, GPS, extend, end, bill). Swap. Wallet. Subscription. Referral. History+CO2. Push. Offline. Chat/call.</td></tr>
+      <tr><td><strong>Shop Android App</strong></td><td>90,000</td><td>OTP. Swap alert (audio). Approve/reject + QR. Inventory. Mark available/fault. Return. Rental return assist (photos). Earnings + payout. Chat/call.</td></tr>
       <tr><td><strong>Admin Panel</strong></td><td>70,000</td><td>14 modules. RBAC. Fleet GPS map. Station heatmap. Rental + damage. Investor mgmt. FOCO payouts. Turbopack.</td></tr>
       <tr><td><strong>Investor Dashboard</strong></td><td>30,000</td><td>Portfolio, earnings charts, ROI, fleet detail, payout PDF, maintenance log, notifications. Row-level isolation.</td></tr>
-      <tr><td><strong>Payment Testing</strong></td><td>10,000</td><td>Sandbox: bKash, Nagad, SSLCommerz. Edge cases. Production credential checklist.</td></tr>
-      <tr><td><strong>Anti-theft + Anti-fraud</strong></td><td>10,000</td><td>HMAC QR rotation. Cross-shop detection. Unreturned escalation. Geofence. Overdue rental. Deposit fraud prevention.</td></tr>
-      <tr><td><strong>UI/UX (Figma)</strong></td><td>25,000</td><td>Design system. Rider (35+), Shop (18), Admin (28), Investor (12) screens. Annotations.</td></tr>
-      <tr><td><strong>QA</strong></td><td>15,000</td><td>Unit + integration (rental E2E, swap E2E, webhooks, GPS). Load: 500 riders, 50 rentals, 50 swaps. Security: QR, JWT, webhook, GPS spoof.</td></tr>
+      <tr><td><strong>UI/UX (Figma)</strong></td><td>30,000</td><td>Design system. Rider (35+), Shop (18), Admin (28), Investor (12) screens. Annotations.</td></tr>
+      <!-- <tr><td><strong>Anti-theft + Anti-fraud</strong></td><td>5,000</td><td>HMAC QR rotation. Cross-shop detection. Unreturned escalation. Geofence. Overdue rental. Deposit fraud prevention Security Systems.</td></tr> -->
+      <tr><td><strong>QA</strong></td><td>20,000</td><td>Unit + integration (rental E2E, swap E2E, webhooks, GPS). Load: 500 riders, 50 rentals, 50 swaps. Security: QR, JWT, webhook, GPS spoof.</td></tr>
       <tr><td><strong>Project Management</strong></td><td>10,000</td><td>16-week sprints. Daily standups. Weekly reports. OpenAPI spec. Runbook. Deployment guide. User guides. Handover.</td></tr>
       <tr class="total-row"><td><strong>Total</strong></td><td><strong>5,50,000</strong></td><td><strong>Five Lakh Fifty Thousand BDT Only</strong></td></tr>
     </tbody>
