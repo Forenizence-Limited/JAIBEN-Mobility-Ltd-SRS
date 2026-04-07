@@ -20,31 +20,14 @@
   body{background:#d0d0d0;font-family:'Inter',sans-serif;color:var(--text-primary);font-size:10.5pt;line-height:1.6;-webkit-font-smoothing:antialiased}
   .page{width:210mm;min-height:297mm;margin:20px auto;background:var(--page-bg);padding:25mm 25mm 30mm 25mm;box-shadow:0 2px 20px rgba(0,0,0,.15);position:relative;overflow:hidden}
   /* .page::after{content:'';position:absolute;bottom:15mm;left:25mm;right:25mm;height:1px;background:var(--border-light)} */
-  /* .page-footer {
+  .page-footer {
   position: static;
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
   font-size: 8pt;
-  color: var(--text-muted);font-family:'Inter',sans-serif} */
-  .page-footer {
-  position: static;
-  margin-top: 30px;
-}
+  color: var(--text-muted);font-family:'Inter',sans-serif}
 
-@media print {
-  .page {
-    min-height: 297mm;
-    padding-bottom: 0;
-  }
-
-  .page-footer {
-    position: absolute;
-    bottom: 10mm;
-    left: 25mm;
-    right: 25mm;
-  }
-}
   .page-footer .conf{font-weight:600;color:var(--danger);letter-spacing:.5px;text-transform:uppercase}
 
   .cover-page{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:297mm;padding:25mm;position:relative}
