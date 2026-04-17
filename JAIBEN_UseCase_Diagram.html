@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --text:#1F2937;--text-sub:#4B5563;--text-muted:#9CA3AF;
+  --bg:#FFF;--border:#D1D5DB;--accent:#065F46;--accent-dark:#064d25;--accent-light:#ecfdf5;
+  --biker:#2563EB;--shop:#D97706;--investor:#7C3AED;
+  --admin:#059669;--accountant:#0891B2;--staff:#DB2777;--manager:#4338CA;
+  --p1-border:#B45309;--p1-bg:#FFFBEB;--p1-text:#78350F;
+  --p2-border:#4338CA;--p2-bg:#EEF2FF;--p2-text:#312E81;
+  --p3-border:#0F766E;--p3-bg:#F0FDFA;--p3-text:#134E4A;
+}
+body{font-family:'Segoe UI','Inter',-apple-system,sans-serif;background:#F8FAFC;color:var(--text);-webkit-font-smoothing:antialiased}
+#root{width:fit-content;min-width:2700px;margin:0 auto;padding:40px 30px;position:relative;background:var(--bg)}
+
+.dt{text-align:center;margin-bottom:24px}
+.dt h1{font-size:24px;font-weight:800;color:var(--accent-dark);letter-spacing:-0.5px}
+.dt p{font-size:12px;color:var(--text-sub);margin-top:4px}
+
+.uc-layout{display:flex;align-items:flex-start;position:relative;gap:0}
+.actor-col{flex-shrink:0;width:135px;display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:30px}
+.actor{display:flex;flex-direction:column;align-items:center;margin-bottom:8px}
+.actor svg{width:36px;height:48px}
+.actor-name{font-size:8px;font-weight:700;margin-top:2px;padding:2px 6px;border-radius:4px;white-space:nowrap;text-align:center;line-height:1.3}
+.actor-name.biker{background:#DBEAFE;color:#1E40AF}
+.actor-name.shop{background:#FEF3C7;color:#92400E}
+.actor-name.investor{background:#EDE9FE;color:#5B21B6}
+.actor-name.admin{background:#D1FAE5;color:#065F46}
+.actor-name.accountant{background:#CFFAFE;color:#155E75}
+.actor-name.staff{background:#FCE7F3;color:#9D174D}
+.actor-name.manager{background:#E0E7FF;color:#3730A3}
+
+/* Admin Team Grouped Box */
+.admin-group{border:2.5px dashed #64748B;border-radius:12px;padding:10px 6px 6px;margin-top:14px;background:#F8FAFC;position:relative;width:100%}
+.admin-group-label{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:#F8FAFC;padding:0 10px;font-size:9px;font-weight:900;color:#334155;white-space:nowrap;letter-spacing:0.4px;text-transform:uppercase}
+.admin-group-actors{display:flex;gap:6px;justify-content:center;align-items:flex-start}
+.admin-group-actors .actor{margin-bottom:0}
+.admin-group-actors .actor svg{width:30px;height:40px}
+.admin-group-actors .actor-name{font-size:6.5px;padding:1px 4px}
+
+.sys{flex:1;min-width:2100px;border:3px solid var(--accent-dark);border-radius:14px;padding:16px 14px 18px;position:relative;background:#FAFFFE}
+.sys-label{position:absolute;top:-14px;left:24px;background:var(--bg);padding:0 12px;font-size:14px;font-weight:800;color:var(--accent-dark);letter-spacing:-0.3px}
+
+.groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.grp{border:2px solid var(--border);border-radius:8px;padding:7px 9px 5px;background:#FAFBFC;position:relative}
+.grp-title{font-size:9.5px;font-weight:800;color:var(--accent-dark);margin-bottom:5px;padding:2px 7px;background:var(--accent-light);border-radius:4px;display:inline-block;letter-spacing:0.2px}
+.grp-list{display:flex;flex-wrap:wrap;gap:4px}
+
+.uc{display:inline-flex;align-items:center;justify-content:center;padding:3px 9px;border-radius:50%;border:2px solid var(--border);background:#FFF;font-size:8px;font-weight:600;white-space:nowrap;min-width:60px;text-align:center;line-height:1.2;position:relative;transition:all 0.15s}
+.uc:hover{transform:scale(1.06);z-index:10}
+.uc.bk{border-color:var(--biker);background:#EFF6FF;color:#1E3A5F}
+.uc.sh{border-color:var(--shop);background:#FFFBEB;color:#78350F}
+.uc.inv{border-color:var(--investor);background:#F5F3FF;color:#4C1D95}
+.uc.ad{border-color:var(--admin);background:#ECFDF5;color:#064E3B}
+.uc.ac{border-color:var(--accountant);background:#ECFEFF;color:#164E63}
+.uc.sf{border-color:var(--staff);background:#FDF2F8;color:#831843}
+.uc.mg{border-color:var(--manager);background:#EEF2FF;color:#312E81}
+.uc.shared{border-color:#475569;background:#F1F5F9;color:#1E293B}
+
+.uc.p1{border-color:var(--p1-border)!important;background:var(--p1-bg)!important;color:var(--p1-text)!important;font-weight:700!important;border-width:2px!important}
+.uc.p2{border-color:var(--p2-border)!important;background:var(--p2-bg)!important;color:var(--p2-text)!important;font-weight:600!important}
+.uc.p3{border-color:var(--p3-border)!important;background:var(--p3-bg)!important;color:var(--p3-text)!important;font-weight:600!important}
+
+.grp.p1-grp{border-color:var(--p1-border);border-width:2px;background:#FFFDF5}
+.grp.p1-grp .grp-title{background:var(--p1-border);color:#FFF}
+.grp.p2-grp{border-color:var(--p2-border);border-width:2px;background:#F8F9FF}
+.grp.p2-grp .grp-title{background:var(--p2-border);color:#FFF}
+.grp.p3-grp{border-color:var(--p3-border);border-width:2px;background:#F5FFFE}
+.grp.p3-grp .grp-title{background:var(--p3-border);color:#FFF}
+.grp.mix-grp{border-color:#64748B;border-width:2px;background:#FAFBFD}
+.grp.mix-grp .grp-title{background:#475569;color:#FFF}
+
+.divider{margin:50px 0 32px;border:none;border-top:4px solid var(--accent-dark);position:relative;text-align:center}
+.divider span{position:relative;top:-16px;background:#F8FAFC;padding:0 20px;font-size:20px;font-weight:900;color:var(--accent-dark);letter-spacing:-0.5px}
+.divider .sub{display:block;font-size:11px;font-weight:500;color:var(--text-sub);margin-top:2px}
+
+.flow-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.flow-svg line,.flow-svg path,.flow-svg text{pointer-events:none}
+
+.leg{margin-top:16px;padding:10px 16px;background:#F1F5F9;border:1px solid var(--border);border-radius:8px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:center}
+.leg-sec{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.leg-t{font-size:7.5px;font-weight:800;color:var(--text-sub);text-transform:uppercase;letter-spacing:.6px;margin-right:2px}
+.leg-i{display:flex;align-items:center;gap:3px;font-size:8.5px;color:var(--text-sub);font-weight:500}
+.leg-e{width:22px;height:12px;border-radius:50%;border:2px solid}
+
+.phase-badge{position:absolute;top:-7px;right:-5px;font-size:6.5px;font-weight:800;padding:1px 4px;border-radius:3px;color:#FFF;letter-spacing:0.3px;z-index:2;line-height:1.2}
+.phase-badge.p1{background:var(--p1-border)}
+.phase-badge.p2{background:var(--p2-border)}
+.phase-badge.p3{background:var(--p3-border)}
+
+.role-tag{font-size:6.5px;font-weight:700;padding:0 3px;border-radius:2px;margin-left:2px;vertical-align:super;line-height:1}
+.role-tag.ad{background:#D1FAE5;color:#065F46}
+.role-tag.ac{background:#CFFAFE;color:#155E75}
+.role-tag.sf{background:#FCE7F3;color:#9D174D}
+.role-tag.mg{background:#E0E7FF;color:#3730A3}
+</style>
+</head>
+<body>
+<div id="root">
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  DIAGRAM 1: COMPLETE — ALL PHASES                                  -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<div class="dt">
+  <h1>JAIBEN Mobility Ltd — Complete Use Case Diagram (All Phases)</h1>
+  <p>EV Rental + Battery Swap + Wallet + FOCO Investor + Reports + Accounting &nbsp;|&nbsp; SRS v1.0 Final</p>
+</div>
+
+<div class="uc-layout" id="layout1">
+  <!-- LEFT ACTORS -->
+  <div class="actor-col">
+    <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#2563EB" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#2563EB" stroke-width="2.2"/></svg><div class="actor-name biker">Biker / User /<br>Customer</div></div>
+    <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#D97706" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#D97706" stroke-width="2.2"/></svg><div class="actor-name shop">Shop</div></div>
+  </div>
+
+  <div class="sys">
+    <div class="sys-label">JAIBEN Mobility Platform</div>
+    <div class="groups">
+
+      <!-- 1. EV Rental Management -->
+      <div class="grp"><div class="grp-title">1. EV Rental Management</div><div class="grp-list">
+        <div class="uc bk" data-id="ar1">Browse Available EVs</div>
+        <div class="uc bk" data-id="ar2">Initiate Rental</div>
+        <div class="uc bk" data-id="ar3">Upload Condition Photos</div>
+        <div class="uc bk" data-id="ar4">Track Active Rental</div>
+        <div class="uc bk" data-id="ar5">Extend Rental</div>
+        <div class="uc bk" data-id="ar6">End Rental / Return Bike</div>
+        <div class="uc bk" data-id="ar7">Dispute Damage</div>
+        <div class="uc sf" data-id="ar8">Verify Biker KYC</div>
+        <div class="uc sf" data-id="ar9">Assess Damage</div>
+        <div class="uc mg" data-id="ar10">Resolve Dispute</div>
+        <div class="uc mg" data-id="ar11">Force-Close Rental</div>
+        <div class="uc sf" data-id="ar12">Handle Overdue</div>
+        <div class="uc ac" data-id="ar13">Hold / Release Deposit</div>
+        <div class="uc ac" data-id="ar14">Hourly/Daily/Monthly Billing</div>
+      </div></div>
+
+      <!-- 2. Battery Swap System -->
+      <div class="grp"><div class="grp-title">2. Battery Swap System</div><div class="grp-list">
+        <div class="uc bk" data-id="as1">Browse Swap Stations</div>
+        <div class="uc bk" data-id="as2">Initiate Battery Swap</div>
+        <div class="uc bk" data-id="as3">Book Swap Slot</div>
+        <div class="uc sh" data-id="as4">Receive Swap Alert</div>
+        <div class="uc sh" data-id="as5">Approve / Reject Swap</div>
+        <div class="uc sh" data-id="as6">Process Battery Return</div>
+        <div class="uc sh" data-id="as7">Report Faulty Battery</div>
+        <div class="uc sf" data-id="as8">Manage Battery Lifecycle</div>
+        <div class="uc sf" data-id="as9">Transfer Batteries</div>
+        <div class="uc sf" data-id="as10">Check Station Availability</div>
+      </div></div>
+
+      <!-- 3. Wallet & Payment System -->
+      <div class="grp"><div class="grp-title">3. Wallet &amp; Payment System</div><div class="grp-list">
+        <div class="uc bk" data-id="aw1">Top-Up JCoin Wallet</div>
+        <div class="uc bk" data-id="aw2">Check Wallet Balance</div>
+        <div class="uc bk" data-id="aw3">Subscribe Swap Plan</div>
+        <div class="uc bk" data-id="aw4">Share Referral Link</div>
+        <div class="uc bk" data-id="aw5">View Earnings</div>
+        <div class="uc bk" data-id="aw6">View Transaction History</div>
+        <div class="uc bk" data-id="aw11">Pay Rent</div>
+        <div class="uc ac" data-id="aw10">Payment Gateway Integration</div>
+        <div class="uc mg" data-id="aw7">Issue Promo Credits</div>
+        <div class="uc mg" data-id="aw8">Configure Pricing</div>
+        <div class="uc ad" data-id="aw9">Manage JCoin System</div>
+      </div></div>
+
+      <!-- 4. Fleet & Asset Management -->
+      <div class="grp"><div class="grp-title">4. Fleet &amp; Asset Management</div><div class="grp-list">
+        <div class="uc sf" data-id="af1">Add / Register EV Bike</div>
+        <div class="uc sf" data-id="af2">Track Fleet GPS</div>
+        <div class="uc sf" data-id="af3">Manage Geofences</div>
+        <div class="uc sf" data-id="af4">Schedule Maintenance</div>
+        <div class="uc sf" data-id="af5">Retire EV / Battery</div>
+        <div class="uc sf" data-id="af6">Manage Shops</div>
+        <div class="uc mg" data-id="af7">View Station Heatmap</div>
+      </div></div>
+
+      <!-- 5. FOCO Investor Management -->
+      <div class="grp"><div class="grp-title">5. FOCO Investor Management</div><div class="grp-list">
+        <div class="uc inv" data-id="ai1">View Portfolio</div>
+        <div class="uc inv" data-id="ai2">View Earnings &amp; ROI</div>
+        <div class="uc inv" data-id="ai3">View Owned EV Details</div>
+        <div class="uc inv" data-id="ai4">Request Withdrawal</div>
+        <div class="uc inv" data-id="ai5">View Withdrawal Status</div>
+        <div class="uc inv" data-id="ai6">Cancel Withdrawal</div>
+        <div class="uc inv" data-id="ai7">Download Payout Statement</div>
+        <div class="uc inv" data-id="ai8">View Maintenance Logs</div>
+        <div class="uc ad" data-id="ai9">Manage Investors</div>
+        <div class="uc ad" data-id="ai10">Assign Bike to Investor</div>
+        <div class="uc ac" data-id="ai11">Verify Withdrawal Eligibility</div>
+        <div class="uc mg" data-id="ai12">Approve / Reject Withdrawal</div>
+        <div class="uc ac" data-id="ai13">Process Payout (bKash/Bank)</div>
+        <div class="uc ac" data-id="ai14">Retry Failed Payout</div>
+        <div class="uc ac" data-id="ai15">Process Monthly Payout</div>
+      </div></div>
+
+      <!-- 6. Security, Auth & Support -->
+      <div class="grp"><div class="grp-title">6. Security, Auth &amp; Support</div><div class="grp-list">
+        <div class="uc shared" data-id="aa1">Authenticate (OTP/JWT)</div>
+        <div class="uc bk" data-id="aa2">Register &amp; KYC</div>
+        <div class="uc shared" data-id="aa3">Contact Support</div>
+        <div class="uc bk" data-id="aa4">View Notifications</div>
+        <div class="uc bk" data-id="aa5">View CO2 Impact</div>
+        <div class="uc sh" data-id="aa6">Assist Rental Return</div>
+        <div class="uc sh" data-id="aa7">View Shop Earnings</div>
+        <div class="uc sf" data-id="aa8">Manage Bikers</div>
+        <div class="uc sf" data-id="aa9">Manage Theft Incidents</div>
+        <div class="uc ad" data-id="aa10">View Audit Log</div>
+        <div class="uc ad" data-id="aa11">Configure Alerts</div>
+        <div class="uc ad" data-id="aa12">Role &amp; Permission</div>
+      </div></div>
+
+      <!-- 7. Admin Reports -->
+      <div class="grp"><div class="grp-title">7. Admin Reports</div><div class="grp-list">
+        <div class="uc mg" data-id="arp1">View Revenue Report</div>
+        <div class="uc mg" data-id="arp2">View Fleet Utilisation</div>
+        <div class="uc sf" data-id="arp3">View Biker Activity</div>
+        <div class="uc mg" data-id="arp4">View Swap Analytics</div>
+        <div class="uc mg" data-id="arp5">View Station Demand</div>
+        <div class="uc mg" data-id="arp6">View Investor ROI Report</div>
+        <div class="uc sf" data-id="arp7">View Damage Report</div>
+        <div class="uc mg" data-id="arp8">Export Reports</div>
+      </div></div>
+
+      <!-- 8. Investor Withdrawal Flow -->
+      <div class="grp"><div class="grp-title">8. Investor Withdrawal Flow</div><div class="grp-list">
+        <div class="uc inv" data-id="awd1">Request Earnings Withdrawal</div>
+        <div class="uc inv" data-id="awd2">Track Withdrawal Status</div>
+        <div class="uc inv" data-id="awd3">Cancel Pending Request</div>
+        <div class="uc mg" data-id="awd4">View All Withdraw Requests</div>
+        <div class="uc ac" data-id="awd5">Verify Eligibility</div>
+        <div class="uc mg" data-id="awd6">Approve Withdrawal</div>
+        <div class="uc mg" data-id="awd7">Reject Withdrawal</div>
+        <div class="uc ac" data-id="awd8">Execute Bank/bKash Transfer</div>
+        <div class="uc ac" data-id="awd9">Retry Failed Transfer</div>
+        <div class="uc ac" data-id="awd10">View Withdrawal History</div>
+      </div></div>
+
+      <!-- 9. Company Accounting -->
+      <div class="grp"><div class="grp-title">9. Company Accounting</div><div class="grp-list">
+        <div class="uc ac" data-id="aac1">View Profit &amp; Loss</div>
+        <div class="uc ac" data-id="aac2">View Revenue vs Expenses</div>
+        <div class="uc ac" data-id="aac3">Track Operational Costs</div>
+        <div class="uc ac" data-id="aac4">Manage Payables</div>
+        <div class="uc ac" data-id="aac5">Manage Receivables</div>
+        <div class="uc ac" data-id="aac6">View JCoin Circulation</div>
+        <div class="uc ac" data-id="aac7">View Deposit Holdings</div>
+        <div class="uc ac" data-id="aac8">Reconcile Gateways</div>
+        <div class="uc ac" data-id="aac9">View Tax Summary</div>
+        <div class="uc ac" data-id="aac10">Export Accounting Data</div>
+        <div class="uc ac" data-id="aac11">Payment Circulation</div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT ACTORS: FOCO Investor + Admin Team Group -->
+  <div class="actor-col">
+    <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#7C3AED" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#7C3AED" stroke-width="2.2"/></svg><div class="actor-name investor">FOCO Investor</div></div>
+    <div class="admin-group">
+      <div class="admin-group-label">Admin Team</div>
+      <div class="admin-group-actors">
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#059669" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#059669" stroke-width="2.2"/></svg><div class="actor-name admin">Admin</div></div>
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#DB2777" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#DB2777" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#DB2777" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#DB2777" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#DB2777" stroke-width="2.2"/></svg><div class="actor-name staff">Staff</div></div>
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#0891B2" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#0891B2" stroke-width="2.2"/></svg><div class="actor-name accountant">Accountant</div></div>
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#4338CA" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#4338CA" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#4338CA" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#4338CA" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#4338CA" stroke-width="2.2"/></svg><div class="actor-name manager">Manager</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg class="flow-svg" id="flow1"><defs>
+  <marker id="mInc1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#64748B"/></marker>
+  <marker id="mExt1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#7C3AED"/></marker>
+</defs></svg>
+
+<div class="leg">
+  <div class="leg-sec"><div class="leg-t">Actors</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#2563EB;background:#EFF6FF"></div>Biker/User/Customer</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#D97706;background:#FFFBEB"></div>Shop</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#7C3AED;background:#F5F3FF"></div>FOCO Investor</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#059669;background:#ECFDF5"></div>Admin</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#0891B2;background:#ECFEFF"></div>Accountant</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#DB2777;background:#FDF2F8"></div>Staff</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#4338CA;background:#EEF2FF"></div>Manager</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#475569;background:#F1F5F9"></div>Shared</div>
+  </div>
+  <div class="leg-sec"><div class="leg-t">Flows</div>
+    <div class="leg-i"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#64748B" stroke-width="1.8" stroke-dasharray="6,3"/><polygon points="22,2 28,5 22,8" fill="#64748B"/></svg>&laquo;include&raquo;</div>
+    <div class="leg-i"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#7C3AED" stroke-width="1.8" stroke-dasharray="4,3"/><polygon points="22,2 28,5 22,8" fill="#7C3AED"/></svg>&laquo;extend&raquo;</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!--  DIAGRAM 2: PHASE BREAKDOWN                                        -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+
+<hr class="divider">
+<span>PHASE BREAKDOWN<span class="sub">Phase 1 = Core Platform Launch (MVP) &nbsp;|&nbsp; Phase 2 = Advanced &amp; Automation &nbsp;|&nbsp; Phase 3 = Battery Swap Network</span></span>
+</hr>
+
+<div class="uc-layout" id="layout2">
+  <div class="actor-col">
+    <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#2563EB" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#2563EB" stroke-width="2.2"/></svg><div class="actor-name biker">Biker / User /<br>Customer</div></div>
+    <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#D97706" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#D97706" stroke-width="2.2"/></svg><div class="actor-name shop">Shop</div></div>
+  </div>
+
+  <div class="sys" style="border-color:#475569">
+    <div class="sys-label" style="color:#475569">JAIBEN Mobility Platform — Phase Breakdown</div>
+    <div class="groups">
+
+      <!-- 1. EV Rental Management -->
+      <div class="grp mix-grp"><div class="grp-title">1. EV Rental Management</div><div class="grp-list">
+        <div class="uc p1" data-id="pr1">Browse Available EVs<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr2">Initiate Rental<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr3">Upload Condition Photos<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr4">Track Active Rental<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr6">End Rental / Return Bike<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr7">Dispute Damage<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr9">Assess Damage<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr10">Resolve Dispute<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr13">Hold / Release Deposit<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr14">Hourly/Daily/Monthly Billing<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr12">Handle Overdue<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pr11">Force-Close Rental<span class="phase-badge p1">P1</span></div>
+        <div class="uc p2" data-id="pr5">Extend Rental<span class="phase-badge p2">P2</span></div>
+      </div></div>
+
+      <!-- 2. Battery Swap System (Phase 3) -->
+      <div class="grp p3-grp"><div class="grp-title">2. Battery Swap System</div><div class="grp-list">
+        <div class="uc p3" data-id="ps1">Browse Swap Stations<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps2">Initiate Battery Swap<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps3">Book Swap Slot<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps4">Receive Swap Alert<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps5">Approve / Reject Swap<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps6">Process Battery Return<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps7">Report Faulty Battery<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps8">Manage Battery Lifecycle<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps9">Transfer Batteries<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="ps10">Check Station Availability<span class="phase-badge p3">P3</span></div>
+      </div></div>
+
+      <!-- 3. Wallet & Payment System -->
+      <div class="grp mix-grp"><div class="grp-title">3. Wallet &amp; Payment System</div><div class="grp-list">
+        <div class="uc p3" data-id="pw1">Top-Up JCoin Wallet<span class="phase-badge p3">P3</span></div>
+        <div class="uc p1" data-id="pw2">Check Wallet Balance<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pw5">View Earnings<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pw6">View Transaction History<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pw11">Pay Rent<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pw10">Payment Gateway Integration<span class="phase-badge p1">P1</span></div>
+        <div class="uc p2" data-id="pw3">Subscribe Swap Plan<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pw4">Share Referral Link<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pw7">Issue Promo Credits<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pw8">Configure Pricing<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pw9">Manage JCoin System<span class="phase-badge p2">P2</span></div>
+      </div></div>
+
+      <!-- 4. Fleet & Asset Management -->
+      <div class="grp mix-grp"><div class="grp-title">4. Fleet &amp; Asset Management</div><div class="grp-list">
+        <div class="uc p1" data-id="pf1">Add / Register EV Bike<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pf2">Track Fleet GPS<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pf3">Manage Geofences<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pf4">Schedule Maintenance<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pf6">Manage Shops<span class="phase-badge p1">P1</span></div>
+        <div class="uc p3" data-id="pf5">Retire EV / Battery<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="pf7">View Station Heatmap<span class="phase-badge p3">P3</span></div>
+      </div></div>
+
+      <!-- 5. FOCO Investor Management (Mixed Phase) -->
+      <div class="grp mix-grp"><div class="grp-title">5. FOCO Investor Management</div><div class="grp-list">
+        <div class="uc p1" data-id="pi1">View Portfolio<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi2">View Earnings &amp; ROI<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi3">View Owned EV Details<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi4">Request Withdrawal<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi5">View Withdrawal Status<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi6">Cancel Withdrawal<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi9">Manage Investors<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi10">Assign Bike to Investor<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi11">Verify Withdrawal Eligibility<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi12">Approve / Reject Withdrawal<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pi13">Process Payout (bKash/Bank)<span class="phase-badge p1">P1</span></div>
+        <div class="uc p2" data-id="pi7">Download Payout Statement<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pi8">View Maintenance Logs<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pi14">Retry Failed Payout<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pi15">Process Monthly Payout<span class="phase-badge p2">P2</span></div>
+      </div></div>
+
+      <!-- 6. Security, Auth & Support -->
+      <div class="grp mix-grp"><div class="grp-title">6. Security, Auth &amp; Support</div><div class="grp-list">
+        <div class="uc p1" data-id="pa1">Authenticate (OTP/JWT)<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pa2">Register &amp; KYC<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pa3">Contact Support<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pa4">View Notifications<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pa6">Assist Rental Return<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pa8">Manage Bikers<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pa12">Role &amp; Permission<span class="phase-badge p1">P1</span></div>
+        <div class="uc p2" data-id="pa5">View CO2 Impact<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pa7">View Shop Earnings<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pa9">Manage Theft Incidents<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pa10">View Audit Log<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pa11">Configure Alerts<span class="phase-badge p2">P2</span></div>
+      </div></div>
+
+      <!-- 7. Admin Reports -->
+      <div class="grp mix-grp"><div class="grp-title">7. Admin Reports</div><div class="grp-list">
+        <div class="uc p1" data-id="prp1">View Revenue Report<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="prp2">View Fleet Utilisation<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="prp3">View Biker Activity<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="prp7">View Damage Report<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="prp8">Export Reports<span class="phase-badge p1">P1</span></div>
+        <div class="uc p3" data-id="prp4">View Swap Analytics<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="prp5">View Station Demand<span class="phase-badge p3">P3</span></div>
+        <div class="uc p3" data-id="prp6">View Investor ROI Report<span class="phase-badge p3">P3</span></div>
+      </div></div>
+
+      <!-- 8. Investor Withdrawal Flow (Mixed Phase) -->
+      <div class="grp mix-grp"><div class="grp-title">8. Investor Withdrawal Flow</div><div class="grp-list">
+        <div class="uc p1" data-id="pwd1">Request Earnings Withdrawal<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd2">Track Withdrawal Status<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd3">Cancel Pending Request<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd4">View All Withdraw Requests<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd5">Verify Eligibility<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd6">Approve Withdrawal<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd7">Reject Withdrawal<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd8">Execute Bank/bKash Transfer<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pwd10">View Withdrawal History<span class="phase-badge p1">P1</span></div>
+        <div class="uc p2" data-id="pwd9">Retry Failed Transfer<span class="phase-badge p2">P2</span></div>
+      </div></div>
+
+      <!-- 9. Company Accounting (Mixed Phase) -->
+      <div class="grp mix-grp"><div class="grp-title">9. Company Accounting</div><div class="grp-list">
+        <div class="uc p1" data-id="pac1">View Profit &amp; Loss<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pac2">View Revenue vs Expenses<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pac4">Manage Payables<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pac5">Manage Receivables<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pac7">View Deposit Holdings<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pac10">Export Accounting Data<span class="phase-badge p1">P1</span></div>
+        <div class="uc p1" data-id="pac11">Payment Circulation<span class="phase-badge p1">P1</span></div>
+        <div class="uc p2" data-id="pac3">Track Operational Costs<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pac8">Reconcile Gateways<span class="phase-badge p2">P2</span></div>
+        <div class="uc p2" data-id="pac9">View Tax Summary<span class="phase-badge p2">P2</span></div>
+        <div class="uc p3" data-id="pac6">View JCoin Circulation<span class="phase-badge p3">P3</span></div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <div class="actor-col">
+    <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#7C3AED" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#7C3AED" stroke-width="2.2"/></svg><div class="actor-name investor">FOCO Investor</div></div>
+    <div class="admin-group">
+      <div class="admin-group-label">Admin Team</div>
+      <div class="admin-group-actors">
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#059669" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#059669" stroke-width="2.2"/></svg><div class="actor-name admin">Admin</div></div>
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#DB2777" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#DB2777" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#DB2777" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#DB2777" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#DB2777" stroke-width="2.2"/></svg><div class="actor-name staff">Staff</div></div>
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#0891B2" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#0891B2" stroke-width="2.2"/></svg><div class="actor-name accountant">Accountant</div></div>
+        <div class="actor"><svg viewBox="0 0 44 56"><circle cx="22" cy="10" r="8" fill="none" stroke="#4338CA" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#4338CA" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#4338CA" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#4338CA" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#4338CA" stroke-width="2.2"/></svg><div class="actor-name manager">Manager</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg class="flow-svg" id="flow2"><defs>
+  <marker id="mInc2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#64748B"/></marker>
+  <marker id="mExt2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#7C3AED"/></marker>
+</defs></svg>
+
+<div class="leg">
+  <div class="leg-sec"><div class="leg-t">Phase</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#B45309;background:#FFFBEB;border-width:2px"></div>Phase 1 — Core Platform (MVP)</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#4338CA;background:#EEF2FF;border-width:2px"></div>Phase 2 — Advanced</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#0F766E;background:#F0FDFA;border-width:2px"></div>Phase 3 — Battery Swap</div>
+  </div>
+  <div class="leg-sec"><div class="leg-t">Actors</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#2563EB;background:#EFF6FF"></div>Biker/User/Customer</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#D97706;background:#FFFBEB"></div>Shop</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#7C3AED;background:#F5F3FF"></div>FOCO Investor</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#059669;background:#ECFDF5"></div>Admin</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#0891B2;background:#ECFEFF"></div>Accountant</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#DB2777;background:#FDF2F8"></div>Staff</div>
+    <div class="leg-i"><div class="leg-e" style="border-color:#4338CA;background:#EEF2FF"></div>Manager</div>
+  </div>
+  <div class="leg-sec"><div class="leg-t">Flows</div>
+    <div class="leg-i"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#64748B" stroke-width="1.8" stroke-dasharray="6,3"/><polygon points="22,2 28,5 22,8" fill="#64748B"/></svg>&laquo;include&raquo;</div>
+    <div class="leg-i"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#7C3AED" stroke-width="1.8" stroke-dasharray="4,3"/><polygon points="22,2 28,5 22,8" fill="#7C3AED"/></svg>&laquo;extend&raquo;</div>
+  </div>
+</div>
+
+</div><!-- end #root -->
+
+<script>
+function drawFlows(svgId, layoutId, includes, extends_) {
+  const svg = document.getElementById(svgId);
+  const root = document.getElementById('root');
+  const rootRect = root.getBoundingClientRect();
+  svg.setAttribute('width', rootRect.width);
+  svg.setAttribute('height', rootRect.height);
+  svg.style.width = rootRect.width + 'px';
+  svg.style.height = rootRect.height + 'px';
+  svg.querySelectorAll('.fl').forEach(e => e.remove());
+
+  const mInc = svgId === 'flow1' ? 'mInc1' : 'mInc2';
+  const mExt = svgId === 'flow1' ? 'mExt1' : 'mExt2';
+
+  function getBox(id) {
+    const el = document.querySelector(`[data-id="${id}"]`);
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return { cx: r.left + r.width/2 - rootRect.left, cy: r.top + r.height/2 - rootRect.top, top: r.top - rootRect.top, bottom: r.bottom - rootRect.top, left: r.left - rootRect.left, right: r.right - rootRect.left, w: r.width, h: r.height };
+  }
+
+  function drawConn(fromId, toId, type) {
+    const f = getBox(fromId), t = getBox(toId);
+    if (!f || !t) return;
+    let x1, y1, x2, y2, d;
+    const dx = t.cx - f.cx, dy = t.cy - f.cy;
+    const adx = Math.abs(dx), ady = Math.abs(dy);
+    if (adx < 30 && ady < 30) return;
+    if (ady < 20) {
+      x1 = dx > 0 ? f.right : f.left; y1 = f.cy;
+      x2 = dx > 0 ? t.left : t.right; y2 = t.cy;
+      d = `M${x1},${y1} L${x2},${y2}`;
+    } else if (adx < 20) {
+      x1 = f.cx; y1 = dy > 0 ? f.bottom : f.top;
+      x2 = t.cx; y2 = dy > 0 ? t.top : t.bottom;
+      d = `M${x1},${y1} L${x2},${y2}`;
+    } else {
+      if (dy > 0) { x1 = f.cx; y1 = f.bottom; x2 = t.cx; y2 = t.top; }
+      else { x1 = f.cx; y1 = f.top; x2 = t.cx; y2 = t.bottom; }
+      const my = (y1 + y2) / 2;
+      d = `M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}`;
+    }
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', 'fl');
+    path.setAttribute('d', d);
+    path.setAttribute('marker-end', type === 'inc' ? `url(#${mInc})` : `url(#${mExt})`);
+    path.setAttribute('stroke', type === 'inc' ? '#64748B' : '#7C3AED');
+    path.setAttribute('stroke-width', '1.4');
+    path.setAttribute('stroke-dasharray', type === 'inc' ? '6,3' : '4,3');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.65');
+    svg.appendChild(path);
+
+    const lx = (x1 + x2) / 2, ly = (y1 + y2) / 2 - 7;
+    const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    txt.setAttribute('class', 'fl');
+    txt.setAttribute('x', lx); txt.setAttribute('y', ly);
+    txt.setAttribute('text-anchor', 'middle');
+    txt.setAttribute('font-size', '7');
+    txt.setAttribute('font-family', 'Segoe UI,Inter,sans-serif');
+    txt.setAttribute('font-weight', '700');
+    txt.setAttribute('fill', type === 'inc' ? '#64748B' : '#7C3AED');
+    txt.setAttribute('opacity', '0.75');
+    txt.textContent = type === 'inc' ? '\u00ABinclude\u00BB' : '\u00ABextend\u00BB';
+    svg.appendChild(txt);
+  }
+
+  includes.forEach(([f, t]) => drawConn(f, t, 'inc'));
+  extends_.forEach(([f, t]) => drawConn(f, t, 'ext'));
+}
+
+// ═══════════════════════════════════════════════════
+// COMPLETE DIAGRAM FLOWS
+// ═══════════════════════════════════════════════════
+const allIncludes = [
+  // EV Rental Management
+  ['ar2', 'ar8'],    // Initiate Rental → Verify Biker KYC
+  ['ar2', 'aw2'],    // Initiate Rental → Check Wallet Balance
+  ['ar2', 'ar13'],   // Initiate Rental → Hold Deposit
+  ['ar2', 'ar3'],    // Initiate Rental → Upload Condition Photos
+  ['ar2', 'aa1'],    // Initiate Rental → Authenticate
+  ['ar6', 'ar9'],    // End Rental → Assess Damage
+  ['ar6', 'ar13'],   // End Rental → Release Deposit
+  ['ar6', 'ar14'],   // End Rental → Billing Calculation
+  ['ar6', 'aa6'],    // End Rental → Shop Assist Return
+  ['ar5', 'aw2'],    // Extend Rental → Check Wallet Balance
+  ['ar5', 'ar14'],   // Extend Rental → Billing Calculation
+  ['ar12', 'af2'],   // Handle Overdue → Track Fleet GPS
+  ['ar8', 'aa1'],    // Verify KYC → Authenticate
+  ['aw11', 'aw2'],   // Pay Rent → Check Wallet Balance
+  ['aw11', 'aw10'],  // Pay Rent → Payment Gateway
+
+  // Battery Swap System
+  ['as2', 'as10'],   // Initiate Swap → Check Station Availability
+  ['as2', 'aw2'],    // Initiate Swap → Check Wallet Balance
+  ['as2', 'as5'],    // Initiate Swap → Approve/Reject Swap
+  ['as2', 'aa1'],    // Initiate Swap → Authenticate
+
+  // Wallet & Payment
+  ['aw1', 'aw10'],   // Top-Up JCoin → Payment Gateway Integration
+  ['aw3', 'aw2'],    // Subscribe Swap Plan → Check Wallet Balance
+  ['aw3', 'aw10'],   // Subscribe Swap Plan → Payment Gateway
+
+  // FOCO Investor
+  ['ai4', 'ai11'],   // Request Withdrawal → Verify Eligibility
+  ['ai4', 'aa1'],    // Request Withdrawal → Authenticate
+  ['ai12', 'ai13'],  // Approve/Reject Withdrawal → Process Payout
+
+  // Investor Withdrawal Flow
+  ['awd1', 'awd5'],  // Request Withdrawal → Verify Eligibility
+  ['awd1', 'aa1'],   // Request Withdrawal → Authenticate
+  ['awd6', 'awd8'],  // Approve Withdrawal → Execute Transfer
+
+  // Company Accounting
+  ['aac1', 'aac2'],  // P&L → Revenue vs Expenses
+  ['aac8', 'aw10'],  // Reconcile Gateways → Payment Gateway
+  ['aac11', 'aac2'], // Payment Circulation → Revenue vs Expenses
+
+  // Auth
+  ['aa2', 'aa1'],    // Register & KYC → Authenticate
+  ['aa12', 'aa1'],   // Role & Permission → Authenticate
+];
+
+const allExtends = [
+  // EV Rental
+  ['ar7', 'ar9'],    // Dispute Damage extends Assess Damage
+  ['ar10', 'ar7'],   // Resolve Dispute extends Dispute Damage
+  ['ar11', 'ar12'],  // Force-Close extends Handle Overdue
+  ['ar5', 'ar4'],    // Extend Rental extends Track Active Rental
+  ['aa5', 'ar4'],    // CO2 Impact extends Track Active Rental
+
+  // Battery Swap
+  ['as3', 'as2'],    // Book Swap Slot extends Initiate Swap
+  ['as4', 'as2'],    // Receive Swap Alert extends Initiate Swap
+  ['as7', 'as6'],    // Report Faulty Battery extends Process Battery Return
+
+  // Wallet
+  ['aw4', 'aw2'],    // Share Referral Link extends Check Balance
+  ['aw5', 'aw2'],    // View Earnings extends Check Balance
+
+  // FOCO Investor
+  ['ai5', 'ai4'],    // View Withdrawal Status extends Request Withdrawal
+  ['ai6', 'ai4'],    // Cancel Withdrawal extends Request Withdrawal
+  ['ai7', 'ai2'],    // Download Payout Statement extends View Earnings & ROI
+  ['ai14', 'ai13'],  // Retry Failed Payout extends Process Payout
+
+  // Investor Withdrawal
+  ['awd2', 'awd1'],  // Track Status extends Request Withdrawal
+  ['awd3', 'awd1'],  // Cancel Request extends Request Withdrawal
+  ['awd7', 'awd6'],  // Reject Withdrawal extends Approve Withdrawal
+  ['awd9', 'awd8'],  // Retry Failed extends Execute Transfer
+
+  // Accounting
+  ['aac9', 'aac1'],  // Tax Summary extends P&L
+];
+
+// ═══════════════════════════════════════════════════
+// PHASE BREAKDOWN FLOWS (consistent with All Phases)
+// ═══════════════════════════════════════════════════
+const phaseIncludes = [
+  // EV Rental Management
+  ['pr2', 'pa2'],    // Initiate Rental → Register & KYC
+  ['pr2', 'pw2'],    // Initiate Rental → Check Wallet Balance
+  ['pr2', 'pr13'],   // Initiate Rental → Hold Deposit
+  ['pr2', 'pr3'],    // Initiate Rental → Upload Condition Photos
+  ['pr2', 'pa1'],    // Initiate Rental → Authenticate
+  ['pr6', 'pr9'],    // End Rental → Assess Damage
+  ['pr6', 'pr13'],   // End Rental → Release Deposit
+  ['pr6', 'pr14'],   // End Rental → Billing Calculation
+  ['pr6', 'pa6'],    // End Rental → Shop Assist Return
+  ['pr12', 'pf2'],   // Handle Overdue → Track Fleet GPS
+  ['pr5', 'pw2'],    // Extend Rental → Check Wallet Balance (P2)
+  ['pr5', 'pr14'],   // Extend Rental → Billing Calculation (P2)
+  ['pw11', 'pw2'],   // Pay Rent → Check Wallet Balance
+  ['pw11', 'pw10'],  // Pay Rent → Payment Gateway
+
+  // Battery Swap System (Phase 3)
+  ['ps2', 'ps10'],   // Initiate Swap → Check Station Availability
+  ['ps2', 'pw2'],    // Initiate Swap → Check Wallet Balance
+  ['ps2', 'ps5'],    // Initiate Swap → Approve/Reject Swap
+  ['ps2', 'pa1'],    // Initiate Swap → Authenticate
+
+  // Wallet & Payment
+  ['pw1', 'pw10'],   // Top-Up JCoin → Payment Gateway Integration
+  ['pw3', 'pw2'],    // Subscribe Swap Plan → Check Wallet Balance (P2)
+  ['pw3', 'pw10'],   // Subscribe Swap Plan → Payment Gateway (P2)
+
+  // FOCO Investor (P1 basic)
+  ['pi4', 'pi11'],   // Request Withdrawal → Verify Eligibility
+  ['pi4', 'pa1'],    // Request Withdrawal → Authenticate
+  ['pi12', 'pi13'],  // Approve/Reject Withdrawal → Process Payout
+
+  // Investor Withdrawal Flow (P1 basic)
+  ['pwd1', 'pwd5'],  // Request Withdrawal → Verify Eligibility
+  ['pwd1', 'pa1'],   // Request Withdrawal → Authenticate
+  ['pwd6', 'pwd8'],  // Approve Withdrawal → Execute Transfer
+
+  // Company Accounting
+  ['pac1', 'pac2'],  // P&L → Revenue vs Expenses
+  ['pac8', 'pw10'],  // Reconcile Gateways → Payment Gateway (P2)
+  ['pac11', 'pac2'], // Payment Circulation → Revenue vs Expenses
+
+  // Auth
+  ['pa2', 'pa1'],    // Register & KYC → Authenticate
+  ['pa12', 'pa1'],   // Role & Permission → Authenticate
+];
+
+const phaseExtends = [
+  // EV Rental
+  ['pr7', 'pr9'],    // Dispute Damage extends Assess Damage (P1)
+  ['pr10', 'pr7'],   // Resolve Dispute extends Dispute Damage (P1)
+  ['pr11', 'pr12'],  // Force-Close extends Handle Overdue (P1)
+  ['pr5', 'pr4'],    // Extend Rental extends Track Active Rental (P2)
+  ['pa5', 'pr4'],    // CO2 Impact extends Track Active Rental (P2)
+
+  // Battery Swap (Phase 3)
+  ['ps3', 'ps2'],    // Book Swap Slot extends Initiate Swap
+  ['ps4', 'ps2'],    // Receive Swap Alert extends Initiate Swap
+  ['ps7', 'ps6'],    // Report Faulty Battery extends Process Battery Return
+
+  // Wallet
+  ['pw4', 'pw2'],    // Share Referral Link extends Check Balance (P2)
+  ['pw5', 'pw2'],    // View Earnings extends Check Balance (P1)
+
+  // FOCO Investor
+  ['pi5', 'pi4'],    // View Withdrawal Status extends Request Withdrawal (P1)
+  ['pi6', 'pi4'],    // Cancel Withdrawal extends Request Withdrawal (P1)
+  ['pi7', 'pi2'],    // Download Payout Statement extends View Earnings & ROI (P2)
+  ['pi14', 'pi13'],  // Retry Failed Payout extends Process Payout (P2)
+
+  // Investor Withdrawal
+  ['pwd2', 'pwd1'],  // Track Status extends Request Withdrawal (P1)
+  ['pwd3', 'pwd1'],  // Cancel Request extends Request Withdrawal (P1)
+  ['pwd7', 'pwd6'],  // Reject Withdrawal extends Approve Withdrawal (P1)
+  ['pwd9', 'pwd8'],  // Retry Failed extends Execute Transfer (P2)
+
+  // Accounting
+  ['pac9', 'pac1'],  // Tax Summary extends P&L (P2)
+];
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    drawFlows('flow1', 'layout1', allIncludes, allExtends);
+    drawFlows('flow2', 'layout2', phaseIncludes, phaseExtends);
+  }, 500);
+});
+
+window.addEventListener('resize', () => {
+  setTimeout(() => {
+    drawFlows('flow1', 'layout1', allIncludes, allExtends);
+    drawFlows('flow2', 'layout2', phaseIncludes, phaseExtends);
+  }, 200);
+});
+</script>
+</body>
+</html>

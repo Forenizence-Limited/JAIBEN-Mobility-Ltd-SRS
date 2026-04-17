@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'text-main': '#1E293B', 'text-sub': '#64748B',
+          'bg-main': '#F8FAFC', 'border-main': '#E2E8F0', 
+          'accent': '#065F46', 'accent-dark': '#064d25', 'accent-light': '#ecfdf5',
+          
+          // Actor Colors (Inner Backgrounds)
+          'biker': '#2563EB', 'biker-light': '#EFF6FF', 'biker-dark': '#1E3A5F', 'biker-badge': '#DBEAFE', 'biker-label': '#1E40AF',
+          'shop': '#E11D48', 'shop-light': '#FFF1F2', 'shop-dark': '#9F1239', 'shop-badge': '#FFE4E6', 'shop-label': '#9F1239', // Changed to Red
+          'investor': '#7C3AED', 'investor-light': '#F5F3FF', 'investor-dark': '#5B21B6', 'investor-badge': '#EDE9FE', 'investor-label': '#5B21B6',
+          'admin': '#059669', 'admin-light': '#ECFDF5', 'admin-dark': '#064E3B', 'admin-badge': '#D1FAE5', 'admin-label': '#065F46',
+          'accountant': '#0891B2', 'accountant-light': '#ECFEFF', 'accountant-dark': '#164E63', 'accountant-badge': '#CFFAFE', 'accountant-label': '#155E75',
+          'staff': '#D97706', 'staff-light': '#FFFBEB', 'staff-dark': '#92400E', 'staff-badge': '#FEF3C7', 'staff-label': '#92400E', // Changed to Amber
+          'manager': '#EA580C', 'manager-light': '#FFF7ED', 'manager-dark': '#9A3412', 'manager-badge': '#FFEDD5', 'manager-label': '#9A3412', // Changed to Orange
+          'shared-light': '#F1F5F9', 'shared-dark': '#334155',
+          
+          // Phase Colors (Borders only)
+          'p1-border': '#B45309',
+          'p2-border': '#4338CA',
+          'p3-border': '#0F766E',
+          
+          'sys-bg': '#FFFFFF', 'grp-bg': '#F8FAFC'
+        },
+        width: {
+          'actor': '140px',
+          'sys-min': '2100px',
+          'root-min': '2700px'
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { -webkit-font-smoothing: antialiased; }
+  .flow-svg line, .flow-svg path, .flow-svg text { pointer-events: none; }
+  .uc-item { cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+  .uc-item:hover { transform: translateY(-2px) scale(1.03); z-index: 20; }
+  .uc-item.active-flow { transform: scale(1.05); z-index: 20; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3); }
+  .flow-svg path.fl { transition: opacity 0.4s ease; }
+  .flow-svg text.fl { transition: opacity 0.4s ease; }
+  .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+</style>
+</head>
+<body class="font-sans bg-slate-50 text-text-main m-0 p-0">
+
+<div id="root" class="w-fit min-w-root-min mx-auto py-10 px-[30px] relative bg-bg-main box-border">
+
+  <div class="text-center mb-8">
+    <h1 class="text-2xl font-extrabold text-accent-dark tracking-tight">JAIBEN Mobility Ltd — Unified Use Case Diagram</h1>
+    <p class="text-sm text-text-sub mt-2 font-medium">EV Rental + Battery Swap + Wallet + FOCO Investor + Reports + Accounting &nbsp;|&nbsp; SRS v1.0 Final</p>
+    <p class="text-xs text-slate-400 mt-1 italic">Click any Use Case to isolate its &laquo;include&raquo; / &laquo;extend&raquo; flows</p>
+  </div>
+
+  <div class="flex items-start relative gap-4" id="layout1">
+    <!-- LEFT ACTORS -->
+    <div class="shrink-0 w-actor flex flex-col items-center gap-3 pt-8">
+      <div class="flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+        <svg viewBox="0 0 44 56" class="w-10 h-14 mb-1"><circle cx="22" cy="10" r="8" fill="none" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#2563EB" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#2563EB" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#2563EB" stroke-width="2.2"/></svg>
+        <div class="text-[9px] font-bold px-2 py-0.5 rounded-md whitespace-nowrap text-center leading-tight bg-biker-badge text-biker-label">Biker / User</div>
+      </div>
+      <div class="flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+        <svg viewBox="0 0 44 56" class="w-10 h-14 mb-1"><circle cx="22" cy="10" r="8" fill="none" stroke="#E11D48" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#E11D48" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#E11D48" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#E11D48" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#E11D48" stroke-width="2.2"/></svg>
+        <div class="text-[9px] font-bold px-2 py-0.5 rounded-md whitespace-nowrap text-center leading-tight bg-shop-badge text-shop-label">Shop</div>
+      </div>
+    </div>
+
+    <div class="flex-1 min-w-sys-min border-[3px] border-accent-dark rounded-[20px] p-6 relative bg-sys-bg shadow-xl">
+      <div class="absolute -top-4 left-8 bg-bg-main px-4 text-base font-extrabold text-accent-dark tracking-tight shadow-sm rounded-lg py-1 border border-slate-100">JAIBEN Mobility Platform</div>
+      <div class="grid grid-cols-3 gap-4 mt-2">
+
+        <!-- 1. EV Rental Management -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">1. EV Rental Management</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar1" onclick="toggleFlow(this)">Browse Available EVs<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar2" onclick="toggleFlow(this)">Initiate Rental<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar3" onclick="toggleFlow(this)">Upload Condition Photos<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar4" onclick="toggleFlow(this)">Track Active Rental<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar5" onclick="toggleFlow(this)">Extend Rental<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar6" onclick="toggleFlow(this)">End Rental / Return Bike<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar7" onclick="toggleFlow(this)">Dispute Damage<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar8" onclick="toggleFlow(this)">Verify Biker KYC<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar9" onclick="toggleFlow(this)">Assess Damage<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar10" onclick="toggleFlow(this)">Resolve Dispute<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar11" onclick="toggleFlow(this)">Force-Close Rental<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar12" onclick="toggleFlow(this)">Handle Overdue<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar13" onclick="toggleFlow(this)">Hold / Release Deposit<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar14" onclick="toggleFlow(this)">Hourly/Daily/Monthly Billing<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+          </div>
+        </div>
+
+        <!-- 2. Battery Swap System -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">2. Battery Swap System</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as1" onclick="toggleFlow(this)">Browse Swap Stations<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as2" onclick="toggleFlow(this)">Initiate Battery Swap<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as3" onclick="toggleFlow(this)">Book Swap Slot<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-shop-light text-shop-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as4" onclick="toggleFlow(this)">Receive Swap Alert<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-shop-light text-shop-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as5" onclick="toggleFlow(this)">Approve / Reject Swap<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-shop-light text-shop-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as6" onclick="toggleFlow(this)">Process Battery Return<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-shop-light text-shop-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as7" onclick="toggleFlow(this)">Report Faulty Battery<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-staff-light text-staff-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as8" onclick="toggleFlow(this)">Manage Battery Lifecycle<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-staff-light text-staff-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as9" onclick="toggleFlow(this)">Transfer Batteries<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-staff-light text-staff-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="as10" onclick="toggleFlow(this)">Check Station Availability<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+          </div>
+        </div>
+
+        <!-- 3. Wallet & Payment System -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">3. Wallet &amp; Payment System</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw1" onclick="toggleFlow(this)">Top-Up JCoin Wallet<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw2" onclick="toggleFlow(this)">Check Wallet Balance<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw3" onclick="toggleFlow(this)">Subscribe Swap Plan<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw4" onclick="toggleFlow(this)">Share Referral Link<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw5" onclick="toggleFlow(this)">View Earnings<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw6" onclick="toggleFlow(this)">View Transaction History<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw11" onclick="toggleFlow(this)">Pay Rent<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw10" onclick="toggleFlow(this)">Payment Gateway Integration<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw7" onclick="toggleFlow(this)">Issue Promo Credits<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw8" onclick="toggleFlow(this)">Configure Pricing<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-admin-light text-admin-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aw9" onclick="toggleFlow(this)">Manage JCoin System<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+          </div>
+        </div>
+
+        <!-- 4. Fleet & Asset Management -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">4. Fleet &amp; Asset Management</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af1" onclick="toggleFlow(this)">Add / Register EV Bike<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af2" onclick="toggleFlow(this)">Track Fleet GPS<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af3" onclick="toggleFlow(this)">Manage Geofences<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af4" onclick="toggleFlow(this)">Schedule Maintenance<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-staff-light text-staff-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af5" onclick="toggleFlow(this)">Retire EV / Battery<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af6" onclick="toggleFlow(this)">Manage Shops<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="af7" onclick="toggleFlow(this)">View Station Heatmap<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+          </div>
+        </div>
+
+        <!-- 5. FOCO Investor Management -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">5. FOCO Investor Management</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai1" onclick="toggleFlow(this)">View Portfolio<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai2" onclick="toggleFlow(this)">View Earnings &amp; ROI<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai3" onclick="toggleFlow(this)">View Owned EV Details<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai4" onclick="toggleFlow(this)">Request Withdrawal<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai5" onclick="toggleFlow(this)">View Withdrawal Status<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai6" onclick="toggleFlow(this)">Cancel Withdrawal<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-investor-light text-investor-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai7" onclick="toggleFlow(this)">Download Payout Statement<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-investor-light text-investor-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai8" onclick="toggleFlow(this)">View Maintenance Logs<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-admin-light text-admin-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai9" onclick="toggleFlow(this)">Manage Investors<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-admin-light text-admin-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai10" onclick="toggleFlow(this)">Assign Bike to Investor<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai11" onclick="toggleFlow(this)">Verify Withdrawal Eligibility<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai12" onclick="toggleFlow(this)">Approve / Reject Withdrawal<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai13" onclick="toggleFlow(this)">Process Payout (bKash/Bank)<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai14" onclick="toggleFlow(this)">Retry Failed Payout<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ai15" onclick="toggleFlow(this)">Process Monthly Payout<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+          </div>
+        </div>
+
+        <!-- 6. Security, Auth & Support -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">6. Security, Auth &amp; Support</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-shared-light text-shared-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa1" onclick="toggleFlow(this)">Authenticate (OTP/JWT)<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa2" onclick="toggleFlow(this)">Register &amp; KYC<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-shared-light text-shared-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa3" onclick="toggleFlow(this)">Contact Support<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa4" onclick="toggleFlow(this)">View Notifications<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-biker-light text-biker-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa5" onclick="toggleFlow(this)">View CO2 Impact<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-shop-light text-shop-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa6" onclick="toggleFlow(this)">Assist Rental Return<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-shop-light text-shop-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa7" onclick="toggleFlow(this)">View Shop Earnings<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa8" onclick="toggleFlow(this)">Manage Bikers<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-staff-light text-staff-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa9" onclick="toggleFlow(this)">Manage Theft Incidents<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-admin-light text-admin-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa10" onclick="toggleFlow(this)">View Audit Log<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-admin-light text-admin-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa11" onclick="toggleFlow(this)">Configure Alerts<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-admin-light text-admin-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aa12" onclick="toggleFlow(this)">Role &amp; Permission<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+          </div>
+        </div>
+
+        <!-- 7. Admin Reports -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">7. Admin Reports</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp1" onclick="toggleFlow(this)">View Revenue Report<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp2" onclick="toggleFlow(this)">View Fleet Utilisation<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp3" onclick="toggleFlow(this)">View Biker Activity<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp4" onclick="toggleFlow(this)">View Swap Analytics<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp5" onclick="toggleFlow(this)">View Station Demand<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp6" onclick="toggleFlow(this)">View Investor ROI Report<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp7" onclick="toggleFlow(this)">View Damage Report<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="arp8" onclick="toggleFlow(this)">Export Reports<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+          </div>
+        </div>
+
+        <!-- 8. Investor Withdrawal Flow -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">8. Investor Withdrawal Flow</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd1" onclick="toggleFlow(this)">Request Earnings Withdrawal<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd2" onclick="toggleFlow(this)">Track Withdrawal Status<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-investor-light text-investor-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd3" onclick="toggleFlow(this)">Cancel Pending Request<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd4" onclick="toggleFlow(this)">View All Withdraw Requests<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd5" onclick="toggleFlow(this)">Verify Eligibility<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd6" onclick="toggleFlow(this)">Approve Withdrawal<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd7" onclick="toggleFlow(this)">Reject Withdrawal<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd8" onclick="toggleFlow(this)">Execute Bank/bKash Transfer<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd9" onclick="toggleFlow(this)">Retry Failed Transfer<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="awd10" onclick="toggleFlow(this)">View Withdrawal History<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+          </div>
+        </div>
+
+        <!-- 9. Company Accounting -->
+        <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+          <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">9. Company Accounting</div>
+          <div class="flex flex-wrap gap-1.5 mt-1">
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac1" onclick="toggleFlow(this)">View Profit &amp; Loss<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac2" onclick="toggleFlow(this)">View Revenue vs Expenses<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac3" onclick="toggleFlow(this)">Track Operational Costs<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac4" onclick="toggleFlow(this)">Manage Payables<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac5" onclick="toggleFlow(this)">Manage Receivables<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p3-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac6" onclick="toggleFlow(this)">View JCoin Circulation<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p3-border">P3</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac7" onclick="toggleFlow(this)">View Deposit Holdings<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac8" onclick="toggleFlow(this)">Reconcile Gateways<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-accountant-light text-accountant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac9" onclick="toggleFlow(this)">View Tax Summary<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac10" onclick="toggleFlow(this)">Export Accounting Data<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+            <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="aac11" onclick="toggleFlow(this)">Payment Circulation<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT ACTORS -->
+    <div class="shrink-0 w-actor flex flex-col items-center gap-3 pt-8">
+      <div class="flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-sm border border-slate-100">
+        <svg viewBox="0 0 44 56" class="w-10 h-14 mb-1"><circle cx="22" cy="10" r="8" fill="none" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#7C3AED" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#7C3AED" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#7C3AED" stroke-width="2.2"/></svg>
+        <div class="text-[9px] font-bold px-2 py-0.5 rounded-md whitespace-nowrap text-center leading-tight bg-investor-badge text-investor-label">FOCO Investor</div>
+      </div>
+      <div class="border-2 border-dashed border-slate-300 rounded-2xl p-3 px-2 pb-2 mt-3 bg-white/50 backdrop-blur-sm relative w-full shadow-sm">
+        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-3 text-[9px] font-black text-slate-600 whitespace-nowrap tracking-wider uppercase shadow-sm rounded-md border border-slate-100">Admin Team</div>
+        <div class="flex gap-2 justify-center items-start mt-1">
+          <div class="flex flex-col items-center">
+            <svg viewBox="0 0 44 56" class="w-8 h-10"><circle cx="22" cy="10" r="8" fill="none" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#059669" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#059669" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#059669" stroke-width="2.2"/></svg>
+            <div class="text-[6px] font-bold mt-0.5 px-1 py-px rounded whitespace-nowrap text-center leading-tight bg-admin-badge text-admin-label">Admin</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg viewBox="0 0 44 56" class="w-8 h-10"><circle cx="22" cy="10" r="8" fill="none" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#D97706" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#D97706" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#D97706" stroke-width="2.2"/></svg>
+            <div class="text-[6px] font-bold mt-0.5 px-1 py-px rounded whitespace-nowrap text-center leading-tight bg-staff-badge text-staff-label">Staff</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg viewBox="0 0 44 56" class="w-8 h-10"><circle cx="22" cy="10" r="8" fill="none" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#0891B2" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#0891B2" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#0891B2" stroke-width="2.2"/></svg>
+            <div class="text-[6px] font-bold mt-0.5 px-1 py-px rounded whitespace-nowrap text-center leading-tight bg-accountant-badge text-accountant-label">Accountant</div>
+          </div>
+          <div class="flex flex-col items-center">
+            <svg viewBox="0 0 44 56" class="w-8 h-10"><circle cx="22" cy="10" r="8" fill="none" stroke="#EA580C" stroke-width="2.2"/><line x1="22" y1="18" x2="22" y2="36" stroke="#EA580C" stroke-width="2.2"/><line x1="8" y1="26" x2="36" y2="26" stroke="#EA580C" stroke-width="2.2"/><line x1="22" y1="36" x2="10" y2="52" stroke="#EA580C" stroke-width="2.2"/><line x1="22" y1="36" x2="34" y2="52" stroke="#EA580C" stroke-width="2.2"/></svg>
+            <div class="text-[6px] font-bold mt-0.5 px-1 py-px rounded whitespace-nowrap text-center leading-tight bg-manager-badge text-manager-label">Manager</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg class="absolute top-0 left-0 w-full h-full pointer-events-none z-[5]" id="flow1"><defs>
+    <marker id="mInc1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#64748B"/></marker>
+    <marker id="mExt1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#7C3AED"/></marker>
+  </defs></svg>
+
+  <div class="mt-6 p-4 px-6 bg-white border border-slate-200 rounded-2xl shadow-sm flex flex-wrap gap-6 justify-center items-center">
+    <div class="flex flex-wrap gap-2 items-center"><div class="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest mr-1">Phase (Border)</div>
+      <div class="flex items-center gap-1.5 text-[9px] text-text-sub font-medium"><div class="w-5 h-5 rounded-full border-2 border-p1-border bg-white"></div>P1 (MVP)</div>
+      <div class="flex items-center gap-1.5 text-[9px] text-text-sub font-medium"><div class="w-5 h-5 rounded-full border-2 border-p2-border bg-white"></div>P2 (Advanced)</div>
+      <div class="flex items-center gap-1.5 text-[9px] text-text-sub font-medium"><div class="w-5 h-5 rounded-full border-2 border-p3-border bg-white"></div>P3 (Swap)</div>
+    </div>
+    <div class="w-px h-6 bg-slate-200"></div>
+    <div class="flex flex-wrap gap-2 items-center"><div class="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest mr-1">Actor (Inner)</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-biker-light border border-biker/30 inline-block"></span>Biker</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-shop-light border border-shop/30 inline-block"></span>Shop</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-investor-light border border-investor/30 inline-block"></span>Investor</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-admin-light border border-admin/30 inline-block"></span>Admin</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-accountant-light border border-accountant/30 inline-block"></span>Accountant</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-staff-light border border-staff/30 inline-block"></span>Staff</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><span class="w-3 h-3 rounded-full bg-manager-light border border-manager/30 inline-block"></span>Manager</div>
+    </div>
+    <div class="w-px h-6 bg-slate-200"></div>
+    <div class="flex flex-wrap gap-2 items-center"><div class="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest mr-1">Flows</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#64748B" stroke-width="1.8" stroke-dasharray="6,3"/><polygon points="22,2 28,5 22,8" fill="#64748B"/></svg>&laquo;include&raquo;</div>
+      <div class="flex items-center gap-1 text-[9px] text-text-sub font-medium"><svg width="28" height="10"><line x1="0" y1="5" x2="22" y2="5" stroke="#7C3AED" stroke-width="1.8" stroke-dasharray="4,3"/><polygon points="22,2 28,5 22,8" fill="#7C3AED"/></svg>&laquo;extend&raquo;</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function drawFlows() {
+  const svg = document.getElementById('flow1');
+  const root = document.getElementById('root');
+  const rootRect = root.getBoundingClientRect();
+  svg.setAttribute('width', rootRect.width);
+  svg.setAttribute('height', rootRect.height);
+  svg.style.width = rootRect.width + 'px';
+  svg.style.height = rootRect.height + 'px';
+  svg.querySelectorAll('.fl').forEach(e => e.remove());
+
+  function getBox(id) {
+    const el = document.querySelector(`[data-id="${id}"]`);
+    if (!el) return null;
+    const r = el.getBoundingClientRect();
+    return { cx: r.left + r.width/2 - rootRect.left, cy: r.top + r.height/2 - rootRect.top, top: r.top - rootRect.top, bottom: r.bottom - rootRect.top, left: r.left - rootRect.left, right: r.right - rootRect.left };
+  }
+
+  function drawConn(fromId, toId, type) {
+    const f = getBox(fromId), t = getBox(toId);
+    if (!f || !t) return;
+    let x1, y1, x2, y2, d;
+    const dx = t.cx - f.cx, dy = t.cy - f.cy;
+    if (Math.abs(dx) < 30 && Math.abs(dy) < 30) return;
+    
+    if (Math.abs(dy) < 20) {
+      x1 = dx > 0 ? f.right : f.left; y1 = f.cy;
+      x2 = dx > 0 ? t.left : t.right; y2 = t.cy;
+      d = `M${x1},${y1} L${x2},${y2}`;
+    } else if (Math.abs(dx) < 20) {
+      x1 = f.cx; y1 = dy > 0 ? f.bottom : f.top;
+      x2 = t.cx; y2 = dy > 0 ? t.top : t.bottom;
+      d = `M${x1},${y1} L${x2},${y2}`;
+    } else {
+      x1 = f.cx; y1 = dy > 0 ? f.bottom : f.top;
+      x2 = t.cx; y2 = dy > 0 ? t.top : t.bottom;
+      const my = (y1 + y2) / 2;
+      d = `M${x1},${y1} C${x1},${my} ${x2},${my} ${x2},${y2}`;
+    }
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('class', 'fl');
+    path.setAttribute('d', d);
+    path.setAttribute('marker-end', type === 'inc' ? 'url(#mInc1)' : 'url(#mExt1)');
+    path.setAttribute('stroke', type === 'inc' ? '#64748B' : '#7C3AED');
+    path.setAttribute('stroke-width', '1.4');
+    path.setAttribute('stroke-dasharray', type === 'inc' ? '6,3' : '4,3');
+    path.setAttribute('fill', 'none');
+    path.setAttribute('opacity', '0.6');
+    path.setAttribute('data-from', fromId);
+    path.setAttribute('data-to', toId);
+    svg.appendChild(path);
+
+    const lx = (x1 + x2) / 2, ly = (y1 + y2) / 2 - 8;
+    const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    txt.setAttribute('class', 'fl');
+    txt.setAttribute('x', lx); txt.setAttribute('y', ly);
+    txt.setAttribute('text-anchor', 'middle');
+    txt.setAttribute('font-size', '7');
+    txt.setAttribute('font-family', 'Segoe UI,Inter,sans-serif');
+    txt.setAttribute('font-weight', '700');
+    txt.setAttribute('fill', type === 'inc' ? '#64748B' : '#7C3AED');
+    txt.setAttribute('data-from', fromId);
+    txt.setAttribute('data-to', toId);
+    txt.textContent = type === 'inc' ? '\u00ABinclude\u00BB' : '\u00ABextend\u00BB';
+    svg.appendChild(txt);
+  }
+
+  allIncludes.forEach(([f, t]) => drawConn(f, t, 'inc'));
+  allExtends.forEach(([f, t]) => drawConn(f, t, 'ext'));
+}
+
+function toggleFlow(el) {
+  const id = el.getAttribute('data-id');
+  const svg = document.getElementById('flow1');
+  const allPaths = svg.querySelectorAll('path.fl');
+  const allTexts = svg.querySelectorAll('text.fl');
+  
+  const isActive = el.classList.contains('active-flow');
+  
+  // Remove active from all
+  document.querySelectorAll('.uc-item.active-flow').forEach(e => e.classList.remove('active-flow'));
+  
+  if (isActive) {
+    // Reset all
+    allPaths.forEach(p => p.style.opacity = '');
+    allTexts.forEach(t => t.style.opacity = '');
+    return;
+  }
+  
+  el.classList.add('active-flow');
+  
+  // Dim all
+  allPaths.forEach(p => p.style.opacity = '0.08');
+  allTexts.forEach(t => t.style.opacity = '0.08');
+  
+  // Highlight connected
+  allPaths.forEach(p => {
+    if (p.getAttribute('data-from') === id || p.getAttribute('data-to') === id) {
+      p.style.opacity = '1';
+      p.style.strokeWidth = '2.5';
+      // Find matching text
+      const fromId = p.getAttribute('data-from');
+      const toId = p.getAttribute('data-to');
+      allTexts.forEach(t => {
+        if (t.getAttribute('data-from') === fromId && t.getAttribute('data-to') === toId) {
+          t.style.opacity = '1';
+        }
+      });
+    } else {
+      p.style.strokeWidth = '1.4';
+    }
+  });
+}
+
+const allIncludes = [
+  ['ar2', 'ar8'], ['ar2', 'aw2'], ['ar2', 'ar13'], ['ar2', 'ar3'], ['ar2', 'aa1'], 
+  ['ar6', 'ar9'], ['ar6', 'ar13'], ['ar6', 'ar14'], ['ar6', 'aa6'], 
+  ['ar5', 'aw2'], ['ar5', 'ar14'], ['ar12', 'af2'], ['ar8', 'aa1'], 
+  ['aw11', 'aw2'], ['aw11', 'aw10'], ['as2', 'as10'], ['as2', 'aw2'], 
+  ['as2', 'as5'], ['as2', 'aa1'], ['aw1', 'aw10'], ['aw3', 'aw2'], 
+  ['aw3', 'aw10'], ['ai4', 'ai11'], ['ai4', 'aa1'], ['ai12', 'ai13'], 
+  ['awd1', 'awd5'], ['awd1', 'aa1'], ['awd6', 'awd8'], ['aac1', 'aac2'], 
+  ['aac8', 'aw10'], ['aac11', 'aac2'], ['aa2', 'aa1'], ['aa12', 'aa1']
+];
+
+const allExtends = [
+  ['ar7', 'ar9'], ['ar10', 'ar7'], ['ar11', 'ar12'], ['ar5', 'ar4'], ['aa5', 'ar4'], 
+  ['as3', 'as2'], ['as4', 'as2'], ['as7', 'as6'], ['aw4', 'aw2'], ['aw5', 'aw2'], 
+  ['ai5', 'ai4'], ['ai6', 'ai4'], ['ai7', 'ai2'], ['ai14', 'ai13'], 
+  ['awd2', 'awd1'], ['awd3', 'awd1'], ['awd7', 'awd6'], ['awd9', 'awd8'], ['aac9', 'aac1']
+];
+
+window.addEventListener('load', () => {
+  setTimeout(drawFlows, 500);
+});
+
+window.addEventListener('resize', () => {
+  setTimeout(drawFlows, 200);
+});
+</script>
+</body>
+</html>
