@@ -86,7 +86,7 @@
 <div class="w-full bg-bg-main box-border relative">
 
   <!-- Header Section (Responsive) -->
-  <div class="text-center mb-4 lg:mb-8 pt-6 px-4">
+  <div class="text-center mb-4 lg:mb-4 pt-3 px-4">
     <h1 class="text-lg lg:text-2xl font-extrabold text-accent-dark tracking-tight">JAIBEN Mobility Ltd — Use Case Diagram</h1>
     <p class="text-xs lg:text-sm text-text-sub mt-1 lg:mt-2 font-medium">EV Rental + Rent-to-Own + Share EV + Battery Swap + Wallet + FOCO Investor + Reports + Accounting + Merchant &nbsp;|&nbsp; SRS v1.0 Final</p>
     <p class="text-[10px] lg:text-xs text-slate-400 mt-1 italic">Click any Use Case to isolate its flows, click an Actor to highlight their Use Cases, or click a Phase to filter</p>
@@ -97,7 +97,7 @@
   <div class="diagram-scroll overflow-x-auto pb-4">
     <div id="root" class="w-fit min-w-[1000px] mx-auto py-4 px-[20px] lg:px-[30px] relative bg-bg-main">
 
-      <div class="flex items-start relative gap-4" id="layout1">
+      <div class="flex items-start relative gap-6" id="layout1">
         <!-- LEFT ACTORS -->
         <div class="shrink-0 w-actor flex flex-col items-center gap-3 pt-8">
           <div class="actor-card flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-md border-2 border-biker/40" data-actor="biker" onclick="toggleActorFilter('biker')">
@@ -315,7 +315,7 @@
           </div>
 
           <!-- Admin Team Box — 2 lines × 2 actors -->
-          <div class="border-2 border-dashed border-slate-400 rounded-2xl p-3 bg-white/60 backdrop-blur-sm relative w-full shadow-md">
+          <div class="border-2 border-dashed border-slate-400 rounded-2xl p-3 bg-white/60 backdrop-blur-sm relative w-auto shadow-md">
             <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-3 text-[9px] font-black text-slate-700 whitespace-nowrap tracking-wider uppercase shadow-sm rounded-md border border-slate-200">Admin Team</div>
             
             <!-- Row 1: Admin | Manager -->
@@ -354,7 +354,7 @@
   </div>
 
   <!-- Bottom Legend (Responsive) -->
-  <div class="mt-4 lg:mt-6 p-3 lg:p-4 px-4 lg:px-6 bg-white border-t border-slate-200 flex flex-wrap gap-4 lg:gap-6 justify-center items-center">
+  <div class="mt-2 lg:mt-3 p-3 lg:p-4 px-4 lg:px-6 bg-white border-t border-slate-200 flex flex-wrap gap-4 lg:gap-6 justify-center items-center">
     <!-- Phase Filters - CLICKABLE -->
     <div class="flex flex-wrap gap-2 items-center"><div class="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest mr-1">Phase</div>
       <div class="phase-filter flex items-center gap-1.5 text-[10px] font-bold bg-p1-bg text-p1-text border-2 border-p1-border rounded-lg px-3 py-1" data-phase="p1" onclick="togglePhaseFilter('p1')"><div class="w-4 h-4 lg:w-5 lg:h-5 rounded-full border-2 border-p1-border bg-white inline-block"></div>P1</div>
