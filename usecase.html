@@ -21,6 +21,7 @@
           'accountant': '#0E7490', 'accountant-light': '#CFFAFE', 'accountant-dark': '#164E63', 'accountant-badge': '#A5F3FC', 'accountant-label': '#0E7490',
           'staff': '#D97706', 'staff-light': '#FEF3C7', 'staff-dark': '#78350F', 'staff-badge': '#FDE68A', 'staff-label': '#B45309',
           'manager': '#EA580C', 'manager-light': '#FFEDD5', 'manager-dark': '#7C2D12', 'manager-badge': '#FED7AA', 'manager-label': '#C2410C',
+          'merchant': '#BE185D', 'merchant-light': '#FCE7F3', 'merchant-dark': '#831843', 'merchant-badge': '#FBCFE8', 'merchant-label': '#9D174D',
           'shared-light': '#F1F5F9', 'shared-dark': '#334155',
           
           // Phase Colors - STRONG & VIBRANT
@@ -85,9 +86,9 @@
 <div class="w-full bg-bg-main box-border relative">
 
   <!-- Header Section (Responsive) -->
-  <div class="text-center mb-4 lg:mb-4 pt-3 px-4">
+  <div class="text-center mb-4 lg:mb-8 pt-6 px-4">
     <h1 class="text-lg lg:text-2xl font-extrabold text-accent-dark tracking-tight">JAIBEN Mobility Ltd — Use Case Diagram</h1>
-    <p class="text-xs lg:text-sm text-text-sub mt-1 lg:mt-2 font-medium">EV Rental + Battery Swap + Wallet + FOCO Investor + Reports + Accounting &nbsp;|&nbsp; SRS v1.0 Final</p>
+    <p class="text-xs lg:text-sm text-text-sub mt-1 lg:mt-2 font-medium">EV Rental + Rent-to-Own + Share EV + Battery Swap + Wallet + FOCO Investor + Reports + Accounting + Merchant &nbsp;|&nbsp; SRS v1.0 Final</p>
     <p class="text-[10px] lg:text-xs text-slate-400 mt-1 italic">Click any Use Case to isolate its flows, click an Actor to highlight their Use Cases, or click a Phase to filter</p>
     <p class="text-[10px] text-blue-500 mt-1 lg:hidden font-bold">↔ Swipe to scroll diagram horizontally ↔</p>
   </div>
@@ -96,7 +97,7 @@
   <div class="diagram-scroll overflow-x-auto pb-4">
     <div id="root" class="w-fit min-w-[1000px] mx-auto py-4 px-[20px] lg:px-[30px] relative bg-bg-main">
 
-      <div class="flex items-start relative gap-6" id="layout1">
+      <div class="flex items-start relative gap-4" id="layout1">
         <!-- LEFT ACTORS -->
         <div class="shrink-0 w-actor flex flex-col items-center gap-3 pt-8">
           <div class="actor-card flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-md border-2 border-biker/40" data-actor="biker" onclick="toggleActorFilter('biker')">
@@ -106,6 +107,10 @@
           <div class="actor-card flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-md border-2 border-shop/40" data-actor="shop" onclick="toggleActorFilter('shop')">
             <svg viewBox="0 0 44 56" class="w-10 h-14 mb-1 actor-stickman" style="color:#DC2626"><circle cx="22" cy="10" r="8" fill="#FEE2E2" stroke="#DC2626" stroke-width="2.5"/><line x1="22" y1="18" x2="22" y2="36" stroke="#DC2626" stroke-width="2.8"/><line x1="8" y1="26" x2="36" y2="26" stroke="#DC2626" stroke-width="2.8"/><line x1="22" y1="36" x2="10" y2="52" stroke="#DC2626" stroke-width="2.8"/><line x1="22" y1="36" x2="34" y2="52" stroke="#DC2626" stroke-width="2.8"/></svg>
             <div class="text-[10px] font-extrabold px-2.5 py-1 rounded-md whitespace-nowrap text-center leading-tight bg-shop text-white shadow-sm">Shop</div>
+          </div>
+          <div class="actor-card flex flex-col items-center mb-3 bg-white p-3 rounded-2xl shadow-md border-2 border-merchant/40" data-actor="merchant" onclick="toggleActorFilter('merchant')">
+            <svg viewBox="0 0 44 56" class="w-10 h-14 mb-1 actor-stickman" style="color:#BE185D"><circle cx="22" cy="10" r="8" fill="#FCE7F3" stroke="#BE185D" stroke-width="2.5"/><line x1="22" y1="18" x2="22" y2="36" stroke="#BE185D" stroke-width="2.8"/><line x1="8" y1="26" x2="36" y2="26" stroke="#BE185D" stroke-width="2.8"/><line x1="22" y1="36" x2="10" y2="52" stroke="#BE185D" stroke-width="2.8"/><line x1="22" y1="36" x2="34" y2="52" stroke="#BE185D" stroke-width="2.8"/></svg>
+            <div class="text-[10px] font-extrabold px-2.5 py-1 rounded-md whitespace-nowrap text-center leading-tight bg-merchant text-white shadow-sm">Client / Merchant</div>
           </div>
         </div>
 
@@ -131,6 +136,13 @@
                 <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar12" data-actor="staff" data-phase="p1" onclick="toggleFlow(this)">Handle Overdue<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
                 <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar13" data-actor="accountant" data-phase="p1" onclick="toggleFlow(this)">Hold / Release Deposit<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
                 <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-accountant-light text-accountant-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar14" data-actor="accountant" data-phase="p1" onclick="toggleFlow(this)">Hourly/Daily/Monthly Billing<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+                <!-- Rent to Own & Share EV Features -->
+                <div class="w-full mt-1.5 mb-1 border-t border-dashed border-biker/30 pt-1.5"></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm ring-1 ring-biker/20" data-id="ar15" data-actor="biker" data-phase="p1" onclick="toggleFlow(this)">Rent-to-Own<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span><span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[5px] font-bold text-biker/70 whitespace-nowrap italic">Pay rent → Own bike</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-biker-light text-biker-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm ring-1 ring-biker/20" data-id="ar16" data-actor="biker" data-phase="p1" onclick="toggleFlow(this)">Share EV (2-Person)<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span><span class="absolute -bottom-2 left-1/2 -translate-x-1/2 text-[5px] font-bold text-biker/70 whitespace-nowrap italic">2 riders, 1 EV</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar17" data-actor="staff" data-phase="p1" onclick="toggleFlow(this)">Verify Rent-to-Own Eligibility<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-staff-light text-staff-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar18" data-actor="staff" data-phase="p1" onclick="toggleFlow(this)">Manage Shared EV Allocation<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p1-border bg-manager-light text-manager-dark font-bold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="ar19" data-actor="manager" data-phase="p1" onclick="toggleFlow(this)">Approve Ownership Transfer<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p1-border">P1</span></div>
               </div>
             </div>
 
@@ -274,6 +286,23 @@
               </div>
             </div>
 
+            <!-- 10. Client / Merchant Panel -->
+            <div class="glass-card border border-slate-200 rounded-xl p-3 relative shadow-sm">
+              <div class="text-[10px] font-extrabold text-accent-dark mb-2 px-2 py-1 bg-accent-light rounded-md inline-block tracking-wide shadow-sm">10. Client / Merchant Panel <span class="text-[7px] font-bold text-p2-text bg-p2-bg px-1.5 py-0.5 rounded ml-1">BASIC</span></div>
+              <div class="text-[7px] text-slate-400 mb-2 italic leading-tight px-1">For partners: Foodpanda, Daraz, e-Commerce platforms</div>
+              <div class="flex flex-wrap gap-1.5 mt-1">
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-merchant-light text-merchant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am1" data-actor="merchant" data-phase="p2" onclick="toggleFlow(this)">See Rider Assigned<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-merchant-light text-merchant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am2" data-actor="merchant" data-phase="p2" onclick="toggleFlow(this)">Track Deliveries<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-merchant-light text-merchant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am3" data-actor="merchant" data-phase="p2" onclick="toggleFlow(this)">Check Fleet Status<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-merchant-light text-merchant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am4" data-actor="merchant" data-phase="p2" onclick="toggleFlow(this)">View ETA<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-merchant-light text-merchant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am5" data-actor="merchant" data-phase="p2" onclick="toggleFlow(this)">Authenticate (API Key)<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-staff-light text-staff-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am6" data-actor="staff" data-phase="p2" onclick="toggleFlow(this)">Manage Merchant Accounts<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am7" data-actor="manager" data-phase="p2" onclick="toggleFlow(this)">Configure API Access<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-manager-light text-manager-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am8" data-actor="manager" data-phase="p2" onclick="toggleFlow(this)">View Delivery Analytics<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+                <div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 rounded-full border-2 border-p2-border bg-merchant-light text-merchant-dark font-semibold text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm" data-id="am9" data-actor="merchant" data-phase="p2" onclick="toggleFlow(this)">View Delivery History<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight bg-p2-border">P2</span></div>
+              </div>
+            </div>
+
           </div>
         </div>
 
@@ -286,7 +315,7 @@
           </div>
 
           <!-- Admin Team Box — 2 lines × 2 actors -->
-          <div class="border-2 border-dashed border-slate-400 rounded-2xl p-3 bg-white/60 backdrop-blur-sm relative w-auto shadow-md">
+          <div class="border-2 border-dashed border-slate-400 rounded-2xl p-3 bg-white/60 backdrop-blur-sm relative w-full shadow-md">
             <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-white px-3 text-[9px] font-black text-slate-700 whitespace-nowrap tracking-wider uppercase shadow-sm rounded-md border border-slate-200">Admin Team</div>
             
             <!-- Row 1: Admin | Manager -->
@@ -325,7 +354,7 @@
   </div>
 
   <!-- Bottom Legend (Responsive) -->
-  <div class="mt-2 lg:mt-3 p-3 lg:p-4 px-4 lg:px-6 bg-white border-t border-slate-200 flex flex-wrap gap-4 lg:gap-6 justify-center items-center">
+  <div class="mt-4 lg:mt-6 p-3 lg:p-4 px-4 lg:px-6 bg-white border-t border-slate-200 flex flex-wrap gap-4 lg:gap-6 justify-center items-center">
     <!-- Phase Filters - CLICKABLE -->
     <div class="flex flex-wrap gap-2 items-center"><div class="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest mr-1">Phase</div>
       <div class="phase-filter flex items-center gap-1.5 text-[10px] font-bold bg-p1-bg text-p1-text border-2 border-p1-border rounded-lg px-3 py-1" data-phase="p1" onclick="togglePhaseFilter('p1')"><div class="w-4 h-4 lg:w-5 lg:h-5 rounded-full border-2 border-p1-border bg-white inline-block"></div>P1</div>
@@ -341,6 +370,7 @@
       <div class="actor-filter flex items-center gap-1 text-[9px] text-text-sub font-medium" data-actor="accountant" onclick="toggleActorFilter('accountant')"><span class="w-3 h-3 rounded-full bg-accountant inline-block shadow-sm"></span>Accountant</div>
       <div class="actor-filter flex items-center gap-1 text-[9px] text-text-sub font-medium" data-actor="staff" onclick="toggleActorFilter('staff')"><span class="w-3 h-3 rounded-full bg-staff inline-block shadow-sm"></span>Staff</div>
       <div class="actor-filter flex items-center gap-1 text-[9px] text-text-sub font-medium" data-actor="manager" onclick="toggleActorFilter('manager')"><span class="w-3 h-3 rounded-full bg-manager inline-block shadow-sm"></span>Manager</div>
+      <div class="actor-filter flex items-center gap-1 text-[9px] text-text-sub font-medium" data-actor="merchant" onclick="toggleActorFilter('merchant')"><span class="w-3 h-3 rounded-full bg-merchant inline-block shadow-sm"></span>Merchant</div>
     </div>
     <div class="w-px h-4 lg:h-6 bg-slate-200"></div>
     <div class="flex flex-wrap gap-2 items-center"><div class="text-[8px] font-extrabold text-slate-500 uppercase tracking-widest mr-1">Flows</div>
@@ -615,14 +645,18 @@ const allIncludes = [
   ['as2', 'as5'], ['as2', 'aa1'], ['aw1', 'aw10'], ['aw3', 'aw2'], 
   ['aw3', 'aw10'], ['ai4', 'ai11'], ['ai4', 'aa1'], ['ai12', 'ai13'], 
   ['awd1', 'awd5'], ['awd1', 'aa1'], ['awd6', 'awd8'], ['aac1', 'aac2'], 
-  ['aac8', 'aw10'], ['aac11', 'aac2'], ['aa2', 'aa1'], ['aa12', 'aa1']
+  ['aac8', 'aw10'], ['aac11', 'aac2'], ['aa2', 'aa1'], ['aa12', 'aa1'],
+  ['am2', 'am1'], ['am2', 'af2'], ['am3', 'af2'], ['am1', 'am5'], ['am4', 'am2'], ['am6', 'am7'], ['am8', 'am2'],
+  ['ar15', 'aw2'], ['ar15', 'ar17'], ['ar15', 'ar14'], ['ar16', 'ar18'], ['ar19', 'ar17']
 ];
 
 const allExtends = [
   ['ar7', 'ar9'], ['ar10', 'ar7'], ['ar11', 'ar12'], ['ar5', 'ar4'], ['aa5', 'ar4'], 
   ['as3', 'as2'], ['as4', 'as2'], ['as7', 'as6'], ['aw4', 'aw2'], ['aw5', 'aw2'], 
   ['ai5', 'ai4'], ['ai6', 'ai4'], ['ai7', 'ai2'], ['ai14', 'ai13'], 
-  ['awd2', 'awd1'], ['awd3', 'awd1'], ['awd7', 'awd6'], ['awd9', 'awd8'], ['aac9', 'aac1']
+  ['awd2', 'awd1'], ['awd3', 'awd1'], ['awd7', 'awd6'], ['awd9', 'awd8'], ['aac9', 'aac1'],
+  ['am4', 'am2'], ['am9', 'am2'],
+  ['ar15', 'ar2'], ['ar16', 'ar2']
 ];
 
 window.addEventListener('load', () => {
