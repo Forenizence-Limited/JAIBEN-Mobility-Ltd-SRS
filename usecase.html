@@ -162,7 +162,16 @@ return`<div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5
 }
 function ucS(id,actor,phase,label,sub){
 const[ab,at]=AC[actor],[pb,pbg,pw]=PC[phase];
-return`<div class="uc-item inline-flex items-center justify-center px-2.5 py-1.5 pb-4 rounded-full border-2 ${pb} ${ab} ${at} ${pw} text-[8px] whitespace-nowrap min-w-[60px] text-center leading-tight relative shadow-sm ring-1 ring-slate-300" data-id="${id}" data-actor="${actor}" data-phase="${phase}" onclick="toggleFlow(this)">${label}<span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight ${pbg}">${phase.toUpperCase()}</span><span class="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[5px] font-bold text-slate-500 whitespace-nowrap italic">${sub}</span></div>`;
+return`<div class="uc-item inline-flex flex-col items-center justify-center px-2.5 py-2 rounded-full border-2 ${pb} ${ab} ${at} ${pw} text-[8px] min-w-[60px] text-center leading-tight relative shadow-sm ring-1 ring-slate-300" data-id="${id}" data-actor="${actor}" data-phase="${phase}" onclick="toggleFlow(this)">
+  
+  <span>${label}</span>
+  <span class="text-[6px] font-bold text-slate-500 italic mt-0.5">${sub}</span>
+
+  <span class="absolute -top-2 -right-1 text-[6px] font-extrabold px-1 rounded-[3px] text-white tracking-wide z-[2] leading-tight ${pbg}">
+    ${phase.toUpperCase()}
+  </span>
+
+</div>`;
 }
 function dv(label){
 return`<div class="w-full mt-1.5 mb-0.5 border-t border-dashed border-slate-300 pt-1"><span class="text-[6px] font-extrabold text-slate-400 uppercase tracking-wider">${label}</span></div>`;
@@ -211,7 +220,7 @@ uc('ar13','accountant','p1','Hold / Deduct from Deposit'),
 uc('ar_ref','accountant','p1','Refund Security Deposit'),
 uc('ar14','accountant','p1','Generate Rental Bill'),
 dv('RENT-TO-OWN MODEL'),
-ucS('ar15','biker','p1','Apply Rent-to-Own','Pay more \u2192 Own bike'),
+uc('ar15','biker','p1','Apply Rent-to-Own'),
 uc('ar15p','biker','p1','Pay RTO Installment'),
 uc('ar_req','biker','p1','Request Ownership Transfer'),
 uc('ar_s6','staff','p1','Verify RTO Eligibility'),
